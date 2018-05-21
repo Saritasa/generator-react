@@ -24,9 +24,9 @@ module.exports = class extends Generator {
 
   initializing() {
     this._checkNodejsVerion();
+    this._calcComponentName();
     this._checkArguments();
     this.destinationRoot(this.destinationPath(this.options['source-root']));
-    this._calcComponentName();
   }
 
   _checkNodejsVerion() {
@@ -36,17 +36,17 @@ module.exports = class extends Generator {
     }
   }
 
-  _checkArguments() {
-    if (!(/^[A-Z][a-zA-Z]*$/.test(this.options.name))) {
-      throw new Error(`name should includes only latin letters and be CamelCased. You passed "${this.options.name}"`);
-    }
-  }
-
   _calcComponentName() {
     const [name, ...pathParts] = this.options.component.split('/').reverse();
 
     this.options.name = name;
     this.options.dest = pathParts.reverse().join('/') || 'components';
+  }
+
+  _checkArguments() {
+    if (!(/^[A-Z][a-zA-Z]*$/.test(this.options.name))) {
+      throw new Error(`name should includes only latin letters and be CamelCased. You passed "${this.options.name}"`);
+    }
   }
 
   install() {
