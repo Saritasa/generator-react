@@ -2,6 +2,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 
 import { <%= name %>Controller } from './<%= name %>.controller';
+import { <%= name %>View } from './<%= name %>.view';
 
 describe('Component::<%= name %>::controller', function() {
   let props;
@@ -16,5 +17,17 @@ describe('Component::<%= name %>::controller', function() {
 
   it('does not throw an error on render', function() {
     expect(renderDoc).not.to.throw(Error);
+  });
+
+  it('renders <%= name %>View only', function() {
+    const doc = renderDoc();
+
+    expect(doc.is(<%= name %>View)).to.be.equal(true);
+  });
+
+  it('does not pass any property with `handle` prefix into <%= name %>View', function() {
+    const doc = renderDoc();
+
+    expect(Object.keys(doc.props()).filter(key => /^handle[A-Z]/.test(key)).length).to.be.equal(0);
   });
 });

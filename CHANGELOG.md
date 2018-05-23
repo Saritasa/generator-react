@@ -1,3 +1,6 @@
+### 0.0.7
+- Add some tests for controller.
+
 ### 0.0.6
 - Prevent eslint errors cause @return tag instead of @returns.
 
