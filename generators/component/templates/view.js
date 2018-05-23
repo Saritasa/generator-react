@@ -12,8 +12,9 @@ export type <%= name %>ViewProps = {};
 
 /**
  * View part of <%= name %> component.
- * @params {<%= name %>ViewProps} $1 Props passed from parent component.
- * @returns {?React.Node}
+ *
+ * @param {<%= name %>ViewProps} $1 Props passed from parent component.
+ * @return {?React.Node} Rendered <%= name %>.
  */
 export const <%= name %>ViewPlain = ({}: <%= name %>ViewProps) => (
   <div className={cls('root')}>
