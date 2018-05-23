@@ -1,3 +1,6 @@
+### 0.0.8
+- Resolve issue with missing props cause wrong default code.
+
 ### 0.0.7
 - Add some tests for controller.
 

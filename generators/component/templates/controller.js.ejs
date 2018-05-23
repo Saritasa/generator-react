@@ -32,6 +32,6 @@ export class <%= name %>Controller extends React.PureComponent<% if (flow) { %><
    * @returns {?React.Node} View part of <%= name %> or possible `null`.
    */
   render() {
-    return React.createElement(<%= name %>View, this.getViewProps);
+    return React.createElement(<%= name %>View, this.getViewProps());
   }
 }
