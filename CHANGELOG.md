@@ -1,3 +1,6 @@
+### 0.0.6
+- Prevent eslint errors cause @return tag instead of @returns.
+
 ### 0.0.5
 - Allow to generate code without flow.
 - Allow to generate code without stories.
