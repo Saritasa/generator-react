@@ -1,5 +1,5 @@
-// @flow
-import * as React from 'react';
+<% if (flow) { %>// @flow
+<% } %>import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
 
@@ -9,5 +9,4 @@ const stories = storiesOf('Components::<%= name %>::View', module);
 
 stories.addDecorator(withKnobs);
 
-stories
-  .add('without props', () => <<%= name %>View />);
+stories.add('without props', () => <<%= name %>View />);

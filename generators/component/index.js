@@ -3,6 +3,7 @@ const path = require('path');
 const Generator = require('yeoman-generator');
 
 const SOURCE_PATH = 'src';
+const COMPONENT_DEST = 'components';
 
 module.exports = class extends Generator {
 
@@ -16,10 +17,12 @@ module.exports = class extends Generator {
       required: true
     });
 
-    this.option('source-root', { type: String, default: SOURCE_PATH, description: 'path for source\'s root' });
+    this.option('flow', { type: Boolean, default: true, description: 'Use --no-flow to remove flow from generated code' });
+    this.option('stories', { type: Boolean, default: true, description: 'Use --no-stories to prevent stories\' generating' });
+    this.option('unit', { type: Boolean, default: true, description: 'Use --no-unit to prevent tests\' generating' });
 
-    this.option('stories');
-    this.option('install-deps');
+    this.option('source-root', { type: String, default: SOURCE_PATH, description: 'Path for source\'s root' });
+    this.option('install-deps', { type: Boolean, default: false, description: 'Install dependencies for generated code' });
   }
 
   initializing() {
@@ -40,7 +43,7 @@ module.exports = class extends Generator {
     const [name, ...pathParts] = this.options.component.split('/').reverse();
 
     this.options.name = name;
-    this.options.dest = pathParts.reverse().join('/') || 'components';
+    this.options.dest = pathParts.reverse().join('/') || COMPONENT_DEST;
   }
 
   _checkArguments() {
@@ -64,43 +67,46 @@ module.exports = class extends Generator {
   }
 
   _writeView() {
-    const { name, dest } = this.options;
+    const { name, flow, stories, unit, dest } = this.options;
+    const files = ['view.js', 'view.css'];
 
-    const files = ['view.js', 'view.css', 'view.stories.js', 'view.unit.js'];
+    if (stories) files.push('view.stories.js');
+    if (unit) files.push('view.unit.js');
 
     files.forEach(file => {
       this.fs.copyTpl(
-        this.templatePath(file),
+        this.templatePath(`${file}.ejs`),
         this.destinationPath(path.join(dest, name, `${name}.${file}`)),
-        { name },
+        { name, flow },
       );
     });
   }
 
   _writeController() {
-    const { name, dest } = this.options;
+    const { name, flow, unit, dest } = this.options;
+    const files = ['controller.js'];
 
-    const files = ['controller.js', 'controller.unit.js'];
+    if (unit) files.push('controller.unit.js');
 
     files.forEach(file => {
       this.fs.copyTpl(
-        this.templatePath(file),
+        this.templatePath(`${file}.ejs`),
         this.destinationPath(path.join(dest, name, `${name}.${file}`)),
-        { name },
+        { name, flow },
       );
     });
   }
 
   _writeMain() {
-    const { name, dest } = this.options;
+    const { name, flow, dest } = this.options;
 
     const files = ['index.js'];
 
     files.forEach(file => {
       this.fs.copyTpl(
-        this.templatePath(file),
+        this.templatePath(`${file}.ejs`),
         this.destinationPath(path.join(dest, name, file)),
-        { name },
+        { name, flow },
       );
     });
   }

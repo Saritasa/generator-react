@@ -1,17 +1,17 @@
-// @flow
-import * as React from 'react';
+<% if (flow) { %>// @flow
+<% } %>import * as React from 'react';
 
-import { <%= name %>View, type <%= name %>ViewProps } from './<%= name %>.view';
-
+import { <%= name %>View<% if (flow) { %>, type <%= name %>ViewProps<% } %> } from './<%= name %>.view';
+<% if (flow) { %>
 export type <%= name %>ControllerProps = {};
 type <%= name %>ControllerState = null;
-
+<% } %>
 /**
  * Controller for <%= name %> component.
  *
  * @extends React.PureComponent
  */
-export class <%= name %>Controller extends React.PureComponent<<%= name %>ControllerProps, <%= name %>ControllerState> {
+export class <%= name %>Controller extends React.PureComponent<% if (flow) { %><<%= name %>ControllerProps, <%= name %>ControllerState><% } %> {
   // Uncomment default props if need
   // static defaultProps = {};
 
@@ -20,10 +20,9 @@ export class <%= name %>Controller extends React.PureComponent<<%= name %>Contro
    *
    * @return {<%= name %>ViewProps} Props for view part of component.
    */
-  getViewProps(): $Exact<<%= name %>ViewProps> {
+  getViewProps()<% if (flow) { %>: $Exact<<%= name %>ViewProps><% } %> {
     return {};
   }
-
 
   /**
    * React's method to render component.

@@ -1,3 +1,8 @@
+### 0.0.5
+- Allow to generate code without flow.
+- Allow to generate code without stories.
+- Allow to generate code without tests.
+
 ### 0.0.4
 - Improve generated jsdoc comments to prevent extra changes after generation.
 - Replace `root` className with `host`.  

@@ -1,0 +1,5 @@
+<% if (flow) { %>// @flow
+<% } %>import { <%= name %>Controller<% if (flow) { %>, type <%= name %>ControllerProps<% } %> } from './<%= name %>.controller';
+
+<% if (flow) { %>export type <%= name %>Props = <%= name %>ControllerProps;
+<% } %>export { <%= name %>Controller as <%= name %> };
