@@ -17,7 +17,7 @@ export type <%= name %>ViewProps = {};
  * @return {?React.Node} Rendered <%= name %>.
  */
 export const <%= name %>ViewPlain = ({}: <%= name %>ViewProps) => (
-  <div className={cls('root')}>
+  <div className={cls('host')}>
     <%= name %>View works!
   </div>
 );
