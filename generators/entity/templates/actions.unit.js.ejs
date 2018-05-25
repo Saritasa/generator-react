@@ -1,0 +1,18 @@
+import * as Action from './<%= Name %>.actions';
+
+describe('Entity::<%= Name %>::actions', function() {
+  it('exports only functions', function() {
+    Object.values(Action).forEach(action => {
+      expect(typeof action).to.be.equal('function');
+    });
+  });
+
+  it('exports action creators that have "<%= Name %>" as name\'s part', function() {
+    Object.keys(Action).forEach(actionName => {
+      const endedWithName = /[a-z]<%= Name %>$/.test(actionName);
+      const includesName = /[a-z]<%= Name %>[A-Z]/.test(actionName);
+
+      expect(endedWithName || includesName).to.be.euqal(true);
+    });
+  });
+});

@@ -1,3 +1,6 @@
+### 0.1.0
+- Add generator for entities.
+
 ### 0.0.8
 - Resolve issue with missing props cause wrong default code.
 

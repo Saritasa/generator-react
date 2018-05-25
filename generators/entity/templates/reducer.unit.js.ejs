@@ -1,0 +1,70 @@
+import * as Immutable from 'immutable';
+
+import * as ActionType from './<%= Name %>.actionTypes';
+import { <%= name %>Reducer } from './<%= Name %>.reducer';
+
+describe('Entity::<%= Name %>::reducer', function() {
+  it('is function', function() {
+    expect(typeof <%= name %>Reducer).to.be.equal('function');
+  });
+
+  it('throws in case of missed action and state', function() {
+    expect(<%= name %>Reducer).to.throw(Error);
+  });
+
+  it('throws in case of missed action', function() {
+    expect(() => <%= name %>Reducer(null)).to.throw(Error);
+  });
+
+  it('does not throw in case of existed action and state', function() {
+    expect(() => <%= name %>Reducer(null, {})).not.to.throw(Error);
+  });
+
+  it('returns the same state as passed in case of unknown action', function() {
+    const state = Immutable.from({});
+
+    expect(<%= name %>Reducer(state, { type: 'UNKNOWN' })).to.be.equal(state);
+  });
+
+  it('returns the same state as passed in case of unknown action', function() {
+    const state = Immutable.from({});
+
+    expect(<%= name %>Reducer(state, { type: 'UNKNOWN' })).to.be.equal(state);
+  });
+
+  it('returns immutable state in case of passed state = undefined', function() {
+    const state = <%= name %>Reducer(undefined, { type: 'UNKNOWN' });
+
+    expect(Immutable.Iterable.isIterable(state)).to.be.equal(true);
+  });
+
+  it('returns immutable record in case of passed state = undefined', function() {
+    const state = <%= name %>Reducer(undefined, { type: 'UNKNOWN' });
+
+    expect(Immutable.Record.isRecord(state)).to.be.equal(true);
+  });
+
+  describe('on LOAD_LIST action', function() {
+    it('sets listLoading into true', function() {
+      const state = <%= name %>Reducer(undefined, { type: ActionType.LOAD_LIST });
+
+      expect(state.get('listLoading')).to.be.equal(true);
+    });
+  });
+
+  describe('on LOAD_LIST_SUCCESS action', function() {
+    it('sets listLoading into false', function() {
+      const state = <%= name %>Reducer(undefined, { type: ActionType.LOAD_LIST_SUCCESS });
+
+      expect(state.get('listLoading')).to.be.equal(false);
+    });
+  });
+
+  describe('on LOAD_LIST_ERROR action', function() {
+    it('sets listLoading into false', function() {
+      const state = <%= name %>Reducer(undefined, { type: ActionType.LOAD_LIST_ERROR });
+
+      expect(state.get('listLoading')).to.be.equal(false);
+    });
+  });
+});

@@ -22,7 +22,7 @@ module.exports = class extends Generator {
     this.option('unit', { type: Boolean, default: true, description: 'Use --no-unit to prevent tests\' generating' });
 
     this.option('source-root', { type: String, default: SOURCE_PATH, description: 'Path for source\'s root' });
-    this.option('install-deps', { type: Boolean, default: false, description: 'Install dependencies for generated code' });
+    this.option('install', { type: Boolean, default: false, description: 'Install dependencies for generated code' });
   }
 
   initializing() {
@@ -53,7 +53,7 @@ module.exports = class extends Generator {
   }
 
   install() {
-    if (this.options['install-deps']) {
+    if (this.options['install']) {
       this.npmInstall(['recompose', 'classnames'], { 'save': true });
       this.npmInstall(['@storybook/react', '@storybook/addon-knobs', '@storybook/addon-links', '@storybook/addon-actions'], { 'save-dev': true });
     }

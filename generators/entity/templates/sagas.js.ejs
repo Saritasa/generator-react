@@ -1,0 +1,37 @@
+<% if (flow) { %>// @flow
+<% } %>import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+
+<% if (flow) { %>import * as Action from './<%= Name %>.actions';
+<% } %>import * as Api from './<%= Name %>.api';
+import * as ActionType from './<%= Name %>.actionTypes';
+import { dtoToRecord } from './<%= Name %>.utils';
+
+function* load<%= Name %>(action<% if (flow) { %>: $Call<typeof Action.load<%= Name %>ByKey, any><% } %>) {
+  try {
+    const <%= name %> = yield call(Api.fetch<%= Name %>, action.payload);
+
+    yield put({ type: ActionType.LOAD_SUCCESS });
+    yield put({ type: ActionType.SET, payload: dtoToRecord(<%= name %>) });
+  } catch (error) {
+    yield put({ type: ActionType.LOAD_ERROR, message: error.message, error });
+  }
+}
+
+function* load<%= Name %>List(action<% if (flow) { %>: $Call<typeof Action.load<%= Name %>List, any><% } %>) {
+  try {
+    const <%= name %>List = yield call(Api.fetch<%= Name %>List, action.payload);
+
+    yield put({ type: ActionType.LOAD_LIST_SUCCESS });
+    yield put({ type: ActionType.SET_LIST, payload: <%= name %>List.map(dtoToRecord) });
+  } catch (error) {
+    yield put({ type: ActionType.LOAD_LIST_ERROR, message: error.message, error });
+  }
+}
+
+export function* load<%= Name %>Saga() {
+  yield takeEvery(ActionType.LOAD, load<%= Name %>);
+}
+
+export function* load<%= Name %>ListSaga() {
+  yield takeLatest(ActionType.LOAD_LIST, load<%= Name %>List);
+}

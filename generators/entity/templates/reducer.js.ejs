@@ -1,0 +1,37 @@
+<% if (flow) { %>// @flow
+<% } %>import * as Immutable from 'immutable';
+
+import * as ActionType from './<%= Name %>.actionTypes';
+<% if (flow) { %>import { <%= Name %>Model } from './<%= Name %>.record';
+
+export type <%= Name %>StateShape = {
+  listLoading: boolean,
+  entities: Immutable.Map<string, <%= Name %>Model>,
+  keys: Immutable.List<string>,
+};
+<% } %>
+export const <%= Name %>StateRecord = Immutable.Record(
+  <% if (flow) { %>(<% } %>{
+    listLoading: false,
+    entities: Immutable.Map(),
+    keys: Immutable.List(),
+  }<% if (flow) { %>: <%= Name %>StateShape)<% } %>,
+);
+
+const defaultState = new <%= Name %>StateRecord();
+
+export function <%= name %>Reducer(state<% if (flow) { %>: <%= Name %>StateRecord<% } %> = defaultState, action<% if (flow) { %>: *<% } %>)<% if (flow) { %>: <%= Name %>StateRecord<% } %> {
+  switch (action.type) {
+    case ActionType.LOAD_LIST:
+      return state.set('listLoading', true);
+
+    case ActionType.LOAD_LIST_SUCCESS:
+      return state.set('listLoading', false);
+
+    case ActionType.LOAD_LIST_ERROR:
+      return state.set('listLoading', false);
+
+    default:
+      return state;
+  }
+}

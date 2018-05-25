@@ -1,0 +1,42 @@
+<% if (flow) { %>// @flow
+<% } %>import http from 'axios'; // use internal module if need
+<% if (flow) { %>
+import { type <%= Name%>Dto } from './<%= Name%>.dto';
+<% } %>
+export function fetch<%= Name %>({ <%= name %>Id }<% if (flow) { %>: { <%= name %>Id: string }<% } %>) {
+  return http.request({
+    method: 'get',
+    url: `/api/v1/<%= name %>/${<%= name %>Id}`,
+  });
+}
+
+export function fetch<%= Name %>List({ query }<% if (flow) { %>: *<% } %>) {
+  return http.request({
+    method: 'get',
+    url: `/api/v1/<%= name %>`,
+    params: query,
+  });
+}
+
+export function save<%= Name %>(<%= name %><% if (flow) { %>: <%= Name%>Dto<% } %>) {
+  return http.request({
+    method: 'put',
+    url: `/api/v1/<%= name %>/${<%= name %>.id}`,
+    body: <%= name %>,
+  });
+}
+
+export function create<%= Name %>(<%= name %><% if (flow) { %>: <%= Name%>Dto<% } %>) {
+  return http.request({
+    method: 'post',
+    url: `/api/v1/<%= name %>`,
+    body: <%= name %>,
+  });
+}
+
+export function delete<%= Name %>({ <%= name %>Id }<% if (flow) { %>: { <%= name %>Id: string }<% } %>) {
+  return http.request({
+    method: 'delete',
+    url: `/api/v1/<%= name %>/${<%= name %>Id}`,
+  });
+}

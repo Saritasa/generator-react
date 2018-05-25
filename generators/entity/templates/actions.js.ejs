@@ -1,0 +1,49 @@
+<% if (flow) { %>// @flow
+<% } %>import * as ActionType from './<%= Name %>.actionTypes';
+<% if (flow) { %>import { <%= Name %> } from './<%= Name %>.record';
+<% } %>import { get<%= Name %>Key, recordToDto, listQueryToListQueryDto } from './<%= Name %>.utils';
+
+export function load<%= Name %>ByKey(key<% if (flow) { %>: string<% } %>) {
+  return {
+    type: ActionType.LOAD,
+    payload: {
+      <%= name %>Id: key,
+    },
+  };
+}
+
+export function load<%= Name %>List(listQuery<% if (flow) { %>: *<% } %>) {
+  const query = listQueryToListQueryDto(listQuery);
+
+  return {
+    type: ActionType.LOAD_LIST,
+    payload: {
+      query,
+    },
+  };
+}
+
+export function create<%= Name %>(<%= name %><% if (flow) { %>: <%= Name %><% } %>) {
+  const body = recordToDto(<%= name %>);
+}
+
+export function save<%= Name %>(<%= name %><% if (flow) { %>: <%= Name %><% } %>) {
+  const key = get<%= Name %>Key(<%= name %>);
+
+  const body = recordToDto(<%= name %>);
+}
+
+export function delete<%= Name %>ByKey(key<% if (flow) { %>: string<% } %>) {
+  return {
+    type: ActionType.DELETE,
+    payload: {
+      key,
+    },
+  };
+}
+
+export function delete<%= Name %>(<%= name %><% if (flow) { %>: <%= Name %><% } %>) {
+  const key = get<%= Name %>Key(<%= name %>);
+
+  return delete<%= Name %>ByKey(key);
+}

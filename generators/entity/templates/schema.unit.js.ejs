@@ -1,0 +1,15 @@
+import Ajv from 'ajv';
+
+import <%= Name %>DtoSchema from './<%= Name %>.schema.json';
+
+const ajv = new Ajv();
+
+describe('Entity::<%= Name %>::schema', function() {
+  describe('<%= Name %>DtoSchema', function() {
+    it('uses valid JSON-schema', function() {
+      const isValid = ajv.validateSchema(<%= Name %>DtoSchema);
+
+      expect(isValid).to.be.equal(true);
+    });
+  });
+});

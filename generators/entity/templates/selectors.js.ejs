@@ -1,0 +1,30 @@
+<% if (flow) { %>// @flow
+<% } %>import { createSelector } from 'reselect';
+<% if (flow) { %>import * as Immutable from 'immutable';
+<% } %>
+import { <% if (flow) { %>type <%= Name %>Model, <% } %><%= Name %> } from './<%= Name %>.record';
+<% if (flow) { %>import { type <%= Name %>StateShape } from './<%= Name %>.reducer';
+<% } %>
+let baseSelectorPath = [];
+
+const empty<%= Name %>Entity = new <%= Name %>();
+
+export const setBaseSelectorPath = (path<% if (flow) { %>: Array<string><% } %>) => {
+  baseSelectorPath = path;
+};
+
+export const selectBase<% if (flow) { %>: (*) => <%= Name %>StateShape<% } %> = createSelector(state => state, state => state.getIn(baseSelectorPath));
+
+export const select<%= Name %>ListLoading<% if (flow) { %>: (*) => boolean<% } %> = createSelector(selectBase, base => base.get('listLoading'));
+
+export const select<%= Name %>Map = createSelector(selectBase, base => base.get('entities'));
+
+export const select<%= Name %>Keys<% if (flow) { %>: (*) => Immutable.List<string><% } %> = createSelector(selectBase, base => base.get('keys'));
+
+export const select<%= Name %>List<% if (flow) { %>: (*) => Immutable.List<<%= Name %>><% } %> = createSelector([select<%= Name %>Map, select<%= Name %>Keys], (keys, entitiesMap) => keys.map(key => entitiesMap.getIn([key, 'data'])));
+
+export const select<%= Name %>ByKey<% if (flow) { %>: (*, string) => <%= Name %><% } %> = createSelector([select<%= Name %>Map, (_, key) => key], (entitiesMap, key) => entitiesMap.getIn([key, 'data'], empty<%= Name %>Entity));
+
+export const select<%= Name %>ByKeyExist<% if (flow) { %>: (*, string) => boolean<% } %> = createSelector([select<%= Name %>Map, (_, key) => key], (entitiesMap, key) => entitiesMap.has(key));
+
+export const select<%= Name %>ByKeyLoading<% if (flow) { %>: (*, string) => boolean<% } %> = createSelector([select<%= Name %>Map, (_, key) => key], (entitiesMap, key) => entitiesMap.getIn([key, 'meta', 'loading'], true));

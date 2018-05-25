@@ -1,0 +1,34 @@
+import * as ActionType from './<%= Name %>.actionTypes';
+
+const ENTITY_NAME = '<%= name %>';
+
+describe('Entity::<%= Name %>::actionTypes', function() {
+  it('does not export any action types that is not string or symbol', function() {
+    Object.values(ActionType).forEach(value => {
+      expect(typeof value).to.be.oneOf(['string', 'symbol']);
+    });
+  });
+
+  it('exports only UPPER_CASED keys', function() {
+    Object.keys(ActionType).forEach(type => {
+      expect(type).to.be.equal(type.toUpperCase());
+    });
+  });
+
+  it('exports unique values for action types', function() {
+    const values = [...Object.values(ActionType)];
+    const uniqueValues = [...new Set(values)];
+
+    expect(values.length).to.be.equal(uniqueValues.length);
+  });
+
+  it(`exports values with "@${ENTITY_NAME}" as prefix`, function() {
+    Object.values(ActionType).forEach(value => {
+      const prefixParts = value.split('/');
+
+      prefixParts.pop();
+
+      expect(prefixParts.join('/')).to.be.equal(`@${ENTITY_NAME}`);
+    });
+  });
+});

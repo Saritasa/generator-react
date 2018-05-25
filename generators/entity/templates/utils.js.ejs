@@ -1,0 +1,39 @@
+<% if (flow) { %>// @flow
+<% } %>import Ajv from 'ajv';
+
+import { <%= Name %> } from './<%= Name %>.record';
+import <%= Name %>DtoSchema from './<%= Name %>.schema.json';
+<% if (flow) { %>import { type <%= Name %>Dto } from './<%= Name %>.dto';
+<% } %>
+const ajv = new Ajv({ allErrors: true });
+
+export const validateDto = ajv.compile(<%= Name %>DtoSchema);
+
+export function get<%= Name %>Key(<%= name %><% if (flow) { %>: <%= Name %><% } %>)<% if (flow) { %>: string<% } %> {
+  return String(<%= name %>.id);
+}
+
+export function recordToDto(<%= name %><% if (flow) { %>: <%= Name %><% } %>)<% if (flow) { %>: <%= Name %>Dto<% } %> {
+  return <%= name %>.toJS();
+}
+
+export function dtoToRecord(<%= name %>Dto<% if (flow) { %>: <%= Name %>Dto<% } %>)<% if (flow) { %>: <%= Name %><% } %> {
+  if (process.env.NODE_ENV !== 'production') {
+    if (!validateDto(<%= name %>Dto)) {
+      const { errors } = validateDto;
+      const error = new Error(`Unexpected data on transform DTO into <%= Name %>.
+Got: ${JSON.stringify(<%= name %>Dto)}.
+Errors: ${errors.map(({ message, dataPath }) => `${dataPath}: ${message}`).join('\n')}`);
+
+      setTimeout(() => {
+        throw error;
+      });
+    }
+  }
+
+  return new <%= Name %>(<%= name %>Dto);
+}
+
+export function listQueryToListQueryDto(<%= name %>Query<% if (flow) { %>: *<% } %>) {
+  return <%= name %>Query;
+}
