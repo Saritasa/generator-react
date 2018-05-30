@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 
 import styles from './<%= name %>.view.css';
 
-// Use css-modules. This allows to use `cls('root') that returns styles.root's value that is real classname.
+// Use css-modules. This allows to use `cls('host') that returns styles.host's value that is real classname.
 const cls = classNames.bind(styles);
 <% if (flow) { %>
 export type <%= name %>ViewProps = {};

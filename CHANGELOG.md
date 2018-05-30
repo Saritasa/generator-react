@@ -1,3 +1,6 @@
+### 0.1.1
+- Fix miss-named classname inside component view's generated jsdoc. 
+
 ### 0.1.0
 - Add generator for entities.
 
