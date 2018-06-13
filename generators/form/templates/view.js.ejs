@@ -23,20 +23,22 @@ type Full<%= Name %>ViewProps = <%= Name %>ViewProps & FromInternalComponentProp
 export const <%= Name %>ViewPlain = ({
   disabledSubmit,
   submitting,
-  valid: isValid,
-  onSubmit: handleSubmit,
-  onReset: handleReset,
+  valid,
+  onSubmit,
+  onReset,
   error,
 }<% if (flow) { %>: Full<%= Name %>ViewProps<% } %>) => (
   <form onSubmit={onSubmit} className={cls('host', { invalid: !valid })}>
     <FormField name="myField" />
-    <FormFieldError name="myField" component="div"/>
+    <FormFieldError name="myField" component="div" />
     <%= Name %>View works!
-    <FormError error={error} component="div"/>
+    <FormError error={error} component="div" />
     <button type="submit" disabled={disabledSubmit}>
       {submitting ? 'Submitting' : 'Submit'}
     </button>
-    <button type="reset" onClick={onReset}>Reset</button>
+    <button type="reset" onClick={onReset}>
+      Reset
+    </button>
   </form>
 );
 

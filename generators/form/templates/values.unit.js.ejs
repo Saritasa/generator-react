@@ -1,4 +1,4 @@
-import { <%= name %>FieldRules, <%= name %>Validate } from './<%= Name %>.values';
+import { <%= name %>FieldRules, validate<%= Name %> } from './<%= Name %>.values';
 
 let values;
 
@@ -20,10 +20,10 @@ describe('Component::<%= Name %>::values::<%= name %>FieldRules()', function() {
   });
 });
 
-describe('Component::<%= Name %>::values::<%= name %>Validate()', function() {
+describe('Component::<%= Name %>::values::validate<%= Name %>()', function() {
   beforeEach(fillValues);
 
-  it('returns `null` in case of valid values', function() {\
-    expect(<%= name %>Validate(fillValues).to.be.equal(null);
+  it('returns `null` in case of valid values', function() {
+    expect(validate<%= Name %>(fillValues)).to.be.equal(null);
   });
 });

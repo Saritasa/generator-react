@@ -49,7 +49,10 @@ module.exports = class extends Generator {
 
   _checkArguments() {
     if (!(/^[A-Z][a-zA-Z]*$/.test(this.options.formName))) {
-      throw new Error(`name should includes only latin letters and be CamelCased. You passed "${this.options.name}"`);
+      throw new Error(`form-name should include only latin letters and be CamelCased. You passed "${this.options.formName}"`);
+    }
+    if (/Form/.test(this.options.formName)) {
+      throw new Error(`form-name should not include 'Form' as substring, generator adds it automatically. You passed "${this.options.formName}"`);
     }
   }
 
@@ -62,7 +65,7 @@ module.exports = class extends Generator {
 
   install() {
     if (this.options['install']) {
-      this.npmInstall(['recompose', 'classnames'], { 'save': true });
+      this.npmInstall(['recompose', '@saritasa/react-form', 'classnames'], { 'save': true });
       this.npmInstall(['@storybook/react', '@storybook/addon-knobs', '@storybook/addon-links', '@storybook/addon-actions'], { 'save-dev': true });
     }
   }
@@ -75,7 +78,7 @@ module.exports = class extends Generator {
   }
 
   _writeView() {
-    const { Name, stories, unit, dest } = this.options;
+    const { Name, unit, dest } = this.options;
     const files = ['view.js', 'view.css'];
 
     if (unit) files.push('view.unit.js');
@@ -90,7 +93,7 @@ module.exports = class extends Generator {
   }
 
   _writeController() {
-    const { Name, unit, dest } = this.options;
+    const { Name, stories, unit, dest } = this.options;
     const files = ['controller.js', 'values.js'];
 
     if (stories) files.push('controller.stories.js');

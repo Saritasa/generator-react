@@ -3,7 +3,7 @@
 import { Form<% if (flow) { %>, type FormProps<% } %> } from '@saritasa/react-form';
 
 import { <%= Name %>View<% if (flow) { %>, type <%= Name %>ViewProps<% } %> } from './<%= Name %>.view';
-import { <%= name %>FieldRules, <%= name %>Validate<% if (flow) { %>, type <%= Name %>Values<% } %> } from './<%= Name %>.values';
+import { <%= name %>FieldRules, validate<%= Name %><% if (flow) { %>, type <%= Name %>Values<% } %> } from './<%= Name %>.values';
 <% if (flow) { %>
 export type <%= Name %>ControllerProps = {};
 type <%= Name %>ControllerState = null;
@@ -27,7 +27,6 @@ export class <%= Name %>Controller extends React.PureComponent<% if (flow) { %><
     return {};
   }
 
-
   /**
    * Method to generate properties for form's view part's wrapper.
    *
@@ -38,7 +37,7 @@ export class <%= Name %>Controller extends React.PureComponent<% if (flow) { %><
       ...this.getViewProps(),
       component: <%= Name %>View,
       fieldRules: <%= name %>FieldRules,
-      validate: <%= name %>Validate,
+      validate: validate<%= Name %>,
     };
   }
 
