@@ -1,0 +1,39 @@
+<% if (flow) { %>// @flow<% } %>
+// Uncomment next line if need field rules.
+// import { createFieldRules } from '@saritasa/react-form';
+
+<% if (flow) { %>/**
+ * Type that describes <%= Name %>'s values' shape.
+ */
+export type <%= Name %>Values = $Exact<{}>;
+export type <%= Name %>Errors = $Exact<{ [$Keys<<%= Name %>Values>]?: ?string }>;
+<% } %>
+/**
+ * Method to transform values after any change.
+ *
+ * Should not mutate values. If you need to change values, create new object (use immutable way for updates).
+ * Should be used in case of fields' deps. For example field `b` should be set into empty string
+ *   in case of changing field `a`:
+ *     export const fieldRule = (values, changedField) => {
+ *       if (changedField === 'a') return { ...values, b: '' };
+ *
+ *       return values;
+ *     };
+ *
+ * @param {<%= Name %>Values} values Current values's object.
+ * @param {string} [changedField] Changed field's name.
+ * @returns {<%= Name %>Values} Same values' object or new object with updated fields.
+ */
+export const <%= name %>FieldRules<% if (flow) %>: ?(<%= Name %>Values, key?: string) => <%= Name %>Values<% } %> = <% if (flow) { %>(<% } %>values<% if (flow) { %>: <%= Name %>Values)<% } %> => values;
+
+/**
+ * Method to validate values.
+ *
+ * Should return object like `{ [fieldName]: errorText }` or null.
+ * If `null` - form is ok. If errorText is `null` or missed or empty string, field is ok.
+ * If errorText is some string - field is errored.
+ *
+ * @param {<%= Name %>Values} values Current values's object.
+ * @returns {Object} `null` or errors' object.
+ */
+export const <%= name %>Validate<% if (flow) %>: ?(<%= Name %>Values) => ?{ <%= Name %>Errors<% } %> = <% if (flow) { %>(<% } %>values<% if (flow) { %>: <%= Name %>Values)<% } %> => null;

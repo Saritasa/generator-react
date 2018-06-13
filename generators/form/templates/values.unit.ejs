@@ -1,0 +1,29 @@
+import { <%= name %>FieldRules, <%= name %>Validate } from './<%= Name %>.values';
+
+let values;
+
+function fillValues() {
+  values = {};
+}
+
+describe('Component::<%= Name %>::values::<%= name %>FieldRules()', function() {
+  beforeEach(fillValues);
+
+  it('does not throw in case of unknown fieldName', function() {
+    expect(() => <%= name %>FieldRules({}, 'unknown field')).not.to.throw(Error);
+  });
+
+  it('returns the same object if changed field is unknown', function() {
+    const values = {};
+
+    expect(<%= name %>FieldRules(values, 'unknown field')).to.be.equal(values);
+  });
+});
+
+describe('Component::<%= Name %>::values::<%= name %>Validate()', function() {
+  beforeEach(fillValues);
+
+  it('returns `null` in case of valid values', function() {\
+    expect(<%= name %>Validate(fillValues).to.be.equal(null);
+  });
+});

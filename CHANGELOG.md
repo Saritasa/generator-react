@@ -1,5 +1,7 @@
 ### 0.1.2
 - Add documentation for entity's action creators.
+- Add tags for package.
+- Add generator for forms.
 
 ### 0.1.1
 - Fix miss-named classname inside component view's generated jsdoc. 

@@ -1,0 +1,12 @@
+<% if (flow) { %>// @flow
+<% } %>import * as React from 'react';
+import { storiesOf } from '@storybook/react';
+import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
+
+import { <%= Name %>Controller } from './<%= Name %>.controller';
+
+const stories = storiesOf('Components::<%= Name %>::Controller', module);
+
+stories.addDecorator(withKnobs);
+
+stories.add('without props', () => <<%= Name %>Controller />);

@@ -1,0 +1,55 @@
+<% if (flow) { %>// @flow
+<% } %>import * as React from 'react';
+import { Form<% if (flow) { %>, type FormProps<% } %> } from '@saritasa/react-form';
+
+import { <%= Name %>View<% if (flow) { %>, type <%= Name %>ViewProps<% } %> } from './<%= Name %>.view';
+import { <%= name %>FieldRules, <%= name %>Validate<% if (flow) { %>, type <%= Name %>Values<% } %> } from './<%= Name %>.values';
+<% if (flow) { %>
+export type <%= Name %>ControllerProps = {};
+type <%= Name %>ControllerState = null;
+type <%= Name %>Props = <%= Name %>ViewProps<<%= Name %>Values> & FormProps<<%= Name %>Values>;
+<% } %>
+/**
+ * Controller for <%= Name %> component.
+ *
+ * @extends React.PureComponent
+ */
+export class <%= Name %>Controller extends React.PureComponent<% if (flow) { %><<%= Name %>ControllerProps, <%= Name %>ControllerState><% } %> {
+  // Uncomment default props if need
+  // static defaultProps = {};
+
+  /**
+   * Method to generate properties for view part of component.
+   *
+   * @returns {<%= Name %>ViewProps} Props for view part of component.
+   */
+  getViewProps()<% if (flow) { %>: $Exact<<%= Name %>ViewProps<<%= Name %>Values>><% } %> {
+    return {};
+  }
+
+
+  /**
+   * Method to generate properties for form's view part's wrapper.
+   *
+   * @returns {<%= Name %>Props} Props for form's view part's wrapper.
+   */
+  getFormProps()<% if (flow) { %>: $Exact<<%= Name %>Props><% } %> {
+    return {
+      ...this.getViewProps(),
+      component: <%= Name %>View,
+      fieldRules: <%= name %>FieldRules,
+      validate: <%= name %>Validate,
+    };
+  }
+
+  /**
+   * React's method to render component.
+   *
+   * Renders form with view part of component.
+   *
+   * @returns {?React.Node} Form with view part of <%= Name %> or possible `null`.
+   */
+  render() {
+    return React.createElement(Form, this.getFormProps());
+  }
+}

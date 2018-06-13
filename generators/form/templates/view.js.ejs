@@ -1,0 +1,46 @@
+<% if (flow) { %>// @flow
+<% } %>import * as React from 'react';
+import { pure } from 'recompose';
+import classNames from 'classnames/bind';
+import { FormError, FormFieldError, FormField<% if (flow) { %>, type FromInternalComponentProps<% } %> } from '@saritasa/react-form';
+<% if (flow) { %>
+import { type <%= Name %>Values } from './<%= Name %>.values';
+<% } %>
+import styles from './<%= Name %>.view.css';
+
+// Use css-modules. This allows to use `cls('host') that returns styles.host's value that is real classname.
+const cls = classNames.bind(styles);
+<% if (flow) { %>
+export type <%= Name %>ViewProps = {};
+type Full<%= Name %>ViewProps = <%= Name %>ViewProps & FromInternalComponentProps<<%= Name %>Values>;
+<% } %>
+/**
+ * View part of <%= Name %> component.
+ *
+ * @param {Full<%= Name %>ViewProps} $1 Props passed from parent component and Form.
+ * @returns {?React.Node} Rendered <%= Name %>.
+ */
+export const <%= Name %>ViewPlain = ({
+  disabledSubmit,
+  submitting,
+  valid: isValid,
+  onSubmit: handleSubmit,
+  onReset: handleReset,
+  error,
+}<% if (flow) { %>: Full<%= Name %>ViewProps<% } %>) => (
+  <form onSubmit={onSubmit} className={cls('host', { invalid: !valid })}>
+    <FormField name="myField" />
+    <FormFieldError name="myField" component="div"/>
+    <%= Name %>View works!
+    <FormError error={error} component="div"/>
+    <button type="submit" disabled={disabledSubmit}>
+      {submitting ? 'Submitting' : 'Submit'}
+    </button>
+    <button type="reset" onClick={onReset}>Reset</button>
+  </form>
+);
+
+// Uncomment default props if need
+// <%= Name %>View.defaultProps = {};
+
+export const <%= Name %>View = pure(<%= Name %>ViewPlain);
