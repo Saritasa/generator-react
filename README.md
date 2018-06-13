@@ -69,4 +69,32 @@ npx yo @saritasa/react:entity MyComponent --no-unit
 npx yo @saritasa/react:entity MyComponent --install
 ```
 
-To run help, use `npx yo @saritasa/react:component --help`.
+To run help, use `npx yo @saritasa/react:entity --help`.
+
+
+## Sub-generator 'form'
+
+Sub-generator for creating form with stories and unit-tests.
+
+Examples:
+```bash
+# creates PROJECT_ROOT/src/components/MyForm
+npx yo @saritasa/react:form My
+
+# creates PROJECT_ROOT/src/My/Nested/Path/MyForm
+npx yo @saritasa/react:form My/Nested/Path/My
+
+# creates PROJECT_ROOT/source_root/My/Nested/Path/MyForm
+npx yo @saritasa/react:form My/Nested/Path/My --source-root=source_root
+
+# generate plain js without flow-type
+npx yo @saritasa/react:form MyComponent --no-flow
+
+# generate entity without unit tests
+npx yo @saritasa/react:form MyComponent --no-unit
+
+# install dependencies for forms
+npx yo @saritasa/react:form My --install
+```
+
+To run help, use `npx yo @saritasa/react:form --help`.
