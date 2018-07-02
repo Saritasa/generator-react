@@ -61,9 +61,10 @@ module.exports = class extends Generator {
 
   writing() {
     const { name, Name, flow, unit, dest } = this.options;
-    const files = ['actions.js', 'actionTypes.js', 'api.js', 'dto.js', 'record.js', 'reducer.js', 'sagas.js', 'schema.json', 'selectors.js', 'utils.js'];
+    const files = ['actions.js', 'actionTypes.js', 'api.js', 'dto.js', 'record.js', 'reducer.js', 'sagas.js', 'schema.js', 'selectors.js', 'utils.js'];
 
     if (unit) ['actions.unit.js', 'actionTypes.unit.js', 'reducer.unit.js', 'schema.unit.js'].forEach(file => files.push(file));
+    if (flow) ['actionTypes.flow.unit.js'].forEach(file => files.push(file));
 
     files.forEach(file => {
       this.fs.copyTpl(

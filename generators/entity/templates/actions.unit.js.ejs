@@ -9,10 +9,10 @@ describe('Entity::<%= Name %>::actions', function() {
 
   it('exports action creators that have "<%= Name %>" as name\'s part', function() {
     Object.keys(Action).forEach(actionName => {
-      const endedWithName = /[a-z]<%= Name %>$/.test(actionName);
+      const endsWithName = /[a-z]<%= Name %>$/.test(actionName);
       const includesName = /[a-z]<%= Name %>[A-Z]/.test(actionName);
 
-      expect(endedWithName || includesName).to.be.euqal(true);
+      expect(endsWithName || includesName).to.be.euqal(true);
     });
   });
 });

@@ -1,3 +1,8 @@
+### 0.1.3
+- Change entity's schema to use .js instead of .json file.
+- Add flow's check for action types to use strict literal types.
+- Add SET and SET_LIST actions into reducer.
+
 ### 0.1.2
 - Add documentation for entity's action creators.
 - Add tags for package.

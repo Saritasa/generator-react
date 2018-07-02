@@ -2,7 +2,7 @@
 <% } %>import Ajv from 'ajv';
 
 import { <%= Name %> } from './<%= Name %>.record';
-import <%= Name %>DtoSchema from './<%= Name %>.schema.json';
+import { <%= Name %>DtoSchema } from './<%= Name %>.schema';
 <% if (flow) { %>import { type <%= Name %>Dto } from './<%= Name %>.dto';
 <% } %>
 const ajv = new Ajv({ allErrors: true });
@@ -10,7 +10,7 @@ const ajv = new Ajv({ allErrors: true });
 export const validateDto = ajv.compile(<%= Name %>DtoSchema);
 
 export function get<%= Name %>Key(<%= name %><% if (flow) { %>: <%= Name %><% } %>)<% if (flow) { %>: string<% } %> {
-  return String(<%= name %>.id);
+  return String(<%= name %>.get('id'));
 }
 
 export function recordToDto(<%= name %><% if (flow) { %>: <%= Name %><% } %>)<% if (flow) { %>: <%= Name %>Dto<% } %> {

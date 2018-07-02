@@ -1,7 +1,9 @@
 <% if (flow) { %>// @flow
 <% } %>import * as Immutable from 'immutable';
 
-export const <%= Name %> = Immutable.Record({});
+export const <%= Name %> = Immutable.Record({
+  id: '',
+});
 
 export const <%= Name %>Meta = Immutable.Record({
   loading: false,

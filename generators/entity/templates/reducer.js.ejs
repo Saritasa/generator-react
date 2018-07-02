@@ -2,8 +2,9 @@
 <% } %>import * as Immutable from 'immutable';
 
 import * as ActionType from './<%= Name %>.actionTypes';
-<% if (flow) { %>import { <%= Name %>Model } from './<%= Name %>.record';
-
+import { <%= Name %>Model } from './<%= Name %>.record';
+import { get<%= Name %>Key } from './<%= Name %>.utils';
+<% if (flow) { %>
 export type <%= Name %>StateShape = {
   listLoading: boolean,
   entities: Immutable.Map<string, <%= Name %>Model>,
@@ -20,6 +21,26 @@ export const <%= Name %>StateRecord = Immutable.Record(
 
 const defaultState = new <%= Name %>StateRecord();
 
+function set<%= Name %>(state, { <%= name %>, time }) {
+  const key = get<%= Name %>Key(<%= name %>);
+
+  if (state.hasIn(['entities', key])) {
+    return state.updateIn(
+      ['entities', key],
+      <%= name %>Old => <%= name %>Old.setIn(['meta', 'updatedAt'], time).set('data', <%= name %>),
+    );
+  }
+
+  return state.setIn(
+    ['entities', key],
+    (new <%= Name %>Model()).setIn(['meta', 'updatedAt'], time).set('data', <%= name %>),
+  );
+}
+
+function set<%= Name %>List(state, { <%= name %>List, time }) {
+  return <%= name %>List.reduce((currentState, <%= name %>) => set<%= Name %>(currentState, { <%= name %>, time }), state);
+}
+
 export function <%= name %>Reducer(state<% if (flow) { %>: <%= Name %>StateRecord<% } %> = defaultState, action<% if (flow) { %>: *<% } %>)<% if (flow) { %>: <%= Name %>StateRecord<% } %> {
   switch (action.type) {
     case ActionType.LOAD_LIST:
@@ -28,8 +49,14 @@ export function <%= name %>Reducer(state<% if (flow) { %>: <%= Name %>StateRecor
     case ActionType.LOAD_LIST_SUCCESS:
       return state.set('listLoading', false);
 
-    case ActionType.LOAD_LIST_ERROR:
+    case ActionType.LOAD_LIST_FAILED:
       return state.set('listLoading', false);
+
+    case ActionType.SET:
+      return set<%= Name %>(state, action.payload);
+
+    case ActionType.SET_LIST:
+      return set<%= Name %>List(state, action.payload);
 
     default:
       return state;

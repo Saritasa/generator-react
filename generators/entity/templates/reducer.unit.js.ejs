@@ -60,9 +60,9 @@ describe('Entity::<%= Name %>::reducer', function() {
     });
   });
 
-  describe('on LOAD_LIST_ERROR action', function() {
+  describe('on LOAD_LIST_FAILED action', function() {
     it('sets listLoading into false', function() {
-      const state = <%= name %>Reducer(undefined, { type: ActionType.LOAD_LIST_ERROR });
+      const state = <%= name %>Reducer(undefined, { type: ActionType.LOAD_LIST_FAILED });
 
       expect(state.get('listLoading')).to.be.equal(false);
     });
