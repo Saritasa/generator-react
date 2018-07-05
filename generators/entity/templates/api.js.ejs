@@ -3,6 +3,13 @@
 <% if (flow) { %>
 import { type <%= Name%>Dto } from './<%= Name%>.dto';
 <% } %>
+/**
+ * Performs request to the api for load single instance of <%= Name %>.
+ * @params {Object} params
+ * @params {string} params.<%= name %>Id The <%= Name %>'s id. Is used to get it from api.
+ * @returns {Object} Promise-like object.
+ * @memberof <%= moduleName %>
+ */
 export function fetch<%= Name %>({ <%= name %>Id }<% if (flow) { %>: { <%= name %>Id: string }<% } %>) {
   return http.request({
     method: 'get',
@@ -10,6 +17,13 @@ export function fetch<%= Name %>({ <%= name %>Id }<% if (flow) { %>: { <%= name 
   });
 }
 
+/**
+ * Performs request to the api for load list of <%= Name %>.
+ * @params {Object} params
+ * @params {Object} params.query Query that filters list of <%= Name %>.
+ * @returns {Object} Promise-like object.
+ * @memberof <%= moduleName %>
+ */
 export function fetch<%= Name %>List({ query }<% if (flow) { %>: *<% } %>) {
   return http.request({
     method: 'get',
@@ -18,6 +32,12 @@ export function fetch<%= Name %>List({ query }<% if (flow) { %>: *<% } %>) {
   });
 }
 
+/**
+ * Performs request to the api for changing existed instance of <%= Name %>.
+ * @params {<%= Name%>Dto} <%= name %> Updated instance of <%= Name %>
+ * @returns {Object} Promise-like object.
+ * @memberof <%= moduleName %>
+ */
 export function save<%= Name %>(<%= name %><% if (flow) { %>: <%= Name%>Dto<% } %>) {
   return http.request({
     method: 'put',
@@ -26,6 +46,12 @@ export function save<%= Name %>(<%= name %><% if (flow) { %>: <%= Name%>Dto<% } 
   });
 }
 
+/**
+ * Performs request to the api for creating new instance of <%= Name %>.
+ * @params {<%= Name%>Dto} <%= name %> New instance of <%= Name %>
+ * @returns {Object} Promise-like object.
+ * @memberof <%= moduleName %>
+ */
 export function create<%= Name %>(<%= name %><% if (flow) { %>: <%= Name%>Dto<% } %>) {
   return http.request({
     method: 'post',
@@ -34,6 +60,13 @@ export function create<%= Name %>(<%= name %><% if (flow) { %>: <%= Name%>Dto<% 
   });
 }
 
+/**
+ * Performs request to the api for delete existed instance of <%= Name %>.
+ * @params {Object} params
+ * @params {string} params.<%= name %>Id The <%= Name %>'s id to delete.
+ * @returns {Object} Promise-like object.
+ * @memberof <%= moduleName %>
+ */
 export function delete<%= Name %>({ <%= name %>Id }<% if (flow) { %>: { <%= name %>Id: string }<% } %>) {
   return http.request({
     method: 'delete',

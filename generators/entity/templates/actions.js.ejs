@@ -14,6 +14,7 @@
  *     It's an `id` usually.
  *
  * @returns {Action} Action with type LOAD and `{ <%= name %>Id: key }` as payload.
+ * @memberof <%= moduleName %>
  */
 export function load<%= Name %>ByKey(key<% if (flow) { %>: string<% } %>) {
   return {
@@ -35,6 +36,7 @@ export function load<%= Name %>ByKey(key<% if (flow) { %>: string<% } %>) {
  * @param {Object} listQuery - Some key that allow to differ 1 instance from another.
  *
  * @returns {Object} Action with type LOAD_LIST and `{ query }` as payload.
+ * @memberof <%= moduleName %>
  */
 export function load<%= Name %>List(listQuery<% if (flow) { %>: { [string]: mixed }<% } %>) {
   const query = listQueryToListQueryDto(listQuery);
@@ -58,6 +60,7 @@ export function load<%= Name %>List(listQuery<% if (flow) { %>: { [string]: mixe
  *     This should be a Immutable.Record.
  *
  * @returns {Object} Action with type SAVE and `{ <%= name%>Id, body }` as payload.
+ * @memberof <%= moduleName %>
  */
 export function save<%= Name %>(<%= name %><% if (flow) { %>: <%= Name %><% } %>) {
   const key = get<%= Name %>Key(<%= name %>);
@@ -83,6 +86,7 @@ export function save<%= Name %>(<%= name %><% if (flow) { %>: <%= Name %><% } %>
  *     It's an `id` usually.
  *
  * @returns {Object} Action with type DELETE and `{ <%= name%>Id }` as payload.
+ * @memberof <%= moduleName %>
  */
 export function delete<%= Name %>ByKey(key<% if (flow) { %>: string<% } %>) {
   return {
@@ -102,6 +106,7 @@ export function delete<%= Name %>ByKey(key<% if (flow) { %>: string<% } %>) {
  *     This should be a Immutable.Record.
  *
  * @returns {Object} see delete<%= Name %>.
+ * @memberof <%= moduleName %>
  */
 export function delete<%= Name %>(<%= name %><% if (flow) { %>: <%= Name %><% } %>) {
   const key = get<%= Name %>Key(<%= name %>);

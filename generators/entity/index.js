@@ -13,13 +13,14 @@ module.exports = class extends Generator {
 
     this.argument('entityName', {
       type: String,
-      description: 'Entities\'s name. Use CamelCase for it. You may use `prefix/EntityName` to create sub-entity.',
+      description: 'Entities\'s name. Use CamelCase for it. You may use `featureName/EntityName` to create sub-entity.',
       required: true
     });
 
     this.option('flow', { type: Boolean, default: true, description: 'Use --no-flow to remove flow from generated code' });
     this.option('unit', { type: Boolean, default: true, description: 'Use --no-unit to prevent tests\' generating' });
 
+    this.option('feature', { type: String, default: null, description: 'Part of what feature is this entity' });
     this.option('source-root', { type: String, default: SOURCE_PATH, description: 'Path for source\'s root' });
     this.option('install', { type: Boolean, default: false, description: 'Install dependencies for generated code' });
   }
@@ -27,6 +28,7 @@ module.exports = class extends Generator {
   initializing() {
     this._checkNodejsVerion();
     this._calcEntityNames();
+    this._calcModuleName();
     this._checkArguments();
     this.destinationRoot(this.destinationPath(this.options['source-root']));
   }
@@ -41,9 +43,17 @@ module.exports = class extends Generator {
   _calcEntityNames() {
     const [name, ...prefixParts] = this.options.entityName.split('/').reverse();
 
+    const featureName = prefixParts.reverse().join('/');
+
     this.options.name = `${name[0].toLowerCase()}${name.slice(1)}`;
     this.options.Name = `${name[0].toUpperCase()}${name.slice(1)}`;
-    this.options.dest = prefixParts.reverse().join('/') || DEST;
+    this.options.featureName = `${featureName.slice(0, 1).toLowerCase()}${featureName.slice(1)}`;
+    this.options.FeatureName = `${featureName.slice(0, 1).toUpperCase()}${featureName.slice(1)}`;
+    this.options.dest = [this.options.featureName, DEST].filter(Boolean).join('/');
+  }
+
+  _calcModuleName() {
+    this.options.moduleName = `${this.options.FeatureName}/${this.options.Name}`;
   }
 
   _checkArguments() {
@@ -60,7 +70,7 @@ module.exports = class extends Generator {
 
 
   writing() {
-    const { name, Name, flow, unit, dest } = this.options;
+    const { name, Name, moduleName, flow, unit, dest } = this.options;
     const files = ['actions.js', 'actionTypes.js', 'api.js', 'dto.js', 'record.js', 'reducer.js', 'sagas.js', 'schema.js', 'selectors.js', 'utils.js'];
 
     if (unit) ['actions.unit.js', 'actionTypes.unit.js', 'reducer.unit.js', 'schema.unit.js'].forEach(file => files.push(file));
@@ -70,7 +80,7 @@ module.exports = class extends Generator {
       this.fs.copyTpl(
         this.templatePath(`${file}.ejs`),
         this.destinationPath(path.join(dest, Name, `${Name}.${file}`)),
-        { name, Name, flow },
+        { name, Name, featureName, moduleName, FeatureName, flow },
       );
     });
   }
