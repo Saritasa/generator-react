@@ -4,7 +4,7 @@
 /**
  * This is the shape and default properties for every instance of <%= Name %>.
  * @property {string} id - The id of <%= Name %>.
- * @memberof <%= moduleName %>
+ * @memberof <%= moduleName %>/reducer
  */
 export const <%= Name %> = Immutable.Record({
   id: '',
@@ -14,7 +14,7 @@ export const <%= Name %> = Immutable.Record({
  * This is the shape and default properties for meta info for every instance of <%= Name %>.
  * @property {boolean} loading - The flag that is used to display that this instance of <%= Name %> is currently loading.
  * @property {?number} updatedAt - The time of last <%= name %>'s info updating.
- * @memberof <%= moduleName %>
+ * @memberof <%= moduleName %>/reducer
  */
 export const <%= Name %>Meta = Immutable.Record({
   loading: false,
@@ -25,7 +25,7 @@ export const <%= Name %>Meta = Immutable.Record({
  * This is the shape and default properties <%= Name %>'s model.
  * @property {<%= Name %>} data - The main <%= name %>'s info.
  * @property {<%= Name %>Meta} meta - Meta info about <%= name %>.
- * @memberof <%= moduleName %>
+ * @memberof <%= moduleName %>/reducer
  */
 export const <%= Name %>Model = Immutable.Record({
   data: new <%= Name %>(),

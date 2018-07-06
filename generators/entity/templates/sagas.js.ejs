@@ -1,4 +1,5 @@
 <% if (flow) { %>// @flow
+import { type Saga } from 'redux-saga';
 <% } %>import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 
 <% if (flow) { %>import * as Action from './<%= Name %>.actions';
@@ -6,7 +7,19 @@ import { type <%= Name %>Dto, type <%= Name %>ListDto } from './<%= Name %>.dto'
 <% } %>import * as Api from './<%= Name %>.api';
 import * as ActionType from './<%= Name %>.actionTypes';
 import { dtoToRecord } from './<%= Name %>.utils';
+/**
+ * Module that stores all sagas and work with requests' logic for <%= Name %>.
+ * @module <%= moduleName %>/sagas
+ */
 
+/**
+ * Saga that try to load single <%= name %> and sets it into store.
+ * @param {Action.load<%= Name %>ByKey} action - Action that initialize loading.
+ *     It's a result, of action creator call, not itself. Action's payload
+ *     should be the same type and shape as `API.fetch<%= Name %>` needs.
+ * @private
+ * @memberof <%= moduleName %>/sagas
+ */
 function* load<%= Name %>(action<% if (flow) { %>: $Call<typeof Action.load<%= Name %>ByKey, any><% } %>) {
   try {
     const <%= name %>Dto<% if (flow) { %>: <%= Name %>Dto<% } %> = yield call(Api.fetch<%= Name %>, action.payload);
@@ -18,6 +31,14 @@ function* load<%= Name %>(action<% if (flow) { %>: $Call<typeof Action.load<%= N
   }
 }
 
+/**
+ * Saga that try to save single <%= name %>.
+ * @param {Action.save<%= Name %>} action - Action that initialize saving.
+ *     It's a result, of action creator call, not itself. Action's payload
+ *     should be the same type and shape as `API.save<%= Name %>` or `API.create<%= Name %>` needs.
+ * @private
+ * @memberof <%= moduleName %>/sagas
+ */
 function* save<%= Name %>(action<% if (flow) { %>: $Call<typeof Action.save<%= Name %>, any><% } %>) {
   try {
     const apiAction = action.payload.<%= name %>Id ? Api.save<%= Name %> : Api.create<%= Name %>;
@@ -30,6 +51,14 @@ function* save<%= Name %>(action<% if (flow) { %>: $Call<typeof Action.save<%= N
   }
 }
 
+/**
+ * Saga that try to delete single <%= name %>.
+ * @param {Action.delete<%= Name %>ByKey} action - Action that initialize deleting.
+ *     It's a result, of action creator call, not itself. Action's payload
+ *     should be the same type and shape as `API.delete<%= Name %>ByKey` needs.
+ * @private
+ * @memberof <%= moduleName %>/sagas
+ */
 function* delete<%= Name %>(action<% if (flow) { %>: $Call<typeof Action.delete<%= Name %>ByKey, any><% } %>) {
   try {
     yield call(Api.delete<%= Name %>, action.payload);
@@ -40,6 +69,14 @@ function* delete<%= Name %>(action<% if (flow) { %>: $Call<typeof Action.delete<
   }
 }
 
+/**
+ * Saga that try to load list of <%= name %> and sets them into store.
+ * @param {Action.load<%= Name %>List} action - Action that initialize loading.
+ *     It's a result, of action creator call, not itself. Action's payload
+ *     should be the same type and shape as  `API.fetch<%= Name %>List` needs.
+ * @private
+ * @memberof <%= moduleName %>/sagas
+ */
 function* load<%= Name %>List(action<% if (flow) { %>: $Call<typeof Action.load<%= Name %>List, any><% } %>) {
   try {
     const <%= name %>ListDto<% if (flow) { %>: <%= Name %>ListDto<% } %> = yield call(Api.fetch<%= Name %>List, action.payload);
@@ -52,18 +89,42 @@ function* load<%= Name %>List(action<% if (flow) { %>: $Call<typeof Action.load<
   }
 }
 
-export function* load<%= Name %>Saga() {
+/**
+ * Takes every <%= Name %>.LOAD action and runs `load<%= Name %>` saga.
+ *
+ * `load<%= Name %>` may works in parallel.
+ * @memberof <%= moduleName %>/sagas
+ */
+export function* load<%= Name %>Saga(): Saga<*> {
   yield takeEvery(ActionType.LOAD, load<%= Name %>);
 }
 
-export function* load<%= Name %>ListSaga() {
+/**
+ * Takes every <%= Name %>.LOAD_LIST action and runs `load<%= Name %>List` saga.
+ *
+ * Only last call of `load<%= Name %>List` will save the data into store.
+ * @memberof <%= moduleName %>/sagas
+ */
+export function* load<%= Name %>ListSaga(): Saga<*> {
   yield takeLatest(ActionType.LOAD_LIST, load<%= Name %>List);
 }
 
-export function* save<%= Name %>Saga() {
+/**
+ * Takes every <%= Name %>.SAVE action and runs `save<%= Name %>` saga.
+ *
+ * `save<%= Name %>` may works in parallel.
+ * @memberof <%= moduleName %>/sagas
+ */
+export function* save<%= Name %>Saga(): Saga<*> {
   yield takeEvery(ActionType.SAVE, save<%= Name %>);
 }
 
-export function* delete<%= Name %>Saga() {
+/**
+ * Takes every <%= Name %>.DELETE action and runs `delete<%= Name %>` saga.
+ *
+ * `delete<%= Name %>` may works in parallel.
+ * @memberof <%= moduleName %>/sagas
+ */
+export function* delete<%= Name %>Saga(): Saga<*> {
   yield takeEvery(ActionType.DELETE, delete<%= Name %>);
 }

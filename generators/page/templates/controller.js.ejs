@@ -4,7 +4,7 @@
 import { <%= Name %>View<% if (flow) { %>, type <%= Name %>ViewProps<% } %> } from './<%= Name %>.view';
 
 /**
- * Module with controller for <%= Name %> component.
+ * Module with controller for <%= Name %> page.
  * @module <%= moduleName %>/controller
  */
 
@@ -21,28 +21,28 @@ export type <%= Name %>ControllerProps = {};
 type <%= Name %>ControllerState = null;
 <% } %>
 /**
- * Controller for <%= Name %> component.
+ * Controller for <%= Name %> page.
  *
- * @extends React.PureComponent
+ * @extends React.PurePage
  * @memberof <%= moduleName %>/controller
  */
-export class <%= Name %>Controller extends React.PureComponent<% if (flow) { %><<%= Name %>ControllerProps, <%= Name %>ControllerState><% } %> {
+export class <%= Name %>Controller extends React.PurePage<% if (flow) { %><<%= Name %>ControllerProps, <%= Name %>ControllerState><% } %> {
   // Uncomment default props if need
   // static defaultProps = {};
 
   /**
-   * Method to generate properties for view part of component.
+   * Method to generate properties for view part of page.
    *
-   * @returns {<%= Name %>ViewProps} Props for view part of component.
+   * @returns {<%= Name %>ViewProps} Props for view part of page.
    */
   getViewProps()<% if (flow) { %>: $Exact<<%= Name %>ViewProps><% } %> {
     return {};
   }
 
   /**
-   * React's method to render component.
+   * React's method to render page.
    *
-   * Does not render something except component's view part.
+   * Does not render something except page's view part.
    *
    * @returns {?React.Node} View part of <%= Name %> or possible `null`.
    */

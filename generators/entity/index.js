@@ -53,7 +53,7 @@ module.exports = class extends Generator {
   }
 
   _calcModuleName() {
-    this.options.moduleName = `${this.options.FeatureName}/${this.options.Name}`;
+    this.options.moduleName = [this.options.FeatureName, this.options.Name].filter(Boolean).join('/');
   }
 
   _checkArguments() {
@@ -70,11 +70,10 @@ module.exports = class extends Generator {
 
 
   writing() {
-    const { name, Name, moduleName, flow, unit, dest } = this.options;
-    const files = ['actions.js', 'actionTypes.js', 'api.js', 'dto.js', 'record.js', 'reducer.js', 'sagas.js', 'schema.js', 'selectors.js', 'utils.js'];
+    const { name, Name, moduleName, featureName, FeatureName, flow, unit, dest } = this.options;
+    const files = ['actions.js', 'actionTypes.js', 'api.js', 'documentation.yml', 'dto.js', 'inject.js', 'record.js', 'reducer.js', 'sagas.js', 'schema.js', 'selectors.js', 'utils.js'];
 
     if (unit) ['actions.unit.js', 'actionTypes.unit.js', 'reducer.unit.js', 'schema.unit.js'].forEach(file => files.push(file));
-    if (flow) ['actionTypes.flow.unit.js'].forEach(file => files.push(file));
 
     files.forEach(file => {
       this.fs.copyTpl(
@@ -83,5 +82,11 @@ module.exports = class extends Generator {
         { name, Name, featureName, moduleName, FeatureName, flow },
       );
     });
+
+    this.fs.copyTpl(
+      this.templatePath('index.js.ejs'),
+      this.destinationPath(path.join(dest, Name, 'index.js')),
+      { name, Name, featureName, moduleName, FeatureName, flow },
+    );
   }
 };

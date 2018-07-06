@@ -4,13 +4,33 @@
 import * as ActionType from './<%= Name %>.actionTypes';
 import { <%= Name %>Model } from './<%= Name %>.record';
 import { get<%= Name %>Key } from './<%= Name %>.utils';
-<% if (flow) { %>
+/**
+ * Module that knows how to transform state of <%= Name %>.
+ * @module <%= moduleName %>/reducer
+ */
+
+/**
+ * Type of <%= Name %>StateRecord that describes default values and shape for state of <%= Name %>.
+ * @name <%= Name %>StateShape
+ * @type {Object}
+ * @property {boolean} listLoading - Flag that shows if list of <%= Name %> is loading currently.
+ * @property {Immutable.Map<string, <%= Name %>Model>} entities - Hasmap for all instances of <%= Name %>
+ *     saved in store.
+ * @property {Immutable.List<string>} keys - List of all keys of <%= Name %> that are stored in store.
+ * @returns {<%= Name %>StateRecord} - New state.
+ * @memberof <%= moduleName %>/reducer
+ */<% if (flow) { %>
 export type <%= Name %>StateShape = {
   listLoading: boolean,
   entities: Immutable.Map<string, <%= Name %>Model>,
   keys: Immutable.List<string>,
 };
 <% } %>
+/**
+ * Record that describes default values and shape for state of <%= Name %>.
+ * @returns {<%= Name %>StateRecord} - New state.
+ * @memberof <%= moduleName %>/reducer
+ */
 export const <%= Name %>StateRecord = Immutable.Record(
   <% if (flow) { %>(<% } %>{
     listLoading: false,
@@ -21,6 +41,16 @@ export const <%= Name %>StateRecord = Immutable.Record(
 
 const defaultState = new <%= Name %>StateRecord();
 
+/**
+ * Saves single <%= name %> into store. Sets time of last update.
+ * @param {<%= Name %>StateRecord} state - Current state for <%= Name %>.
+ * @param {Object} payload - Action payload.
+ * @param {<%= Name %>} payload.<%= name %> - Instance of <%= Name %>.
+ * @param {number} payload.time - Time that action called.
+ * @returns {<%= Name %>StateRecord} - New state.
+ * @private
+ * @memberof <%= moduleName %>/reducer
+ */
 function set<%= Name %>(state, { <%= name %>, time }) {
   const key = get<%= Name %>Key(<%= name %>);
 
@@ -37,6 +67,16 @@ function set<%= Name %>(state, { <%= name %>, time }) {
   );
 }
 
+/**
+ * Saves every <%= name %> into store. Sets time of last update.
+ * @param {<%= Name %>StateRecord} state - Current state for <%= Name %>.
+ * @param {Object} payload - Action payload.
+ * @param {List<<%= Name%>>} payload.<%= name %>List - List of <%= Name %>.
+ * @param {number} payload.time - Time that action called.
+ * @returns {<%= Name %>StateRecord} - New state.
+ * @private
+ * @memberof <%= moduleName %>/reducer
+ */
 function set<%= Name %>List(state, { <%= name %>List, time }) {
   return <%= name %>List.reduce((currentState, <%= name %>) => set<%= Name %>(currentState, { <%= name %>, time }), state);
 }
@@ -44,10 +84,10 @@ function set<%= Name %>List(state, { <%= name %>List, time }) {
 /**
  * Reducer that transforms state for <%= Name %>.
  *
- * @params {<%= Name %>StateRecord} state - Current state for <%= Name %>.
- * @params {Object} action - Action that may change the state.
+ * @param {<%= Name %>StateRecord} state - Current state for <%= Name %>.
+ * @param {Object} action - Action that may change the state.
  * @returns {<%= Name %>StateRecord} New (if has any update) or old state record.
- * @memberof <%= moduleName %>
+ * @memberof <%= moduleName %>/reducer
  */
 export function <%= name %>Reducer(state<% if (flow) { %>: <%= Name %>StateRecord<% } %> = defaultState, action<% if (flow) { %>: *<% } %>)<% if (flow) { %>: <%= Name %>StateRecord<% } %> {
   switch (action.type) {

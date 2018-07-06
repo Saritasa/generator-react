@@ -1,0 +1,76 @@
+#!/usr/bin/env node
+const path = require('path');
+const cp = require('child_process');
+
+const list = require('cli-list');
+
+const deps = [
+  'prop-types',
+  'reselect',
+  'redux',
+  'immutable',
+  'redux-immutable',
+  'redux-saga',
+  'react-redux',
+  'react-router',
+  'ric',
+  'axios',
+  '@saritasa/react-form',
+  'recompose',
+  'classnames',
+].join(' ');
+
+const devDeps = [
+  '@saritasa/generator-react',
+  'yo',
+  '@storybook/react',
+  '@storybook/addon-knobs',
+  '@storybook/addon-links',
+  '@storybook/addon-actions',
+  'mocha',
+  'enzyme',
+  'enzyme-adapter-react-16',
+  'chai',
+  'flow-bin',
+  'husky',
+  'nyc',
+  'react-app-rewired',
+].join(' ');
+
+function checkNodejsVerion() {
+  const { node } = process.versions;
+  if (Number(node.split('.')[0]) !== 8) {
+    throw new Error(`Use nodejs v8 instead of ${node}`);
+  }
+}
+
+function checkNpx() {
+  try {
+    cp.execSync('npx --version');
+  } catch (error) {
+    throw new Error('Install npx please (you may use npm v5.7+ for it).');
+  }
+}
+
+function checkArguments({ name }) {
+  if (!(/^[a-zA-Z][-a-zA-Z]*$/.test(name))) {
+    throw new Error(`name should includes only latin letters and dashes. You passed "${name}"`);
+  }
+}
+
+function install({ name }) {
+  cp.execSync(`npx create-react-app ${name} --use-npm`);
+  cp.execSync(`cd ${name} && npm install --save ${deps} && npm install --save-dev ${devDeps}`);
+  cp.execSync(`cd ${name} && npx flow init`);
+  console.log('Done');
+}
+
+function run() {
+  checkNodejsVerion();
+  checkNpx();
+  const [ name ] = list(process.argv.slice(2));
+  checkArguments({ name });
+  install({ name });
+}
+
+run();

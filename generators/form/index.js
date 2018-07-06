@@ -61,6 +61,13 @@ module.exports = class extends Generator {
 
     this.options.name = `${formName[0].toLowerCase()}${formName.slice(1)}Form`;
     this.options.Name = `${formName[0].toUpperCase()}${formName.slice(1)}Form`;
+    this.options.featureName = `${featureName.slice(0, 1).toLowerCase()}${featureName.slice(1)}`;
+    this.options.FeatureName = `${featureName.slice(0, 1).toUpperCase()}${featureName.slice(1)}`;
+    this.options.dest = [this.options.featureName, DEST].filter(Boolean).join('/');
+  }
+
+  _calcModuleName() {
+    this.options.moduleName = [this.options.FeatureName, this.options.Name].filter(Boolean).join('/');
   }
 
   install() {

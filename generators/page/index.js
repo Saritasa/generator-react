@@ -3,7 +3,7 @@ const path = require('path');
 const Generator = require('yeoman-generator');
 
 const SOURCE_PATH = 'src';
-const COMPONENT_DEST = 'components';
+const Page_DEST = 'pages';
 
 module.exports = class extends Generator {
 
@@ -11,9 +11,9 @@ module.exports = class extends Generator {
     // Calling the super constructor is important so our generator is correctly set up
     super(args, opts);
 
-    this.argument('component', {
+    this.argument('page', {
       type: String,
-      description: 'Component\'s name. Use CamelCase for it. You may use `prefix/ComponentName`. By default prefix="components".',
+      description: 'Page\'s name. Use CamelCase for it. You may use `featureName/PageName`. By default feature is empty.',
       required: true
     });
 
@@ -27,7 +27,7 @@ module.exports = class extends Generator {
 
   initializing() {
     this._checkNodejsVerion();
-    this._calcComponentName();
+    this._calcPageName();
     this._checkArguments();
     this._calcModuleName();
     this.destinationRoot(this.destinationPath(this.options['source-root']));
@@ -40,16 +40,16 @@ module.exports = class extends Generator {
     }
   }
 
-  _calcComponentName() {
+  _calcPageName() {
     const [name, ...prefixParts] = this.options.entityName.split('/').reverse();
 
     const featureName = prefixParts.reverse().join('/');
 
-    this.options.name = `${name[0].toLowerCase()}${name.slice(1)}`;
-    this.options.Name = `${name[0].toUpperCase()}${name.slice(1)}`;
+    this.options.name = `${name[0].toLowerCase()}${name.slice(1)}Page`;
+    this.options.Name = `${name[0].toUpperCase()}${name.slice(1)}Page`;
     this.options.featureName = `${featureName.slice(0, 1).toLowerCase()}${featureName.slice(1)}`;
     this.options.FeatureName = `${featureName.slice(0, 1).toUpperCase()}${featureName.slice(1)}`;
-    this.options.dest = [this.options.featureName, COMPONENT_DEST].filter(Boolean).join('/');
+    this.options.dest = [this.options.featureName, Page_DEST].filter(Boolean).join('/');
   }
 
   _checkArguments() {

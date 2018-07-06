@@ -1,5 +1,7 @@
 <% if (flow) { %>// @flow
-<% } %>import { <%= Name %>Controller<% if (flow) { %>, type <%= Name %>ControllerProps<% } %> } from './<%= Name %>.controller';
+<% } %>import { connect } from 'react-redux';
+
+import { <%= Name %>Controller<% if (flow) { %>, type <%= Name %>ControllerProps<% } %> } from './<%= Name %>.controller';
 
 /**
  * TODO: Fill this section.

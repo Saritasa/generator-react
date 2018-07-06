@@ -6,7 +6,7 @@ import classNames from 'classnames/bind';
 import styles from './<%= Name %>.view.css';
 
 /**
- * View part of <%= Name %> component.
+ * View part of <%= Name %> page.
  * @module <%= moduleName %>/view
  */
 
@@ -20,9 +20,9 @@ const cls = classNames.bind(styles);
 export type <%= Name %>ViewProps = {};
 <% } %>
 /**
- * Plain part of <%= Name %> component's View.
+ * Plain part of <%= Name %> page's View.
  *
- * @param {<%= Name %>ViewProps} $1 Props passed from parent component.
+ * @param {<%= Name %>ViewProps} $1 Props passed from parent page.
  * @returns {?React.Node} Rendered <%= Name %>.
  * @memberof <%= moduleName %>/view
  */
@@ -36,7 +36,7 @@ export const <%= Name %>ViewPlain = ({}<% if (flow) { %>: <%= Name %>ViewProps<%
 // <%= Name %>View.defaultProps = {};
 
 /**
- * View part of <%= Name %> passed as PureComponent.
+ * View part of <%= Name %> passed as PurePage.
  * @memberof <%= moduleName %>/view
  */
 export const <%= Name %>View = pure(<%= Name %>ViewPlain);

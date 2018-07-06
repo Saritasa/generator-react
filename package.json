@@ -1,13 +1,15 @@
 {
   "name": "@saritasa/generator-react",
-  "version": "0.2.1",
+  "version": "0.2.1-rc.5",
   "description": "Package for generating boilerplated code",
-  "main": "generators/component/index.js",
+  "main": "generators/app/index.js",
+  "bin": "create-saritasa-react-app",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "files": [
-    "generators"
+    "generators",
+    "create-saritasa-react-app"
   ],
   "keywords": [
     "saritasa",
@@ -23,6 +25,8 @@
   "author": "Konstantine Petryaev <numminorihsf@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "cli-list": "^0.2.0",
+    "immutable": "^4.0.0-rc.9",
     "yeoman-generator": "^2.0.5"
   }
 }

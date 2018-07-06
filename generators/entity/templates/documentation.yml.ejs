@@ -1,12 +1,13 @@
 toc:
-  - name: "<%= moduleName %>"
-    children:
-    - actions
-    - LngLat
-    - LngLatBounds
-    - name: Navigation
+  - name: "<%= [FeatureName, 'Entity'].filter(Boolean).join('::') %>::<%= moduleName %>"
     description: |
-      Here are some helper functions for navigation.
-    children:
-    - shortestPath
-    - salesman
+      Methods, actions, sagas, schema and types to work with <%= Name %>.
+  - <%= Name %>
+  - <%= Name %>/inject
+  - <%= Name %>/actions
+  - <%= Name %>/actionTypes
+  - <%= Name %>/api
+  - <%= Name %>/reducer
+  - <%= Name %>/sagas
+  - <%= Name %>/selectors
+  - <%= Name %>/utils

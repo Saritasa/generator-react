@@ -1,16 +1,16 @@
 <% if (flow) { %>// @flow
-<% } %>/**
- * This module is used to inject all part of <%= moduleName %> module into
- * application.
- *
- * @module <%= moduleName %>/inject
- * @memberof <%= moduleName %>
- */
-import { entityStore } from 'store';
+<% } %>import { entityStore } from 'store';
 
 import { <%= name %>Reducer } from './<%= Name %>.reducer';
 import { setBaseSelectorPath } from './<%= Name %>.selectors';
 import * as Saga from './<%= Name %>.sagas';
+
+/**
+ * This module is used to inject all part of <%= moduleName %> module into
+ * application.
+ *
+ * @module <%= moduleName %>/inject
+ */
 
 entityStore.inject({
   name: '<%= name %>',
