@@ -1,0 +1,8 @@
+<% if (flow) { %>// @flow
+<% } %>import * as React from 'react';
+
+import { <%= Name %>RootLink, <%= Name %>NestedLink } from '../links';
+
+export const ExampleHeader = () => (<div>
+    This is an example header for feature "<%= Name %>". Go to <<%= Name %>RootLink>Feature root</<%= Name %>RootLink>. Go to <<%= Name %>NestedLink>Feature nested Page</<%= Name %>NestedLink>.
+</div>);

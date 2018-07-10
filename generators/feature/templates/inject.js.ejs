@@ -1,0 +1,10 @@
+<% if (flow) { %>// @flow
+<% } %>import * as <%= Name %>Paths from './routes/<%= Name %>.paths';
+import { <%= name %>RouteStore } from './routes';
+import { routeStore } from '../../routes';
+
+routeStore.injectRouteStore(<%= name %>RouteStore);
+
+(Object.values(<%= Name %>Paths): Array<any>).forEach(
+  (<%= name %>Path: $Values<typeof <%= Name %>Paths>) => <%= name %>Path.store(<%= name %>RouteStore)
+);
