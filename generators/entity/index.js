@@ -53,7 +53,7 @@ module.exports = class extends Generator {
   }
 
   _calcModuleName() {
-    this.options.moduleName = [this.options.FeatureName, this.options.Name].filter(Boolean).join('/');
+    this.options.moduleName = [this.options.FeatureName, 'Entity', this.options.Name].filter(Boolean).join('/');
   }
 
   _checkArguments() {
