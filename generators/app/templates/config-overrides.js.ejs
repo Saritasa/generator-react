@@ -8,11 +8,18 @@ const RESOLVE_OPTIONS = {
   ],
 };
 
+const webpack = require(require.resolve('webpack', RESOLVE_OPTIONS));
+
 module.exports = function override(config, env) {
   // do stuff with the webpack config...
   const rules = config.module.rules.filter(rule =>
+    !rule.test ||
     !rule.test.test('java-script-rule.js') &&
     !rule.test.test('css-rule.css')
+  );
+
+  config.plugins.push(
+    new webpack.DefinePlugin({ 'process.env.TARGET': '"client"' }),
   );
 
   config.module.rules = [
@@ -21,7 +28,7 @@ module.exports = function override(config, env) {
     {
       test: /\.(js|jsx|mjs)$/,
       loader: require.resolve('babel-loader', RESOLVE_OPTIONS),
-      include: path.resolve(path.join(__dirname, 'src')),
+      include: path.resolve(path.join(__dirname, '<%= sourceRoot %>')),
       exclude: { or: [/(node_modules|bower_components)/, /\.min\.js$/] },
       options: {
         // @remove-on-eject-begin

@@ -1,0 +1,11 @@
+// @flow
+/**
+ * Application's root.
+ * Imports App's self-routes and call needed runtime in order
+ * to process.env.TARGET.
+ */
+import './routes';
+
+if (process.env.TARGET === 'client') {
+  import('./index.client');
+}

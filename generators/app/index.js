@@ -3,19 +3,13 @@ const cp = require('child_process');
 
 const Generator = require('yeoman-generator');
 
-
+const SOURCE_PATH = 'src';
 
 module.exports = class extends Generator {
 
   constructor(args, opts) {
     // Calling the super constructor is important so our generator is correctly set up
     super(args, opts);
-
-    this.argument('name', {
-      type: String,
-      description: 'Application\'s name.',
-      required: true
-    });
 
     this.option('flow', { type: Boolean, default: true, description: 'Use --no-flow to remove flow from generated code' });
     this.option('stories', { type: Boolean, default: true, description: 'Use --no-stories to prevent stories\' generating' });
@@ -27,8 +21,6 @@ module.exports = class extends Generator {
   initializing() {
     this._checkNodejsVerion();
     this._checkNpx();
-    this._checkArguments();
-    this.destinationRoot(this.destinationPath(this.options.name));
   }
 
   _checkNodejsVerion() {
@@ -46,71 +38,43 @@ module.exports = class extends Generator {
     }
   }
 
-  _checkArguments() {
-    if (!(/^[a-zA-Z][-a-zA-Z]*$/.test(this.options.name))) {
-      throw new Error(`name should includes only latin letters and dashes. You passed "${this.options.name}"`);
-    }
-  }
+   _writingSrc() {
+     const { flow, 'source-root': sourceRoot } = this.options;
+       const files = [
+         `${SOURCE_PATH}/index.js`,
+         `${SOURCE_PATH}/index.client.js`,
+         `${SOURCE_PATH}/components/ExampleHeader.js`,
+         `${SOURCE_PATH}/links/index.js`,
+         `${SOURCE_PATH}/links/nested.link.js`,
+         `${SOURCE_PATH}/links/root.link.js`,
+         `${SOURCE_PATH}/routes/index.js`,
+         `${SOURCE_PATH}/routes/paths.js`,
+         `${SOURCE_PATH}/routes/routeStore.js`,
+         `${SOURCE_PATH}/pages/ExampleRootPage.js`,
+         `${SOURCE_PATH}/pages/ExampleNestedPage.js`,
+       ];
 
-  install() {
+       files.forEach(file => {
+         const fileName = file.replace(SOURCE_PATH, sourceRoot);
+         this.fs.copyTpl(
+           this.templatePath(`${file}.ejs`),
+           this.destinationPath(fileName),
+           { flow },
+         );
+       });
+   }
 
-    "scripts": {
-      -   "start": "react-scripts start",
-        +   "start": "react-app-rewired start",
-        -   "build": "react-scripts build",
-        +   "build": "react-app-rewired build",
-        -   "test": "react-scripts test --env=jsdom",
-        +   "test": "react-app-rewired test --env=jsdom"
-    }
+  writing() {
+    const { flow, 'source-root': sourceRoot } = this.options;
+    const files = ['config-overrides.js'];
+
+    files.forEach(file => {
+      this.fs.copyTpl(
+        this.templatePath(`${file}.ejs`),
+        this.destinationPath(`${file}`),
+        { flow, sourceRoot },
+      );
+    });
+    this._writingSrc();
   }
-  // writing() {
-  //   this._writeView();
-  //   this._writeController();
-  //   this._writeMain();
-  // }
-  //
-  // _writeView() {
-  //   const { name, flow, stories, unit, dest } = this.options;
-  //   const files = ['view.js', 'view.css'];
-  //
-  //   if (stories) files.push('view.stories.js');
-  //   if (unit) files.push('view.unit.js');
-  //
-  //   files.forEach(file => {
-  //     this.fs.copyTpl(
-  //       this.templatePath(`${file}.ejs`),
-  //       this.destinationPath(path.join(dest, name, `${name}.${file}`)),
-  //       { name, flow },
-  //     );
-  //   });
-  // }
-  //
-  // _writeController() {
-  //   const { name, flow, unit, dest } = this.options;
-  //   const files = ['controller.js'];
-  //
-  //   if (unit) files.push('controller.unit.js');
-  //
-  //   files.forEach(file => {
-  //     this.fs.copyTpl(
-  //       this.templatePath(`${file}.ejs`),
-  //       this.destinationPath(path.join(dest, name, `${name}.${file}`)),
-  //       { name, flow },
-  //     );
-  //   });
-  // }
-  //
-  // _writeMain() {
-  //   const { name, flow, dest } = this.options;
-  //
-  //   const files = ['index.js'];
-  //
-  //   files.forEach(file => {
-  //     this.fs.copyTpl(
-  //       this.templatePath(`${file}.ejs`),
-  //       this.destinationPath(path.join(dest, name, file)),
-  //       { name, flow },
-  //     );
-  //   });
-  // }
 };

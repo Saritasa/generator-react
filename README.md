@@ -7,6 +7,11 @@ Installation:
 npm i --save-dev yo @saritasa/generator-react
 ```
 
+Creating the app:
+```bash
+npx @saritasa/generator-react [app-name] && cd [app-name]
+```
+
 Run:
 ```bash
 npx yo @saritasa/react:[sub-generator-name]
@@ -98,3 +103,32 @@ npx yo @saritasa/react:form My --install
 ```
 
 To run help, use `npx yo @saritasa/react:form --help`.
+
+
+## Sub-generator 'feature'
+
+Sub-generator for creating a feature branch that can encapsulate components, routes, entities etc.
+
+Examples:
+```bash
+# creates PROJECT_ROOT/src/features/My
+npx yo @saritasa/react:feature My
+```
+
+To run help, use `npx yo @saritasa/react:feature --help`.
+
+## Sub-generator 'route'
+
+Sub-generator for creating a route with link.
+
+Examples:
+```bash
+# creates PROJECT_ROOT/src/routes/My
+npx yo @saritasa/react:route My
+
+# creates PROJECT_ROOT/src/features/featureName/routes/My
+npx yo @saritasa/react:route featureName/My
+
+```
+
+To run help, use `npx yo @saritasa/react:route --help`.

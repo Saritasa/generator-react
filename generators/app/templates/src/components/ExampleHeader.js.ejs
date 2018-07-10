@@ -1,0 +1,8 @@
+<% if (flow) { %>// @flow
+<% } %>import * as React from 'react';
+
+import { RootLink, NestedLink } from '../links';
+
+export const ExampleHeader = () => (<div>
+    This is an example header for App. Go to <RootLink>app's root</RootLink>. Go to <NestedLink>app's nested Page</NestedLink>.
+</div>);

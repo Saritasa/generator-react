@@ -1,0 +1,30 @@
+<% if (flow) { %>// @flow
+<% } %>import * as React from 'react';
+import { Runtime } from 'react-app-core';
+
+import { ExampleHeader } from '../components/ExampleHeader';
+import { ExampleRootPage } from '../pages/ExampleRootPage';
+import { ExampleNestedPage } from '../pages/ExampleNestedPage';
+
+export const { routeStore } = Runtime.getInstance();
+
+routeStore
+  .setName('')
+  .inject(
+    [
+      {
+        path: '',
+        component: ExampleHeader,
+      },
+      {
+        path: '',
+        exact: true,
+        component: ExampleRootPage,
+      },
+      {
+        path: 'nested',
+        exact: true,
+        component: ExampleNestedPage,
+      },
+    ],
+  );
