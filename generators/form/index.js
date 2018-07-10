@@ -3,7 +3,7 @@ const path = require('path');
 const Generator = require('yeoman-generator');
 
 const SOURCE_PATH = 'src';
-const COMPONENT_DEST = 'components';
+const DEST = 'forms';
 
 module.exports = class extends Generator {
 
