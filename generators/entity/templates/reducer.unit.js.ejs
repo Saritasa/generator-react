@@ -3,7 +3,7 @@ import * as Immutable from 'immutable';
 import * as ActionType from './<%= Name %>.actionTypes';
 import { <%= name %>Reducer } from './<%= Name %>.reducer';
 
-describe('Entity::<%= Name %>::reducer', function() {
+describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join('::') %>::<%= Name %>::reducer', function() {
   it('is function', function() {
     expect(typeof <%= name %>Reducer).to.be.equal('function');
   });

@@ -1,6 +1,6 @@
 import * as Action from './<%= Name %>.actions';
 
-describe('Entity::<%= Name %>::actions', function() {
+describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join('::') %>::<%= Name %>::actions', function() {
   it('exports only functions', function() {
     Object.values(Action).forEach(action => {
       expect(typeof action).to.be.equal('function');

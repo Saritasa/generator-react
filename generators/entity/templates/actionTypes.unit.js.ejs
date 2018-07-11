@@ -2,7 +2,7 @@ import * as ActionType from './<%= Name %>.actionTypes';
 
 const ENTITY_NAME = '<%= name %>';
 
-describe('Entity::<%= Name %>::actionTypes', function() {
+describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join('::') %>::<%= Name %>::actionTypes', function() {
   it('does not export any action types that is not string or symbol', function() {
     Object.values(ActionType).forEach(value => {
       expect(typeof value).to.be.oneOf(['string', 'symbol']);
