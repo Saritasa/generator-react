@@ -8,120 +8,120 @@
  * Action type that is dispatched in case of start loading single <%= name %>.
  * @memberof <%= moduleName %>/actionTypes
  */
-export const LOAD<% if (flow) { %>: '@<%= name %>/LOAD'<% } %> = '@<%= name %>/LOAD';
+export const LOAD<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/LOAD'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/LOAD';
 /**
  * Action type that is dispatched in case of failed loading single <%= name %>.
  * @memberof <%= moduleName %>/actionTypes
  */
-export const LOAD_FAILED<% if (flow) { %>: '@<%= name %>/LOAD_FAILED'<% } %> = '@<%= name %>/LOAD_FAILED';
+export const LOAD_FAILED<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/LOAD_FAILED'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/LOAD_FAILED';
 /**
  * Action type that is dispatched in case of successfully loading single <%= name %>.
  * @memberof <%= moduleName %>/actionTypes
  */
-export const LOAD_SUCCESS<% if (flow) { %>: '@<%= name %>/LOAD_SUCCESS'<% } %> = '@<%= name %>/LOAD_SUCCESS';
+export const LOAD_SUCCESS<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/LOAD_SUCCESS'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/LOAD_SUCCESS';
 
 /**
  * Action type that is dispatched in case of start loading <%= name %> list.
  * @memberof <%= moduleName %>/actionTypes
  */
-export const LOAD_LIST<% if (flow) { %>: '@<%= name %>/LOAD_LIST'<% } %> = '@<%= name %>/LOAD_LIST';
+export const LOAD_LIST<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/LOAD_LIST'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/LOAD_LIST';
 /**
  * Action type that is dispatched in case of failed loading <%= name %> list.
  * @memberof <%= moduleName %>/actionTypes
  */
-export const LOAD_LIST_FAILED<% if (flow) { %>: '@<%= name %>/LOAD_LIST_FAILED'<% } %> = '@<%= name %>/LOAD_LIST_FAILED';
+export const LOAD_LIST_FAILED<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/LOAD_LIST_FAILED'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/LOAD_LIST_FAILED';
 /**
  * Action type that is dispatched in case of successfully loading <%= name %> list.
  * @memberof <%= moduleName %>/actionTypes
  */
-export const LOAD_LIST_SUCCESS<% if (flow) { %>: '@<%= name %>/LOAD_LIST_SUCCESS'<% } %> = '@<%= name %>/LOAD_LIST_SUCCESS';
+export const LOAD_LIST_SUCCESS<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/LOAD_LIST_SUCCESS'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/LOAD_LIST_SUCCESS';
 
 /**
  * Action type that is dispatched in case of start saving single <%= name %>.
  * @memberof <%= moduleName %>/actionTypes
  */
-export const SAVE<% if (flow) { %>: '@<%= name %>/SAVE'<% } %> = '@<%= name %>/SAVE';
+export const SAVE<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SAVE'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SAVE';
 /**
  * Action type that is dispatched in case of failed saving single <%= name %>.
  * @memberof <%= moduleName %>/actionTypes
  */
-export const SAVE_FAILED<% if (flow) { %>: '@<%= name %>/SAVE_FAILED'<% } %> = '@<%= name %>/SAVE_FAILED';
+export const SAVE_FAILED<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SAVE_FAILED'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SAVE_FAILED';
 /**
  * Action type that is dispatched in case of successfully saving single <%= name %>.
  * @memberof <%= moduleName %>/actionTypes
  */
-export const SAVE_SUCCESS<% if (flow) { %>: '@<%= name %>/SAVE_SUCCESS'<% } %> = '@<%= name %>/SAVE_SUCCESS';
+export const SAVE_SUCCESS<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SAVE_SUCCESS'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SAVE_SUCCESS';
 
 /**
  * Action type that is dispatched in case of start saving <%= name %> list.
  * @memberof <%= moduleName %>/actionTypes
  */
-export const SAVE_LIST<% if (flow) { %>: '@<%= name %>/SAVE_LIST'<% } %> = '@<%= name %>/SAVE_LIST';
+export const SAVE_LIST<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SAVE_LIST'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SAVE_LIST';
 /**
  * Action type that is dispatched in case of start loading 1 <%= name %>.
  * @memberof <%= moduleName %>/actionTypes
  */
-export const SAVE_LIST_FAILED<% if (flow) { %>: '@<%= name %>/SAVE_FAILED_LIST'<% } %> = '@<%= name %>/SAVE_FAILED_LIST';
+export const SAVE_LIST_FAILED<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SAVE_FAILED_LIST'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SAVE_FAILED_LIST';
 /**
  * Action type that is dispatched in case of failed saving <%= name %> list.
  * @memberof <%= moduleName %>/actionTypes
  */
-export const SAVE_LIST_SUCCESS<% if (flow) { %>: '@<%= name %>/SAVE_SUCCESS_LIST'<% } %> = '@<%= name %>/SAVE_SUCCESS_LIST';
+export const SAVE_LIST_SUCCESS<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SAVE_SUCCESS_LIST'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SAVE_SUCCESS_LIST';
 
 /**
  * Action type that is dispatched in case of start deleting single <%= name %>.
  * @memberof <%= moduleName %>/actionTypes
  */
-export const DELETE<% if (flow) { %>: '@<%= name %>/DELETE'<% } %> = '@<%= name %>/DELETE';
+export const DELETE<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/DELETE'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/DELETE';
 /**
  * Action type that is dispatched in case of failed deleting single <%= name %>.
  * @memberof <%= moduleName %>/actionTypes
  */
-export const DELETE_FAILED<% if (flow) { %>: '@<%= name %>/DELETE_FAILED'<% } %> = '@<%= name %>/DELETE_FAILED';
+export const DELETE_FAILED<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/DELETE_FAILED'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/DELETE_FAILED';
 /**
  * Action type that is dispatched in case of successfully deleting single <%= name %>.
  * @memberof <%= moduleName %>/actionTypes
  */
-export const DELETE_SUCCESS<% if (flow) { %>: '@<%= name %>/DELETE_SUCCESS'<% } %> = '@<%= name %>/DELETE_SUCCESS';
+export const DELETE_SUCCESS<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/DELETE_SUCCESS'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/DELETE_SUCCESS';
 
 /**
  * Action type that is dispatched in case of start deleting list of <%= name %>.
  * @memberof <%= moduleName %>/actionTypes
  */
-export const DELETE_LIST<% if (flow) { %>: '@<%= name %>/DELETE_LIST'<% } %> = '@<%= name %>/DELETE_LIST';
+export const DELETE_LIST<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/DELETE_LIST'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/DELETE_LIST';
 /**
  * Action type that is dispatched in case of start failed list of <%= name %>.
  * @memberof <%= moduleName %>/actionTypes
  */
-export const DELETE_LIST_FAILED<% if (flow) { %>: '@<%= name %>/DELETE_FAILED_LIST'<% } %> = '@<%= name %>/DELETE_FAILED_LIST';
+export const DELETE_LIST_FAILED<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/DELETE_FAILED_LIST'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/DELETE_FAILED_LIST';
 /**
  * Action type that is dispatched in case of successfully deleting list of <%= name %>.
  * @memberof <%= moduleName %>/actionTypes
  */
-export const DELETE_LIST_SUCCESS<% if (flow) { %>: '@<%= name %>/DELETE_SUCCESS_LIST'<% } %> = '@<%= name %>/DELETE_SUCCESS_LIST';
+export const DELETE_LIST_SUCCESS<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/DELETE_SUCCESS_LIST'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/DELETE_SUCCESS_LIST';
 
 /**
  * Action type that is dispatched in writing single <%= name %> into store.
  * @memberof <%= moduleName %>/actionTypes
  */
-export const SET<% if (flow) { %>: '@<%= name %>/SET'<% } %> = '@<%= name %>/SET';
+export const SET<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SET'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SET';
 /**
  * Action type that is dispatched in removing single <%= name %> from store.
  * @memberof <%= moduleName %>/actionTypes
  */
-export const REMOVE<% if (flow) { %>: '@<%= name %>/REMOVE'<% } %> = '@<%= name %>/REMOVE';
+export const REMOVE<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/REMOVE'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/REMOVE';
 /**
  * Action type that is dispatched in writing list of <%= name %> into store.
  * @memberof <%= moduleName %>/actionTypes
  */
-export const SET_LIST<% if (flow) { %>: '@<%= name %>/SET_LIST'<% } %> = '@<%= name %>/SET_LIST';
+export const SET_LIST<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SET_LIST'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SET_LIST';
 /**
  * Action type that is dispatched in removing list of <%= name %> from store.
  * @memberof <%= moduleName %>/actionTypes
  */
-export const REMOVE_LIST<% if (flow) { %>: '@<%= name %>/REMOVE_LIST'<% } %> = '@<%= name %>/REMOVE_LIST';
+export const REMOVE_LIST<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/REMOVE_LIST'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/REMOVE_LIST';
 /**
  * Action type that is dispatched in case writing current pagination state for <% name %>.
  * @memberof <%= moduleName %>/actionTypes
  */
-export const SET_PAGINATION<% if (flow) { %>: '@<%= name %>/SET_PAGINATION'<% } %> = '@<%= name %>/SET_PAGINATION';
+export const SET_PAGINATION<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SET_PAGINATION'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SET_PAGINATION';

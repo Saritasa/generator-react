@@ -1,6 +1,6 @@
 import * as ActionType from './<%= Name %>.actionTypes';
 
-const ENTITY_NAME = '<%= name %>';
+const NAMESPACED_NAME = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>';
 
 describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join('::') %>::<%= Name %>::actionTypes', function() {
   it('does not export any action types that is not string or symbol', function() {
@@ -22,13 +22,13 @@ describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join
     expect(values.length).to.be.equal(uniqueValues.length);
   });
 
-  it(`exports values with "@${ENTITY_NAME}" as prefix`, function() {
+  it(`exports values with "${NAMESPACED_NAME}" as prefix`, function() {
     Object.values(ActionType).forEach(value => {
       const prefixParts = value.split('/');
 
       prefixParts.pop();
 
-      expect(prefixParts.join('/')).to.be.equal(`@${ENTITY_NAME}`);
+      expect(prefixParts.join('/')).to.be.equal(`${NAMESPACED_NAME}`);
     });
   });
 });
