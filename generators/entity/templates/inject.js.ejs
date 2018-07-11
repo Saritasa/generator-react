@@ -1,5 +1,5 @@
 <% if (flow) { %>// @flow
-<% } %>import { entityStore } from 'store';
+<% } %>import { Runtime } from 'react-app-core';
 
 import { <%= name %>Reducer } from './<%= Name %>.reducer';
 import { setBaseSelectorPath } from './<%= Name %>.selectors';
@@ -12,8 +12,8 @@ import * as Saga from './<%= Name %>.sagas';
  * @module <%= moduleName %>/inject
  */
 
-entityStore.inject({
-  name: '<%= name %>',
+Runtime.entityStore.inject({
+  name: '<%= featureName ? `${featureName}::${name}` : name %>',
   reducer: <%= name %>Reducer,
   setBaseSelectorPath,
   sagas: Object.values(Saga),
