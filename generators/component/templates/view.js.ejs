@@ -36,7 +36,7 @@ export const <%= Name %>ViewPlain = ({}<% if (flow) { %>: <%= Name %>ViewProps<%
 // <%= Name %>View.defaultProps = {};
 
 /**
- * View part of <%= Name %> passed as PureComponent.
+ * View part of <%= Name %> exported as PureComponent to prevent extra re*renders.
  * @memberof <%= moduleName %>/view
  */
 export const <%= Name %>View = pure(<%= Name %>ViewPlain);

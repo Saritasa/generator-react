@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import { <%= Name %>ViewPlain as <%= Name %>View } from './<%= Name %>.view';
 
-describe('Component::<%= Name %>::view', function() {
+describe('<%= [FeatureName.split('/').join('::'), 'Component'].filter(Boolean).join('::') %>::<%= Name %>::view', function() {
   let props;
 
   beforeEach(function() {
