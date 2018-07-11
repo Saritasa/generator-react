@@ -4,15 +4,43 @@ import { Form<% if (flow) { %>, type FormProps<% } %> } from '@saritasa/react-fo
 
 import { <%= Name %>View<% if (flow) { %>, type <%= Name %>ViewProps<% } %> } from './<%= Name %>.view';
 import { <%= name %>FieldRules, validate<%= Name %><% if (flow) { %>, type <%= Name %>Values<% } %> } from './<%= Name %>.values';
+
+/**
+ * Module with controller for <%= Name %> component.
+ * @module <%= moduleName %>/controller
+ */
 <% if (flow) { %>
-export type <%= Name %>ControllerProps = {};
+/**
+ * Shape of props for <%= Name %>Controller.
+ * @memberof <%= moduleName %>/controller
+ */
+export type <%= Name %>ControllerProps = {
+  onSubmit: $PropertyType<FormProps<<%= Name %>Values>, 'onSubmit'>
+};
+
+/**
+ * Shape of <%= Name %>Controller's State.
+ * @memberof <%= moduleName %>/controller
+ */
 type <%= Name %>ControllerState = null;
-type <%= Name %>Props = <%= Name %>ViewProps<<%= Name %>Values> & FormProps<<%= Name %>Values>;
+
+/**
+ * Shape of <%= Name %>Props for Form component to render <%= Name %>View.
+ * @memberof <%= moduleName %>/controller
+ */
+type <%= Name %>Props = {
+  ...$Exact<<%= Name %>ViewProps>,
+  onSubmit: *,
+  component: *,
+  fieldRules: *,
+  validate: *,
+  } & FormProps<<%= Name %>Values>;
 <% } %>
 /**
- * Controller for <%= Name %> component.
+ * Controller for <%= Name %> form.
  *
  * @extends React.PureComponent
+ * @memberof <%= moduleName %>/controller
  */
 export class <%= Name %>Controller extends React.PureComponent<% if (flow) { %><<%= Name %>ControllerProps, <%= Name %>ControllerState><% } %> {
   // Uncomment default props if need
@@ -23,7 +51,7 @@ export class <%= Name %>Controller extends React.PureComponent<% if (flow) { %><
    *
    * @returns {<%= Name %>ViewProps} Props for view part of component.
    */
-  getViewProps()<% if (flow) { %>: $Exact<<%= Name %>ViewProps<<%= Name %>Values>><% } %> {
+  getViewProps()<% if (flow) { %>: $Exact<<%= Name %>ViewProps><% } %> {
     return {};
   }
 
@@ -33,8 +61,11 @@ export class <%= Name %>Controller extends React.PureComponent<% if (flow) { %><
    * @returns {<%= Name %>Props} Props for form's view part's wrapper.
    */
   getFormProps()<% if (flow) { %>: $Exact<<%= Name %>Props><% } %> {
+    const { onSubmit } = this.props;
+
     return {
       ...this.getViewProps(),
+      onSubmit,
       component: <%= Name %>View,
       fieldRules: <%= name %>FieldRules,
       validate: validate<%= Name %>,

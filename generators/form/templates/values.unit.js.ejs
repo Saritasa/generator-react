@@ -6,7 +6,7 @@ function fillValues() {
   values = {};
 }
 
-describe('Component::<%= Name %>::values::<%= name %>FieldRules()', function() {
+describe('<%= [FeatureName.split('/').join('::'), 'Form'].filter(Boolean).join('::') %>::<%= Name %>::values::<%= name %>FieldRules()', function() {
   beforeEach(fillValues);
 
   it('does not throw in case of unknown fieldName', function() {

@@ -5,8 +5,8 @@ import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
 
 import { <%= Name %>Controller } from './<%= Name %>.controller';
 
-const stories = storiesOf('Components::<%= Name %>::Controller', module);
+const stories = storiesOf('<%= [FeatureName.split('/').join('::'), 'Form'].filter(Boolean).join('::') %>::::<%= Name %>::Controller', module);
 
 stories.addDecorator(withKnobs);
 
-stories.add('without props', () => <<%= Name %>Controller />);
+stories.add('without props', () => <<%= Name %>Controller onSubmit={alert} />);

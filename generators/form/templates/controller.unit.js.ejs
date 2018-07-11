@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import { <%= Name %>Controller } from './<%= Name %>.controller';
 import { <%= Name %>View } from './<%= Name %>.view';
 
-describe('Component::<%= Name %>::controller', function() {
+describe('<%= [FeatureName.split('/').join('::'), 'Form'].filter(Boolean).join('::') %>::<%= Name %>::controller', function() {
   let props;
 
   beforeEach(function() {

@@ -1,6 +1,13 @@
 <% if (flow) { %>// @flow
-<% } %>// Uncomment next line if need field rules.
-// import { createFieldRules } from '@saritasa/react-form';
+<% } %>import { createFieldRules } from '@saritasa/react-form';
+
+/**
+ * Module to work with values inside <%= Name %>.
+ * This allows to:
+ * - use fields that depends from another fields
+ * - validate values
+ * @module <%= moduleName %>/values
+ */
 
 <% if (flow) { %>/**
  * Type that describes <%= Name %>'s values' shape.
@@ -23,8 +30,9 @@ export type <%= Name %>Errors = $Exact<{ [$Keys<<%= Name %>Values>]: ?string }>;
  * @param {<%= Name %>Values} values Current values's object.
  * @param {string} [changedField] Changed field's name.
  * @returns {<%= Name %>Values} Same values' object or new object with updated fields.
+ * @memberof <%= moduleName %>/values
  */
-export const <%= name %>FieldRules<% if (flow) { %>: ?(<%= Name %>Values, key?: string) => <%= Name %>Values<% } %> = <% if (flow) { %>(<% } %>values<% if (flow) { %>: <%= Name %>Values)<% } %> => values;
+export const <%= name %>FieldRules = createFieldRules(<% if (flow) { %>(<% } %>values<% if (flow) { %>: <%= Name %>Values)<% } %> => values);
 
 /**
  * Method to validate values.
@@ -34,6 +42,7 @@ export const <%= name %>FieldRules<% if (flow) { %>: ?(<%= Name %>Values, key?: 
  * If errorText is some string - field is errored.
  *
  * @param {<%= Name %>Values} values Current values's object.
- * @returns {Object} `null` or errors' object.
+ * @returns {null|Object} `null` or errors' object.
+ * @memberof <%= moduleName %>/values
  */
-export const validate<%= Name %><% if (flow) { %>: ?(<%= Name %>Values) => ?<%= Name %>Errors<% } %> = <% if (flow) { %>(<% } %>values<% if (flow) { %>: <%= Name %>Values)<% } %> => null;
+export const validate<%= Name %><% if (flow) { %>: (<%= Name %>Values) => ?<%= Name %>Errors<% } %> = <% if (flow) { %>(<% } %>values<% if (flow) { %>: <%= Name %>Values)<% } %> => null;
