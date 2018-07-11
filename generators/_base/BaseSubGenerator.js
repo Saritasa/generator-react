@@ -18,6 +18,8 @@ module.exports = class BaseSubGenerator extends BaseGenerator {
     this.option('install', { type: Boolean, default: false, description: 'Install dependencies for generated code' });
   }
 
+  transformName(name) { return name; }
+
   mainArgument(name, description) {
     this._originalName = name;
     this._name = `[featureName/]${name}`;
@@ -42,7 +44,7 @@ module.exports = class BaseSubGenerator extends BaseGenerator {
   }
 
   _calcName() {
-    const name = this.options[this._name].split('/').pop();
+    const name = this.transformName(this.options[this._name].split('/').pop());
 
     this._checkMainArgumentName(name);
 
@@ -100,9 +102,11 @@ module.exports = class BaseSubGenerator extends BaseGenerator {
 
 
     filesToWrite.forEach(file => {
+      const [realFileName, ...paths] = file.split('/').reverse();
+
       this.fs.copyTpl(
         this.templatePath(`${file}.ejs`),
-        this.destinationPath(path.join(dest, `${Name}.${file}`)),
+        this.destinationPath(path.join(dest, ...paths.reverse(), `${Name}.${realFileName}`)),
         { name, Name, featureName, moduleName, FeatureName, flow },
       );
     });
