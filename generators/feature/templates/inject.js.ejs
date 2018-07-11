@@ -3,6 +3,10 @@
 import { <%= name %>RouteStore } from './routes';
 import { routeStore } from '../../routes';
 
+/**
+ * This module injects routes into parent feature or app (if there is not any parent feature).
+ * @module <%= moduleName %>/inject
+ */
 routeStore.injectRouteStore(<%= name %>RouteStore);
 
 (Object.values(<%= Name %>Paths): Array<any>).forEach(

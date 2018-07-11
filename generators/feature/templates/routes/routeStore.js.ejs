@@ -6,6 +6,15 @@ import { ExampleHeader } from '../components/ExampleHeader';
 import { ExampleRootPage } from '../pages/ExampleRootPage';
 import { ExampleNestedPage } from '../pages/ExampleNestedPage';
 
+/**
+ * RouteStore for <%= Name %> feature.
+ * Every route of this feature should be described in this section except nested features.
+ * Currently available routes:
+ * - featureRoot
+ * - featureRoot/nested
+ * @type {ReactAppCode.RouteStore} See react-app-core to learn more about it.
+ * @memberof <%= moduleName %>/routes
+ */
 export const <%= name %>RouteStore = new RouteStore()
   .setName('<%= name %>')
   .inject(
@@ -27,4 +36,7 @@ export const <%= name %>RouteStore = new RouteStore()
     ],
   );
 
+/**
+ * Used for RouteStores' composition.
+ */
 export const routeStore = <%= name %>RouteStore;

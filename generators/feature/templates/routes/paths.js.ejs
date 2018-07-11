@@ -1,7 +1,18 @@
-// @flow
-import { InjectedPath } from 'react-app-core';
+<% if (flow) { %>// @flow
+<% } %>import { InjectedPath } from 'react-app-core';
 
+/**
+ * Root path for <%= Name %> feature.
+ * You may subscribe to its updates. To learn more about this, please check
+ * the documentation for react-app-core.
+ * @type {ReactAppCode.InjectedPath}
+ * @memberof <%= moduleName %>/routes
+ */
 export const <%= name %>RootPath = InjectedPath.of('');
 
+/**
+ * Root path an example nested route of feature.
+ * TODO: Remove this path, please and create your own via generators.
+ * @memberof <%= moduleName %>/routes
+ */
 export const <%= name %>NestedPath = InjectedPath.of('nested');
-

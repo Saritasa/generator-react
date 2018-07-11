@@ -1,3 +1,9 @@
 <% if (flow) { %>// @flow
-<% } %>export * from './<%= Name %>.paths';
+<% } %>/**
+ * This module work with routing inside <%= FeatureName %> feature.
+ *
+ * To see paths, please check its paths.
+ * @module <%= moduleName %>/routes
+ */
+export * from './<%= Name %>.paths';
 export { <%= name %>RouteStore, routeStore } from './<%= Name %>.routeStore';
