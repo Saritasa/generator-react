@@ -4,29 +4,29 @@
 import { <%= Name %>View<% if (flow) { %>, type <%= Name %>ViewProps<% } %> } from './<%= Name %>.view';
 
 /**
- * Module with controller for <%= Name %> page.
+ * Module with controller for <%= Name %>.
  * @module <%= moduleName %>/controller
  */
-
 <% if (flow) { %>
 /**
  * Shape of props for <%= Name %>Controller.
  * @memberof <%= moduleName %>/controller
  */
 export type <%= Name %>ControllerProps = {};
+
 /**
-* Shape of <%= Name %>Controller's State.
-* @memberof <%= moduleName %>/controller
-*/
+ * Shape of <%= Name %>Controller's State.
+ * @memberof <%= moduleName %>/controller
+ */
 type <%= Name %>ControllerState = null;
 <% } %>
 /**
- * Controller for <%= Name %> page.
+ * Controller for <%= Name %>.
  *
- * @extends React.PurePage
+ * @extends React.PureComponent
  * @memberof <%= moduleName %>/controller
  */
-export class <%= Name %>Controller extends React.PurePage<% if (flow) { %><<%= Name %>ControllerProps, <%= Name %>ControllerState><% } %> {
+export class <%= Name %>Controller extends React.PureComponent<% if (flow) { %><<%= Name %>ControllerProps, <%= Name %>ControllerState><% } %> {
   // Uncomment default props if need
   // static defaultProps = {};
 
