@@ -1,130 +1,56 @@
-const path = require('path');
+const BaseSubGenerator = require('../_base/BaseSubGenerator');
 
-const ejs = require('ejs');
-const Generator = require('yeoman-generator');
+const DESTINATION_FOLDER = null;
 
-const DEST = 'routes';
-const SOURCE_PATH = 'src';
+const TEMPLATES = {};
 
-module.exports = class extends Generator {
+const NAMED_TEMPLATES = {
+  files: ['links/link.js'],
+  units: ['links/link.unit.js'],
+};
 
+const PARTED_TEMPLATES = {
+  files: ['links/index.js', 'routes/paths.js', 'routes/documentation.yml', 'links/documentation.yml'],
+};
+
+const PARTED_NAMED_TEMPLATES = {};
+
+module.exports = class PageGenerator extends BaseSubGenerator {
   constructor(args, opts) {
     // Calling the super constructor is important so our generator is correctly set up
     super(args, opts);
 
-    this.argument('route-name', {
-      type: String,
-      description: 'Route\'s name.',
-      required: true
-    });
+    this.mainArgument(
+      'route',
+      "Route's name. Use CamelCase for it. You may use `featureName/RouteName` to create route inside feature.",
+    );
+  }
 
-    this.option('flow', { type: Boolean, default: true, description: 'Use --no-flow to remove flow from generated code' });
-    this.option('unit', { type: Boolean, default: true, description: 'Use --no-unit to prevent tests\' generating' });
+  transformModuleName(name) {
+    const parts = name.split('/');
 
-    this.option('source-root', { type: String, default: SOURCE_PATH, description: 'Path for source\'s root' });
+    parts.pop();
+    parts.pop();
+
+    return parts.join('/');
   }
 
   initializing() {
-    this._checkNodejsVerion();
-    this._calcEntityNames();
-    this._calcModuleName();
-    this._checkArguments();
-    this.destinationRoot(this.destinationPath(this.options['source-root']));
+    this.setDestination(DESTINATION_FOLDER);
+    super.initializing();
   }
 
-  _checkNodejsVerion() {
-    const { node } = process.versions;
-    if (Number(node.split('.')[0]) !== 8) {
-      throw new Error(`Use nodejs v8 instead of ${node}`);
-    }
-  }
-  _calcEntityNames() {
-    const [name, ...prefixParts] = this.options['route-name'].split('/').reverse();
-
-    const featureName = prefixParts.reverse().join('/');
-
-    this.options.name = `${name[0].toLowerCase()}${name.slice(1)}`;
-    this.options.Name = `${name[0].toUpperCase()}${name.slice(1)}`;
-    this.options.featureName = `${featureName.slice(0, 1).toLowerCase()}${featureName.slice(1)}`;
-    this.options.FeatureName = `${featureName.slice(0, 1).toUpperCase()}${featureName.slice(1)}`;
-    this.options.dest = [this.options.featureName].filter(Boolean).join('/');
-  }
-
-  _calcModuleName() {
-    this.options.moduleName = [this.options.FeatureName, 'Route', this.options.Name].filter(Boolean).join('/');
-  }
-
-  _checkArguments() {
-    if (!(/^[A-Z][a-zA-Z]*$/.test(this.options.Name))) {
-      throw new Error(`name should includes only latin letters and be CamelCased. You passed "${this.options.Name}"`);
-    }
-  }
-
-  _writeMains() {
-    const { name, Name, flow, stories, unit, dest } = this.options;
-    const files = ['links/index.js', 'routes/paths.js'];
-
-    if (stories) files.push(...[]);
-    if (unit) files.push(...[]);
-
-    console.log('write mains');
-    files.forEach(file => {
-      console.log(this.destinationPath(path.join(dest, `${file}`)));
-      if (this.fs.exists(this.destinationPath(path.join(dest, `${file}`)))) return;
-
-      this.fs.copyTpl(
-        this.templatePath(`${file}.main.ejs`),
-        this.destinationPath(path.join(dest, `${file}`)),
-        { name, Name, flow },
-      );
-    });
-  }
-
-  _writeLink() {
-    const { name, Name, flow, stories, unit, dest } = this.options;
-    const files = ['links/link.js'];
-
-    if (stories) files.push(...[]);
-    if (unit) files.push(...[]);
-
-    console.log('write link');
-    files.forEach(file => {
-      const [filename, ...prefix] = file.split('/').reverse();
-
-      this.fs.copyTpl(
-        this.templatePath(`${file}.ejs`),
-        this.destinationPath(path.join(dest, ...prefix.reverse(), `${Name}.${filename}`)),
-        { name, Name, flow },
-      );
-    });
-  }
-
-  _writeParts() {
-    const { name, Name, flow, stories, unit, dest } = this.options;
-    const files = ['links/index.js', 'routes/paths.js'];
-
-    if (stories) files.push(...[]);
-    if (unit) files.push(...[]);
-
-    console.log('write part');
-    files.forEach(file => {
-      const pathToFile = this.destinationPath(path.join(dest, `${file}`));
-      console.log(this.destinationPath(path.join(dest, `${file}`)));
-
-      this.fs.append(
-        pathToFile,
-        '\n' + ejs.render(
-          this.fs.read(this.templatePath(`${file}.part.ejs`)),
-          { name, Name, flow },
-        ),
-      );
-    });
-
+  install() {
+    super.install(['react', 'react-dom', 'recompose', 'classnames'], { 'save': true });
+    super.install(['@storybook/react', '@storybook/addon-knobs', '@storybook/addon-links', '@storybook/addon-actions'], { 'save-dev': true });
   }
 
   writing() {
-    this._writeMains();
-    this._writeLink();
-    this._writeParts();
+    this.writeTemplates(TEMPLATES);
+    this.writeNamedTemplates(NAMED_TEMPLATES);
+    this.writeMissedTemplates(PARTED_TEMPLATES);
+    this.writeMissedNamedTemplates(PARTED_NAMED_TEMPLATES);
+    this.appendTemplates(PARTED_TEMPLATES);
+    this.appendNamedTemplates(PARTED_NAMED_TEMPLATES);
   }
 };
