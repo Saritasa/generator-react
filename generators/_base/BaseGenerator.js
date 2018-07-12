@@ -66,7 +66,7 @@ module.exports = class BaseGenerator extends Generator {
       flow,
       unit: writeUnit,
       stories: writeStories,
-      dest,
+      dest = '',
     } = this.options;
 
     const filesToWrite = [...files];
