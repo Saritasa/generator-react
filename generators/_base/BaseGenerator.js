@@ -66,6 +66,7 @@ module.exports = class BaseGenerator extends Generator {
       flow,
       unit: writeUnit,
       stories: writeStories,
+      'source-root': sourceRoot,
       dest = '',
     } = this.options;
 
@@ -80,7 +81,7 @@ module.exports = class BaseGenerator extends Generator {
         this.destinationPath(
           path.join(dest, file.replace(/^source_root/, this.options['source-root'])),
         ),
-        { name, Name, featureName, moduleName, FeatureName, flow },
+        { name, Name, featureName, moduleName, FeatureName, flow, sourceRoot },
       );
     });
   }
