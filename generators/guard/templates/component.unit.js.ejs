@@ -1,0 +1,56 @@
+import * as React from 'react';
+import { shallow } from 'enzyme';
+
+import { <%= Name %> } from './<%= Name %>.component';
+
+describe('<%= [FeatureName.split('/').join('::'), 'Guard'].filter(Boolean).join('::') %>::<%= Name %>::component', function() {
+  let props;
+
+  beforeEach(function() {
+    props = {
+      children: <div>This should be rendered only after passing <%= Name %>'s check.</div>
+    };
+  });
+
+  function renderDoc(override = {}) {
+    return shallow(<<%= Name %> {...props} {...override} />);
+  }
+
+  function renderDocWithMultipleChildren(override = {}) {
+    return shallow(
+      <<%= Name %> {...props} {...override}>
+        <div>child1</div>
+        <div>child2</div>
+      </<%= Name %>>
+    );
+  }
+
+  it('does not throw an error on render', function() {
+    expect(renderDoc).not.to.throw(Error);
+  });
+
+  it('renders nothing by default', function() {
+    expect(renderDoc().exists()).to.be.equal(false);
+  });
+
+  it('renders single child from #children in case of #allowedAccess=true', function() {
+    const doc = renderDoc();
+
+    doc.setState({ allowedAccess: true });
+
+    expect(doc.text()).to.be.equal("This should be rendered only after passing <%= Name %>'s check.");
+  });
+
+  it('renders many children from #children in case of #allowedAccess=true', function() {
+    const doc = renderDocWithMultipleChildren();
+
+    doc.setState({ allowedAccess: true });
+
+    expect(doc.text()).to.include('child1');
+    expect(doc.text()).to.include('child2');
+  });
+
+  it('calls external check while mounting', function() {
+    // TODO: Write check and pass it into component
+  });
+});

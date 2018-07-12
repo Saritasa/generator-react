@@ -1,0 +1,70 @@
+<% if (flow) { %>// @flow
+<% } %>import * as React from 'react';
+
+/**
+ * <%= Name %> component.
+ * @module <%= moduleName %>
+ */
+<% if (flow) { %>
+/**
+ * Shape of props for <%= Name %>Component.
+ * @memberof <%= moduleName %>
+ */
+export type <%= Name %>ComponentProps = {
+  children: React.Node,
+};
+
+/**
+ * Shape of <%= Name %>Component's State.
+ * @property accessAllowed - Flag to know if should display guard's children or not.
+ * @memberof <%= moduleName %>
+ */
+type <%= Name %>ComponentState = { accessAllowed: boolean };
+<% } %>
+/**
+ * Main class for <%= Name %>Component.
+ *
+ * @extends React.PureComponent
+ * @memberof <%= moduleName %>
+ */
+export class <%= Name %>Component extends React.PureComponent<% if (flow) { %><<%= Name %>ComponentProps, <%= Name %>ComponentState><% } %> {
+  // Uncomment default props if need
+  // static defaultProps = {};
+
+  /**
+   * React's method to ge new state from props and old state.
+   * TODO: Finish the next line.
+   * Sets #allowedAccess flag in state into `true` then
+   */
+  static getDerivedStateFromProps(props<% if (flow) { %>: <%= Name %>ComponentProps<% } %>, state<% if (flow) { %>: <%= Name %>ComponentState<% } %>)<% if (flow) { %>: <%= Name %>ComponentState<% } %> {
+    return state;
+  }
+
+  /**
+   * Guard component's default state.
+   */
+  state = { accessAllowed: false };
+
+  /**
+   * React's method that is called after the component output has been rendered to the DOM.
+   * Calls external check to know if user can access its children.
+   */
+  componentDidMount() {
+    // TODO: write external check call
+  }
+
+  /**
+   * React's method to render component.
+   *
+   * Render's children of <%= Name %>Component in case of allowed access.
+   *
+   * @returns {?React.Node} Guard's children or possible `null`.
+   */
+  render() {
+    const { accessAllowed } = this.state;
+
+    if (!accessAllowed) return null;
+
+    return React.createElement(React.Fragment, null, this.props.children);
+  }
+}
