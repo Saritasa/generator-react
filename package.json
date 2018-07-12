@@ -23,7 +23,7 @@
     "url": "https://github.com/saritasa/generator-react.git"
   },
   "author": "Konstantine Petryaev <numminorihsf@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "cli-list": "^0.2.0",
     "ejs": "^2.6.1",

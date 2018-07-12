@@ -1,3 +1,6 @@
+### 1.0.0-rc.2
+- Update license info in package.json file.
+
 ### 1.0.0-rc.1
 #### Features 
 - Improve jsdoc comments and documentation for route generator.
