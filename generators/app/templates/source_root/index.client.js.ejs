@@ -1,10 +1,13 @@
-// @flow
-import * as React from 'react';
+<% if (flow) { %>// @flow
+<% } %>import * as React from 'react';
 import ReactDOM from 'react-dom';
 
 import { createApplication, Runtime } from 'react-app-core';
 import registerServiceWorker from './registerServiceWorker';
 
+/**
+ * Mount point for application.
+ */
 const root = document.getElementById('root');
 
 if (!root) throw new Error(`Can't render App without element with id="root" on the page`);

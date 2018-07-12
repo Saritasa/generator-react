@@ -1,5 +1,11 @@
 <% if (flow) { %>// @flow
 <% } %>import { createLink } from 'react-app-core';
-import { RootPath } from '../routes';
+import { rootPath } from '../routes';
 
-export const RootLink = createLink(RootPath);
+/**
+ * This is a root link for application.
+ *
+ * @type {ReactAppCore.Link} See the doc fir react-app-core to learn more.
+ * @memberof links
+ */
+export const RootLink = createLink(rootPath);

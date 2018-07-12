@@ -7,7 +7,17 @@ import { ExampleRootPage } from '../pages/ExampleRootPage';
 import { ExampleNestedPage } from '../pages/ExampleNestedPage';
 
 export const { routeStore } = Runtime.getInstance();
-
+/**
+ * RouteStore for application.
+ *
+ * Every route of application (except features' routes) should be described in this section.
+ * Currently available routes:
+ * - `/` - Application's root
+ * - `/nested`
+ *
+ * @type {ReactAppCode.RouteStore} See react-app-core to learn more about it.
+ * @memberof routes
+ */
 routeStore
   .setName('')
   .inject(
