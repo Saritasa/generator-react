@@ -7,11 +7,13 @@ import { <%= name %>FieldRules, validate<%= Name %><% if (flow) { %>, type <%= N
 
 /**
  * Module with controller for <%= Name %> component.
+ *
  * @module <%= moduleName %>/controller
  */
 <% if (flow) { %>
 /**
  * Shape of props for <%= Name %>Controller.
+ *
  * @memberof <%= moduleName %>/controller
  */
 export type <%= Name %>ControllerProps = {
@@ -20,12 +22,14 @@ export type <%= Name %>ControllerProps = {
 
 /**
  * Shape of <%= Name %>Controller's State.
+ *
  * @memberof <%= moduleName %>/controller
  */
 type <%= Name %>ControllerState = null;
 
 /**
  * Shape of <%= Name %>Props for Form component to render <%= Name %>View.
+ *
  * @memberof <%= moduleName %>/controller
  */
 type <%= Name %>Props = {

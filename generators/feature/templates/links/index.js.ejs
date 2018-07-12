@@ -1,14 +1,15 @@
 <% if (flow) { %>// @flow
 <% } %>/**
  * This module re-exports all Links for feature.
+ *
  * These links allow to prevent hardcoding urls.
  * They also allows to use simple syntax in case of routes with parameters.
- * For example in case of route like `/path/:parameterId/featureRoot` you may use:
- * ```
- *   <<%= Name %>RootLink parameterId={parameterId}>Go to the root of <%= Name %></RootLink>
- * ```
+ *
+ * @example <caption>In case of route like `/path/:parameterId/featureRoot`</caption>
+ * <<%= Name %>RootLink parameterId={parameterId}>Go to the root of <%= Name %></RootLink>
  * @module <%= moduleName %>/links
  */
 export { <%= Name %>RootLink } from './<%= Name %>.root.link';
+
 // TODO: Remove this example export
 export { <%= Name %>NestedLink } from './<%= Name %>.nested.link';

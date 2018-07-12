@@ -2,8 +2,9 @@
 <% } %>import { <%= Name %>Controller<% if (flow) { %>, type <%= Name %>ControllerProps<% } %> } from './<%= Name %>.controller';
 
 /**
-* TODO: Fill this section with main info about <%= Name %> form component and values.
-* @module <%= moduleName %>
-*/
+ * TODO: Fill this section with main info about <%= Name %> form component and values.
+ *
+ * @module <%= moduleName %>
+ */
 <% if (flow) { %>export type <%= Name %>Props = <%= Name %>ControllerProps;
 <% } %>export { <%= Name %>Controller as <%= Name %> };

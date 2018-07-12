@@ -9,126 +9,53 @@ npm i --save-dev yo @saritasa/generator-react
 
 Creating the app:
 ```bash
-npx @saritasa/generator-react [app-name] && cd [app-name]
+npx @saritasa/generator-react [app-name] && cd [app-name] && npx yo @saritasa/react
 ```
 
-Run:
+Running any sub-generator:
 ```bash
 npx yo @saritasa/react:[sub-generator-name]
 ```
 
+## Existed sub-generators
+There are some generators for internal application's parts:
+- feature - Sub-generator for feature. Creates base routes, page examples.
+- entity - Sub-generator for creating redux entity with sagas, selectors, actions and reducer.
+- component - Sub-generator for creating react component. Creates separated view and controller parts.
+- form - Sub-generator for creating form component. Creates separated view and controller parts.
+- route - Sub-generator for creating the route. Creates injected path and Link component. 
+- page - Sub-generator for creating the page (only pages should handle routes). Also pages 
+- guard - Generates guard components and its connect base.
 
-## Sub-generator 'component'
+Every generator needs `name` argument to generates content:
+```bash
+                              name argument
+                                   ▼
+npx yo @saritasa/react:feature FeatureName
+                          ^
+                    sub-generator's name
+```
 
-Sub-generator for creating components with stories, unit-tests.
-
-Examples:
+Also every generator allows you to use self in next ways:
 ```bash
 # creates PROJECT_ROOT/src/components/MyComponent
 npx yo @saritasa/react:component MyComponent
 
-# creates PROJECT_ROOT/src/My/Nested/Path/MyComponent
-npx yo @saritasa/react:component My/Nested/Path/MyComponent
+# creates PROJECT_ROOT/src/features/Deep/features/Nested/components/MyComponent
+npx yo @saritasa/react:component Deep/Nested/MyComponent
 
-# creates PROJECT_ROOT/source_root/My/Nested/Path/MyComponent
-npx yo @saritasa/react:component My/Nested/Path/MyComponent --source-root=source_root
+# creates PROJECT_ROOT/my_source_root/MyComponent
+npx yo @saritasa/react:component MyComponent --source-root=my_source_root
 
-# generate plain js without flow-type
+# generates plain js without flow-types
 npx yo @saritasa/react:component MyComponent --no-flow
 
-# generate component without unit tests
+# generates component without unit tests
 npx yo @saritasa/react:component MyComponent --no-unit
 
-# generate component without stories
+# generates component without stories
 npx yo @saritasa/react:component MyComponent --no-stories
 
-# install dependencies for component
-npx yo @saritasa/react:component MyComponent --install
+# displays help for generator
+npx yo @saritasa/react:component --help
 ```
-
-To run help, use `npx yo @saritasa/react:component --help`.
-
-
-## Sub-generator 'entity'
-
-Sub-generator for creating redux entity with sagas, selectors, actions and reducer.
-
-Examples:
-```bash
-# creates PROJECT_ROOT/src/components/MyComponent
-npx yo @saritasa/react:entity MyComponent
-
-# creates PROJECT_ROOT/src/My/Nested/Path/MyComponent
-npx yo @saritasa/react:entity My/Nested/Path/MyComponent
-
-# creates PROJECT_ROOT/source_root/My/Nested/Path/MyComponent
-npx yo @saritasa/react:entity My/Nested/Path/MyComponent --source-root=source_root
-
-# generate plain js without flow-type
-npx yo @saritasa/react:entity MyComponent --no-flow
-
-# generate entity without unit tests
-npx yo @saritasa/react:entity MyComponent --no-unit
-
-# install dependencies for entity
-npx yo @saritasa/react:entity MyComponent --install
-```
-
-To run help, use `npx yo @saritasa/react:entity --help`.
-
-
-## Sub-generator 'form'
-
-Sub-generator for creating form with stories and unit-tests.
-
-Examples:
-```bash
-# creates PROJECT_ROOT/src/components/MyForm
-npx yo @saritasa/react:form My
-
-# creates PROJECT_ROOT/src/My/Nested/Path/MyForm
-npx yo @saritasa/react:form My/Nested/Path/My
-
-# creates PROJECT_ROOT/source_root/My/Nested/Path/MyForm
-npx yo @saritasa/react:form My/Nested/Path/My --source-root=source_root
-
-# generate plain js without flow-type
-npx yo @saritasa/react:form MyComponent --no-flow
-
-# generate entity without unit tests
-npx yo @saritasa/react:form MyComponent --no-unit
-
-# install dependencies for forms
-npx yo @saritasa/react:form My --install
-```
-
-To run help, use `npx yo @saritasa/react:form --help`.
-
-
-## Sub-generator 'feature'
-
-Sub-generator for creating a feature branch that can encapsulate components, routes, entities etc.
-
-Examples:
-```bash
-# creates PROJECT_ROOT/src/features/My
-npx yo @saritasa/react:feature My
-```
-
-To run help, use `npx yo @saritasa/react:feature --help`.
-
-## Sub-generator 'route'
-
-Sub-generator for creating a route with link.
-
-Examples:
-```bash
-# creates PROJECT_ROOT/src/routes/My
-npx yo @saritasa/react:route My
-
-# creates PROJECT_ROOT/src/features/featureName/routes/My
-npx yo @saritasa/react:route featureName/My
-
-```
-
-To run help, use `npx yo @saritasa/react:route --help`.

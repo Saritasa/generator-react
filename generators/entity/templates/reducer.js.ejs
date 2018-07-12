@@ -6,11 +6,13 @@ import { <%= Name %>Model } from './<%= Name %>.record';
 import { get<%= Name %>Key } from './<%= Name %>.utils';
 /**
  * Module that knows how to transform state of <%= Name %>.
+ *
  * @module <%= moduleName %>/reducer
  */
 
 /**
  * Type of <%= Name %>StateRecord that describes default values and shape for state of <%= Name %>.
+ *
  * @name <%= Name %>StateShape
  * @type {Object}
  * @property {boolean} listLoading - Flag that shows if list of <%= Name %> is loading currently.
@@ -28,6 +30,7 @@ export type <%= Name %>StateShape = {
 <% } %>
 /**
  * Record that describes default values and shape for state of <%= Name %>.
+ *
  * @returns {<%= Name %>StateRecord} - New state.
  * @memberof <%= moduleName %>/reducer
  */
@@ -43,6 +46,7 @@ const defaultState = new <%= Name %>StateRecord();
 
 /**
  * Saves single <%= name %> into store. Sets time of last update.
+ *
  * @param {<%= Name %>StateRecord} state - Current state for <%= Name %>.
  * @param {Object} payload - Action payload.
  * @param {<%= Name %>} payload.<%= name %> - Instance of <%= Name %>.
@@ -69,6 +73,7 @@ function set<%= Name %>(state, { <%= name %>, time }) {
 
 /**
  * Saves every <%= name %> into store. Sets time of last update.
+ *
  * @param {<%= Name %>StateRecord} state - Current state for <%= Name %>.
  * @param {Object} payload - Action payload.
  * @param {List<<%= Name%>>} payload.<%= name %>List - List of <%= Name %>.

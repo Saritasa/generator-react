@@ -10,6 +10,7 @@ import styles from './<%= Name %>.view.css';
 
 /**
  * View part of <%= Name %> component.
+ *
  * @module <%= moduleName %>/view
  */
 
@@ -18,12 +19,14 @@ const cls = classNames.bind(styles);
 <% if (flow) { %>
 /**
  * PartShape of <%= Name %>View's props.
+ *
  * @memberof <%= moduleName %>/view
  */
 export type <%= Name %>ViewProps = {};
 
 /**
  * Shape of all props passed from main Form component.
+ *
  * @property {boolean} disabledSubmit `true` if submit should be disabled.
  * @property {boolean} submitting `true` if form is in process of submitting currently.
  * @property {boolean} valid `true` if form has valid values.
@@ -69,6 +72,7 @@ export const <%= Name %>ViewPlain = ({
 
 /**
  * View part of <%= Name %> exported as PureComponent to prevent extra re*renders.
+ *
  * @memberof <%= moduleName %>/view
  */
 export const <%= Name %>View = pure(<%= Name %>ViewPlain);

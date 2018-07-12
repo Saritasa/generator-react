@@ -1,3 +1,15 @@
+### 1.0.0-rc.1
+#### Features 
+- Improve jsdoc comments and documentation for route generator.
+- Update Page generator to work as other existed generators (see 1.0.0-rc.0).
+- Add Guard generator.
+- Make generated documentation to be pretty in case of eslint rules.
+
+
+#### Internal change (for developers)
+- Add `BaseSubGenerator#transformModuleName()` method to change module name.
+
+
 ### 1.0.0-rc.0
 We have re-written existed sub-generators to replace much code with separated modules that do the same things.
 This allows to think more about "what code do we generate" instead of "how do we generate the code". 
@@ -11,14 +23,15 @@ This allows to think more about "what code do we generate" instead of "how do we
       `src/Deep/Nested/MyEntity` folder with internal content.
   - New:
       - `yo @saritasa/react:entity MyEntity` command generates 
-        `src/entities/MyEntity` folder with internal content. **Was not changed**
+        `src/entities/MyEntity` folder with internal content. **Was not changed**.
       - `yo @saritasa/react:entity Deep/Nested/MyEntity` command generates 
-        `src/features/Deep/features/Nested/entities/MyEntity` folder with internal content. **Was changed**
+        `src/features/Deep/features/Nested/entities/MyEntity` folder with internal content. **Was changed**.
 
 #### Features 
-- Add Route generator
-- Add Feature generator
-- Add `create-saritasa-react-app` script to allow generate app via `npx @saritasa/generator-react app-name`
+- Add Route generator.
+- Add Feature generator.
+- Add `create-saritasa-react-app` script to allow generate app via `npx @saritasa/generator-react app-name`.
+- Add generating documentation.yml files for generated content for future usage.
 
 #### Internal change (for developers)
 - Create `BaseGenerator` that implements basic logic for generators 

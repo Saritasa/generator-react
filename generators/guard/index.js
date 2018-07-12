@@ -3,7 +3,7 @@ const BaseSubGenerator = require('../_base/BaseSubGenerator');
 const DESTINATION_FOLDER = 'guards';
 
 const TEMPLATES = {
-  files: ['index.js']
+  files: ['index.js'],
 };
 
 const NAMED_TEMPLATES = {
@@ -32,7 +32,7 @@ module.exports = class ComponentGenerator extends BaseSubGenerator {
   }
 
   install() {
-    super.install(['react', 'react-dom'], { 'save': true });
+    super.install(['react', 'react-dom'], { save: true });
   }
 
   writing() {

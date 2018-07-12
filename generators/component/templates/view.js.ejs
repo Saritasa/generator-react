@@ -7,6 +7,7 @@ import styles from './<%= Name %>.view.css';
 
 /**
  * View part of <%= Name %> component.
+ *
  * @module <%= moduleName %>/view
  */
 
@@ -15,6 +16,7 @@ const cls = classNames.bind(styles);
 <% if (flow) { %>
 /**
  * Shape of <%= Name %>View's props.
+ *
  * @memberof <%= moduleName %>/view
  */
 export type <%= Name %>ViewProps = {};
@@ -36,7 +38,8 @@ export const <%= Name %>ViewPlain = ({}<% if (flow) { %>: <%= Name %>ViewProps<%
 // <%= Name %>View.defaultProps = {};
 
 /**
- * View part of <%= Name %> exported as PureComponent to prevent extra re*renders.
+ * View part of <%= Name %> exported as PureComponent to prevent extra re-renders.
+ *
  * @memberof <%= moduleName %>/view
  */
 export const <%= Name %>View = pure(<%= Name %>ViewPlain);

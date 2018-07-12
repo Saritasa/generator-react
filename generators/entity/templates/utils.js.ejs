@@ -7,12 +7,14 @@ import { <%= Name %>DtoSchema } from './<%= Name %>.schema';
 <% } %>
 /**
  * Utils for working with <% Name %> data.
+ *
  * @module <%= moduleName %>/utils
  */
 
 
 /**
  * Instance of Ajv that allows to create validators.
+ *
  * @private
  * @memberof <%= moduleName %>/utils
  */
@@ -20,6 +22,7 @@ const ajv = new Ajv({ allErrors: true });
 
 /**
  * Validate <%= Name %>Dto in order to <%= Name %>DtoSchema.
+ *
  * @function
  * @param {*} anything - Anything that we should check.
  * @returns {boolean} - `true` if `anything` is valid in order to schema.
@@ -29,6 +32,7 @@ export const validateDto = ajv.compile(<%= Name %>DtoSchema);
 
 /**
  * Gets key from <%= Name %>.
+ *
  * @param {<%= Name %>} <%= name %> - Instance of <%= Name %> which key we need.
  * @returns {string} - Key.
  * @memberof <%= moduleName %>/utils
@@ -39,6 +43,7 @@ export function get<%= Name %>Key(<%= name %><% if (flow) { %>: <%= Name %><% } 
 
 /**
  * Transforms record into DTO.
+ *
  * @param {<%= Name %>} <%= name %> - Instance of <%= Name %> to transform.
  * @returns {<%= Name %>Dto} - DTO.
  * @memberof <%= moduleName %>/utils
@@ -52,6 +57,7 @@ export function recordToDto(<%= name %><% if (flow) { %>: <%= Name %><% } %>)<% 
  *
  * Checks if <%= name %>Dto is valid in order to <%= Name %>DtoSchema.
  * If is not valid, throw an Error (in async mode).
+ *
  * @param {<%= Name %>Dto} <%= name %>Dto - DTO.
  * @returns {<%= Name %>} - Instance of <%= Name %>.
  * @memberof <%= moduleName %>/utils
@@ -75,6 +81,7 @@ Errors: ${errors.map(({ message, dataPath }) => `${dataPath}: ${message}`).join(
 
 /**
  * Transforms query from app's format into api's format.
+ *
  * @param {*} <%= name %>Query - Query from application.
  * @returns {*} - Transformed query.
  * @memberof <%= moduleName %>/utils

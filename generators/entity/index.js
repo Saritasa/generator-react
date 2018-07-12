@@ -21,12 +21,7 @@ const NAMED_TEMPLATES = {
     'selectors.js',
     'utils.js',
   ],
-  units: [
-    'actions.unit.js',
-    'actionTypes.unit.js',
-    'reducer.unit.js',
-    'schema.unit.js',
-  ],
+  units: ['actions.unit.js', 'actionTypes.unit.js', 'reducer.unit.js', 'schema.unit.js'],
 };
 
 module.exports = class EntityGenerator extends BaseSubGenerator {

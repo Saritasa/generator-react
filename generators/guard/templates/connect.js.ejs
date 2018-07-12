@@ -4,6 +4,17 @@ import { connect } from 'react-redux';
 
 import { <%= Name %>Component<% if (flow) { %>, type <%= Name %>ComponentProps<% } %> } from './<%= Name %>.component';
 
+/**
+ * Method to get guard's props.
+ *
+ * Use global application's state and props passed from parent component for generate props
+ * via selectors.
+ *
+ * @param {any} state Global application's state.
+ * @param {Object} ownProps Props passed from parent component.
+     By default should not be used.
+ * @returns {Object} props
+ */
 function mapStateToProps(state, ownProps) {
   // TODO: use selectors to get props for component from global state.
   return {};

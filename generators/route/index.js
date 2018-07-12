@@ -10,7 +10,12 @@ const NAMED_TEMPLATES = {
 };
 
 const PARTED_TEMPLATES = {
-  files: ['links/index.js', 'routes/paths.js', 'routes/documentation.yml', 'links/documentation.yml'],
+  files: [
+    'links/index.js',
+    'routes/paths.js',
+    'routes/documentation.yml',
+    'links/documentation.yml',
+  ],
 };
 
 const PARTED_NAMED_TEMPLATES = {};
@@ -41,8 +46,16 @@ module.exports = class PageGenerator extends BaseSubGenerator {
   }
 
   install() {
-    super.install(['react', 'react-dom', 'recompose', 'classnames'], { 'save': true });
-    super.install(['@storybook/react', '@storybook/addon-knobs', '@storybook/addon-links', '@storybook/addon-actions'], { 'save-dev': true });
+    super.install(['react', 'react-dom', 'recompose', 'classnames'], { save: true });
+    super.install(
+      [
+        '@storybook/react',
+        '@storybook/addon-knobs',
+        '@storybook/addon-links',
+        '@storybook/addon-actions',
+      ],
+      { 'save-dev': true },
+    );
   }
 
   writing() {

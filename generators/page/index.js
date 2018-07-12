@@ -3,7 +3,7 @@ const BaseSubGenerator = require('../_base/BaseSubGenerator');
 const DESTINATION_FOLDER = 'pages';
 
 const TEMPLATES = {
-  files: ['index.js']
+  files: ['index.js'],
 };
 
 const NAMED_TEMPLATES = {
@@ -33,8 +33,16 @@ module.exports = class PageGenerator extends BaseSubGenerator {
   }
 
   install() {
-    super.install(['react', 'react-dom', 'recompose', 'classnames'], { 'save': true });
-    super.install(['@storybook/react', '@storybook/addon-knobs', '@storybook/addon-links', '@storybook/addon-actions'], { 'save-dev': true });
+    super.install(['react', 'react-dom', 'recompose', 'classnames'], { save: true });
+    super.install(
+      [
+        '@storybook/react',
+        '@storybook/addon-knobs',
+        '@storybook/addon-links',
+        '@storybook/addon-actions',
+      ],
+      { 'save-dev': true },
+    );
   }
 
   writing() {

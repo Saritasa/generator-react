@@ -5,11 +5,13 @@ import { type <%= Name%>Dto } from './<%= Name%>.dto';
 <% } %>
 /**
  * Requests to API for working with <%= Name %>.
+ *
  * @module <%= moduleName %>/api
  */
 
 /**
  * Performs request to the api for load single instance of <%= Name %>.
+ *
  * @param {Object} params
  * @param {string} params.<%= name %>Id The <%= Name %>'s id. Is used to get it from api.
  * @returns {Object} Promise-like object.
@@ -24,6 +26,7 @@ export function fetch<%= Name %>({ <%= name %>Id }<% if (flow) { %>: { <%= name 
 
 /**
  * Performs request to the api for load list of <%= Name %>.
+ *
  * @param {Object} params
  * @param {Object} params.query Query that filters list of <%= Name %>.
  * @returns {Object} Promise-like object.
@@ -39,6 +42,7 @@ export function fetch<%= Name %>List({ query }<% if (flow) { %>: *<% } %>) {
 
 /**
  * Performs request to the api for changing existed instance of <%= Name %>.
+ *
  * @param {<%= Name%>Dto} <%= name %> Updated instance of <%= Name %>
  * @returns {Object} Promise-like object.
  * @memberof <%= moduleName %>/api
@@ -53,6 +57,7 @@ export function save<%= Name %>(<%= name %><% if (flow) { %>: <%= Name%>Dto<% } 
 
 /**
  * Performs request to the api for creating new instance of <%= Name %>.
+ *
  * @param {<%= Name%>Dto} <%= name %> New instance of <%= Name %>
  * @returns {Object} Promise-like object.
  * @memberof <%= moduleName %>/api
@@ -67,6 +72,7 @@ export function create<%= Name %>(<%= name %><% if (flow) { %>: <%= Name%>Dto<% 
 
 /**
  * Performs request to the api for delete existed instance of <%= Name %>.
+ *
  * @param {Object} params
  * @param {string} params.<%= name %>Id The <%= Name %>'s id to delete.
  * @returns {Object} Promise-like object.

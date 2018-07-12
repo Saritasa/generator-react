@@ -5,17 +5,20 @@ import { <%= Name %>View<% if (flow) { %>, type <%= Name %>ViewProps<% } %> } fr
 
 /**
  * Module with controller for <%= Name %> component.
+ *
  * @module <%= moduleName %>/controller
  */
 <% if (flow) { %>
 /**
  * Shape of props for <%= Name %>Controller.
+ *
  * @memberof <%= moduleName %>/controller
  */
 export type <%= Name %>ControllerProps = {};
 
 /**
  * Shape of <%= Name %>Controller's State.
+ *
  * @memberof <%= moduleName %>/controller
  */
 type <%= Name %>ControllerState = null;

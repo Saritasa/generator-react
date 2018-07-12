@@ -3,7 +3,7 @@ const BaseSubGenerator = require('../_base/BaseSubGenerator');
 const DESTINATION_FOLDER = 'forms';
 
 const TEMPLATES = {
-  files: ['index.js']
+  files: ['index.js'],
 };
 const NAMED_TEMPLATES = {
   files: ['view.js', 'view.css', 'controller.js', 'documentation.yml', 'values.js'],
@@ -32,8 +32,16 @@ module.exports = class ComponentGenerator extends BaseSubGenerator {
   }
 
   install() {
-    super.install(['recompose', '@saritasa/react-form', 'classnames'], { 'save': true });
-    super.install(['@storybook/react', '@storybook/addon-knobs', '@storybook/addon-links', '@storybook/addon-actions'], { 'save-dev': true });
+    super.install(['recompose', '@saritasa/react-form', 'classnames'], { save: true });
+    super.install(
+      [
+        '@storybook/react',
+        '@storybook/addon-knobs',
+        '@storybook/addon-links',
+        '@storybook/addon-actions',
+      ],
+      { 'save-dev': true },
+    );
   }
 
   writing() {

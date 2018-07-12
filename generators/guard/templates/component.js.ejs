@@ -8,6 +8,7 @@
 <% if (flow) { %>
 /**
  * Shape of props for <%= Name %>Component.
+ *
  * @memberof <%= moduleName %>
  */
 export type <%= Name %>ComponentProps = {
@@ -16,6 +17,7 @@ export type <%= Name %>ComponentProps = {
 
 /**
  * Shape of <%= Name %>Component's State.
+ *
  * @property accessAllowed - Flag to know if should display guard's children or not.
  * @memberof <%= moduleName %>
  */
@@ -33,8 +35,13 @@ export class <%= Name %>Component extends React.PureComponent<% if (flow) { %><<
 
   /**
    * React's method to ge new state from props and old state.
+   *
    * TODO: Finish the next line.
    * Sets #allowedAccess flag in state into `true` then
+   *
+   * @param {<%= Name %>ComponentProps} props Current component's props.
+   * @param {<%= Name %>ComponentState} state Old component's state.
+   * @returns {<%= Name %>ComponentState} New comports's state.
    */
   static getDerivedStateFromProps(props<% if (flow) { %>: <%= Name %>ComponentProps<% } %>, state<% if (flow) { %>: <%= Name %>ComponentState<% } %>)<% if (flow) { %>: <%= Name %>ComponentState<% } %> {
     return state;
@@ -47,6 +54,7 @@ export class <%= Name %>Component extends React.PureComponent<% if (flow) { %><<
 
   /**
    * React's method that is called after the component output has been rendered to the DOM.
+   *
    * Calls external check to know if user can access its children.
    */
   componentDidMount() {

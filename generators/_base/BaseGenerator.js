@@ -10,11 +10,27 @@ module.exports = class BaseGenerator extends Generator {
     // Calling the super constructor is important so our generator is correctly set up
     super(args, opts);
 
-    this.option('flow', { type: Boolean, default: true, description: 'Use --no-flow to remove flow from generated code' });
-    this.option('stories', { type: Boolean, default: true, description: 'Use --no-stories to prevent stories\' generating' });
-    this.option('unit', { type: Boolean, default: true, description: 'Use --no-unit to prevent tests\' generating' });
+    this.option('flow', {
+      type: Boolean,
+      default: true,
+      description: 'Use --no-flow to remove flow from generated code',
+    });
+    this.option('stories', {
+      type: Boolean,
+      default: true,
+      description: "Use --no-stories to prevent stories' generating",
+    });
+    this.option('unit', {
+      type: Boolean,
+      default: true,
+      description: "Use --no-unit to prevent tests' generating",
+    });
 
-    this.option('source-root', { type: String, default: SOURCE_PATH, description: 'Path for source\'s root' });
+    this.option('source-root', {
+      type: String,
+      default: SOURCE_PATH,
+      description: "Path for source's root",
+    });
   }
 
   initializing() {
@@ -26,6 +42,7 @@ module.exports = class BaseGenerator extends Generator {
 
   _checkNodejsVerion() {
     const { node } = process.versions;
+
     if (Number(node.split('.')[0]) !== 8) {
       throw new Error(`Use nodejs v8 instead of ${node}`);
     }
@@ -40,7 +57,17 @@ module.exports = class BaseGenerator extends Generator {
   }
 
   writeTemplates({ files = [], units = [], stories = [] }) {
-    const { name, Name, moduleName, featureName, FeatureName, flow, unit: writeUnit, stories: writeStories, dest } = this.options;
+    const {
+      name,
+      Name,
+      moduleName,
+      featureName,
+      FeatureName,
+      flow,
+      unit: writeUnit,
+      stories: writeStories,
+      dest,
+    } = this.options;
 
     const filesToWrite = [...files];
 
@@ -50,7 +77,9 @@ module.exports = class BaseGenerator extends Generator {
     filesToWrite.forEach(file => {
       this.fs.copyTpl(
         this.templatePath(`${file}.ejs`),
-        this.destinationPath(path.join(dest, file)),
+        this.destinationPath(
+          path.join(dest, file.replace(/^source_root/, this.options['source-root'])),
+        ),
         { name, Name, featureName, moduleName, FeatureName, flow },
       );
     });
