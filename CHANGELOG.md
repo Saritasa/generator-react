@@ -1,3 +1,9 @@
+### 1.0.0-rc.6
+- Resolve minor issues with generated documentation for guard and entity.
+
+#### Features
+- Add `connected-component` sub generator to create connected version of existed component inside existed page's directory. It works only in 1 feature lever (or app). For example if we have f1 and f2 as features, we can't create connected component inside f1's page with component from f2.  
+
 ### 1.0.0-rc.2
 - Update license info in package.json file.
 

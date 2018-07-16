@@ -1,0 +1,7 @@
+<% if (flow) { %>// @flow
+<% } %>/**
+* TODO: Fill this section with main info about <%= Name %>.
+*
+* @module <%= moduleName %>
+*/
+export { <%= Name %> <% if (flow) { %>, type <%= Name %>Props<% } %> } from './<%= Name %>.connect';

@@ -24,8 +24,10 @@ There are some generators for internal application's parts:
 - component - Sub-generator for creating react component. Creates separated view and controller parts.
 - form - Sub-generator for creating form component. Creates separated view and controller parts.
 - route - Sub-generator for creating the route. Creates injected path and Link component. 
-- page - Sub-generator for creating the page (only pages should handle routes). Also pages 
+- page - Sub-generator for creating the page (only pages should handle routes). Routes should be handle 
+_only_ by pages. 
 - guard - Generates guard components and its connect base.
+- connected-component - Generates connected version of some component inside `pages/{Page}/components` directory.
 
 Every generator needs `name` argument to generates content:
 ```bash
