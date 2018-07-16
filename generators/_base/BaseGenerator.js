@@ -58,12 +58,6 @@ module.exports = class BaseGenerator extends Generator {
 
   writeTemplates({ files = [], units = [], stories = [] }) {
     const {
-      name,
-      Name,
-      moduleName,
-      featureName,
-      FeatureName,
-      flow,
       unit: writeUnit,
       stories: writeStories,
       'source-root': sourceRoot,
@@ -77,10 +71,11 @@ module.exports = class BaseGenerator extends Generator {
 
     filesToWrite.forEach(file => {
       this.fs.copyTpl(
-        this.templatePath(`${file}.ejs`), this.destinationPath(
+        this.templatePath(`${file}.ejs`),
+        this.destinationPath(
           path.join(dest, file.replace(/^source_root/, this.options['source-root'])),
         ),
-        { name, Name, featureName, moduleName, FeatureName, flow, sourceRoot },
+        Object.assign({}, this.options, { sourceRoot }),
       );
     });
   }

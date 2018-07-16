@@ -14,12 +14,19 @@ import { <%= Name %>Component<% if (flow) { %>, type <%= Name %>ComponentProps<%
  * @param {Object} ownProps Props passed from parent component.
      By default should not be used.
  * @returns {Object} props
+ * @private
+ * @memberof <%= moduleName %>
  */
 function mapStateToProps(state, ownProps) {
   // TODO: use selectors to get props for component from global state.
   return {};
 }
-
+/**
+ * Object or function pass action creators into <%= Name %>Component as props.
+ *
+ * @private
+ * @memberof <%= moduleName %>
+ */
 const mapActionToProps = {
   // TODO: pass action creators into component.
 };

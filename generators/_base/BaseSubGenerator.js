@@ -3,19 +3,19 @@ const path = require('path');
 
 const BaseGenerator = require('./BaseGenerator');
 
-function camelize(word) {
-  return `${word[0].toLowerCase()}${word.slice(1)}`;
-}
-
-function pascalize(word) {
-  return `${word[0].toUpperCase()}${word.slice(1)}`;
-}
-
 module.exports = class BaseSubGenerator extends BaseGenerator {
+  static camelize(word) {
+    return `${word[0].toLowerCase()}${word.slice(1)}`;
+  }
+  static pascalize(word) {
+    return `${word[0].toUpperCase()}${word.slice(1)}`;
+  }
+
   constructor(args, opts) {
     // Calling the super constructor is important so our generator is correctly set up
     super(args, opts);
 
+    this._initialized = false;
     this.option('install', {
       type: Boolean,
       default: false,
@@ -46,6 +46,10 @@ module.exports = class BaseSubGenerator extends BaseGenerator {
   }
 
   initializing() {
+    if (this._initialized) {
+      this.destinationRoot(this.options['source-root'].split('/').map(() => '..').join('/'));
+    }
+    this._initialized = true;
     super.initializing();
     this._calcName();
     this._calcFeatureName();
@@ -59,8 +63,8 @@ module.exports = class BaseSubGenerator extends BaseGenerator {
 
     this._checkMainArgumentName(name);
 
-    this.options.name = camelize(name);
-    this.options.Name = pascalize(name);
+    this.options.name = BaseSubGenerator.camelize(name);
+    this.options.Name = BaseSubGenerator.pascalize(name);
   }
 
   _checkMainArgumentName(name) {
@@ -76,8 +80,8 @@ module.exports = class BaseSubGenerator extends BaseGenerator {
 
     featurePathParts.pop();
 
-    const featureName = featurePathParts.map(camelize).join('/');
-    const FeatureName = featurePathParts.map(pascalize).join('/');
+    const featureName = featurePathParts.map(BaseSubGenerator.camelize).join('/');
+    const FeatureName = featurePathParts.map(BaseSubGenerator.pascalize).join('/');
 
     this.options.featureName = featureName;
     this.options.FeatureName = FeatureName;
@@ -95,7 +99,7 @@ module.exports = class BaseSubGenerator extends BaseGenerator {
 
   _calcModuleName() {
     this.options.moduleName = this.transformModuleName(
-      [this.options.FeatureName, pascalize(this._originalName), this.options.Name]
+      [this.options.FeatureName, BaseSubGenerator.pascalize(this._originalName), this.options.Name]
         .filter(Boolean)
         .join('/'),
     );
@@ -108,17 +112,7 @@ module.exports = class BaseSubGenerator extends BaseGenerator {
   }
 
   writeNamedTemplates({ files = [], units = [], stories = [] }) {
-    const {
-      name,
-      Name,
-      moduleName,
-      featureName,
-      FeatureName,
-      flow,
-      unit: writeUnit,
-      stories: writeStories,
-      dest,
-    } = this.options;
+    const { Name, unit: writeUnit, stories: writeStories, dest } = this.options;
 
     const filesToWrite = [...files];
 
@@ -131,23 +125,13 @@ module.exports = class BaseSubGenerator extends BaseGenerator {
       this.fs.copyTpl(
         this.templatePath(`${file}.ejs`),
         this.destinationPath(path.join(dest, ...paths.reverse(), `${Name}.${realFileName}`)),
-        { name, Name, featureName, moduleName, FeatureName, flow },
+        this.options,
       );
     });
   }
 
   writeMissedTemplates({ files = [], units = [], stories = [] }) {
-    const {
-      name,
-      Name,
-      moduleName,
-      featureName,
-      FeatureName,
-      flow,
-      unit: writeUnit,
-      stories: writeStories,
-      dest,
-    } = this.options;
+    const { unit: writeUnit, stories: writeStories, dest } = this.options;
 
     const filesToWrite = [...files];
 
@@ -161,29 +145,16 @@ module.exports = class BaseSubGenerator extends BaseGenerator {
 
       if (this.fs.exists(this.destinationPath(pathToRealFile))) return;
 
-      this.fs.copyTpl(this.templatePath(`${file}.main.ejs`), this.destinationPath(pathToRealFile), {
-        name,
-        Name,
-        featureName,
-        moduleName,
-        FeatureName,
-        flow,
-      });
+      this.fs.copyTpl(
+        this.templatePath(`${file}.main.ejs`),
+        this.destinationPath(pathToRealFile),
+        this.options,
+      );
     });
   }
 
   writeMissedNamedTemplates({ files = [], units = [], stories = [] }) {
-    const {
-      name,
-      Name,
-      moduleName,
-      featureName,
-      FeatureName,
-      flow,
-      unit: writeUnit,
-      stories: writeStories,
-      dest,
-    } = this.options;
+    const { Name, unit: writeUnit, stories: writeStories, dest } = this.options;
 
     const filesToWrite = [...files];
 
@@ -197,29 +168,16 @@ module.exports = class BaseSubGenerator extends BaseGenerator {
 
       if (this.fs.exists(this.destinationPath(pathToRealFile))) return;
 
-      this.fs.copyTpl(this.templatePath(`${file}.main.ejs`), this.destinationPath(pathToRealFile), {
-        name,
-        Name,
-        featureName,
-        moduleName,
-        FeatureName,
-        flow,
-      });
+      this.fs.copyTpl(
+        this.templatePath(`${file}.main.ejs`),
+        this.destinationPath(pathToRealFile),
+        this.options,
+      );
     });
   }
 
   appendTemplates({ files = [], units = [], stories = [] }) {
-    const {
-      name,
-      Name,
-      moduleName,
-      featureName,
-      FeatureName,
-      flow,
-      unit: writeUnit,
-      stories: writeStories,
-      dest,
-    } = this.options;
+    const { unit: writeUnit, stories: writeStories, dest } = this.options;
 
     const filesToWrite = [...files];
 
@@ -231,30 +189,13 @@ module.exports = class BaseSubGenerator extends BaseGenerator {
 
       this.fs.append(
         this.destinationPath(path.join(dest, ...paths.reverse(), realFileName)),
-        ejs.render(this.fs.read(this.templatePath(`${file}.part.ejs`)), {
-          name,
-          Name,
-          featureName,
-          moduleName,
-          FeatureName,
-          flow,
-        }),
+        ejs.render(this.fs.read(this.templatePath(`${file}.part.ejs`)), this.options),
       );
     });
   }
 
   appendNamedTemplates({ files = [], units = [], stories = [] }) {
-    const {
-      name,
-      Name,
-      moduleName,
-      featureName,
-      FeatureName,
-      flow,
-      unit: writeUnit,
-      stories: writeStories,
-      dest,
-    } = this.options;
+    const { Name, unit: writeUnit, stories: writeStories, dest } = this.options;
 
     const filesToWrite = [...files];
 
@@ -266,14 +207,7 @@ module.exports = class BaseSubGenerator extends BaseGenerator {
 
       this.fs.append(
         this.destinationPath(path.join(dest, ...paths.reverse(), `${Name}.${realFileName}`)),
-        `\n${ejs.render(this.fs.read(this.templatePath(`${file}.part.ejs`)), {
-          name,
-          Name,
-          featureName,
-          moduleName,
-          FeatureName,
-          flow,
-        })}`,
+        `\n${ejs.render(this.fs.read(this.templatePath(`${file}.part.ejs`)), this.options)}`,
       );
     });
   }
