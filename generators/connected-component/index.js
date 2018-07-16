@@ -23,6 +23,10 @@ module.exports = class ComponentGenerator extends BaseSubGenerator {
     );
   }
 
+  transformName(name) {
+    return `Connected${name}`;
+  }
+
   transformModuleName(name) {
     const parts = name.split('/');
     const realName = parts.pop();

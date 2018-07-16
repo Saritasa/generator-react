@@ -1,3 +1,6 @@
+### 1.0.0-rc.7
+- Update connected component naming to create component named `Connected{name}` to resolve possible issues with naming.
+
 ### 1.0.0-rc.6
 - Resolve minor issues with generated documentation for guard and entity.
 
