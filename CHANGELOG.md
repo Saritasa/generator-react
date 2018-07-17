@@ -1,5 +1,11 @@
+### 1.0.0-rc.8
+#### Bugfixes
+- Add `ajv` into installed dependencies.
+
+
 ### 1.0.0-rc.7
 - Update connected component naming to create component named `Connected{name}` to resolve possible issues with naming.
+
 
 ### 1.0.0-rc.6
 - Resolve minor issues with generated documentation for guard and entity.
@@ -7,8 +13,10 @@
 #### Features
 - Add `connected-component` sub generator to create connected version of existed component inside existed page's directory. It works only in 1 feature lever (or app). For example if we have f1 and f2 as features, we can't create connected component inside f1's page with component from f2.  
 
+
 ### 1.0.0-rc.2
 - Update license info in package.json file.
+
 
 ### 1.0.0-rc.1
 #### Features 
@@ -16,7 +24,6 @@
 - Update Page generator to work as other existed generators (see 1.0.0-rc.0).
 - Add Guard generator.
 - Make generated documentation to be pretty in case of eslint rules.
-
 
 #### Internal change (for developers)
 - Add `BaseSubGenerator#transformModuleName()` method to change module name.

@@ -15,6 +15,7 @@ const deps = [
   'react-router',
   'redux-logger',
   'ric',
+  'ajv',
   'axios',
   '@saritasa/react-form',
   'recompose',
