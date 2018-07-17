@@ -1,6 +1,7 @@
 ### 1.0.0-rc.8
 #### Bugfixes
 - Add `ajv` into installed dependencies.
+- Remove extra variables from form's story's template files.
 
 
 ### 1.0.0-rc.7
