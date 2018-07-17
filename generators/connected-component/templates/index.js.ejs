@@ -4,4 +4,7 @@
 *
 * @module <%= moduleName %>
 */
-export { <%= Name %> <% if (flow) { %>, type <%= Name %>Props<% } %> } from './<%= Name %>.connect';
+import { <%= Name %> <% if (flow) { %>, type <%= Name %>Props<% } %> } from './<%= Name %>.connect';
+
+export { <%= Name %> };
+<% if (flow) { %>export type { <%= Name %>Props };<% } %>
