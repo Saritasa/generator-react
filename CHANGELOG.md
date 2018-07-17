@@ -2,7 +2,9 @@
 #### Bugfixes
 - Add `ajv` into installed dependencies.
 - Remove extra variables from form's story's template files.
-
+- Resolve issues with imports inside connected component.
+- Resolve issues with jsdoc in connected component.
+- Remove unused variable from index.client file.
 
 ### 1.0.0-rc.7
 - Update connected component naming to create component named `Connected{name}` to resolve possible issues with naming.
