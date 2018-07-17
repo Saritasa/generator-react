@@ -97,7 +97,7 @@ export const select<%= Name %>List<% if (flow) { %>: (*) => Immutable.List<<%= N
  * @returns {<%= Name %>} - Single <%= Name %>.
  * @memberof <%= moduleName %>/selectors
  */
-export const select<%= Name %>ByKey<% if (flow) { %>: (*, string) => <%= Name %><% } %> = createSelector([select<%= Name %>Map, (_, key) => key], (entitiesMap, key) => entitiesMap.getIn([key, 'data'], empty<%= Name %>Entity));
+export const select<%= Name %>ByKey<% if (flow) { %>: (*, string) => <%= Name %><% } %> = createSelector([select<%= Name %>Map, (state, key) => key], (entitiesMap, key) => entitiesMap.getIn([key, 'data'], empty<%= Name %>Entity));
 
 /**
  * Selects flag if single <%= Name %> by its key exists from store.
@@ -108,7 +108,7 @@ export const select<%= Name %>ByKey<% if (flow) { %>: (*, string) => <%= Name %>
  * @returns {boolean} - `true` if exists. `false` if does not.
  * @memberof <%= moduleName %>/selectors
  */
-export const select<%= Name %>ByKeyExist<% if (flow) { %>: (*, string) => boolean<% } %> = createSelector([select<%= Name %>Map, (_, key) => key], (entitiesMap, key) => entitiesMap.has(key));
+export const select<%= Name %>ByKeyExist<% if (flow) { %>: (*, string) => boolean<% } %> = createSelector([select<%= Name %>Map, (state, key) => key], (entitiesMap, key) => entitiesMap.has(key));
 
 /**
  * Selects flag if single <%= Name %> by its key is loading.
@@ -119,4 +119,4 @@ export const select<%= Name %>ByKeyExist<% if (flow) { %>: (*, string) => boolea
  * @returns {boolean} - `true` if is loading. `false` if is not.
  * @memberof <%= moduleName %>/selectors
  */
-export const select<%= Name %>ByKeyLoading<% if (flow) { %>: (*, string) => boolean<% } %> = createSelector([select<%= Name %>Map, (_, key) => key], (entitiesMap, key) => entitiesMap.getIn([key, 'meta', 'loading'], true));
+export const select<%= Name %>ByKeyLoading<% if (flow) { %>: (*, string) => boolean<% } %> = createSelector([select<%= Name %>Map, (state, key) => key], (entitiesMap, key) => entitiesMap.getIn([key, 'meta', 'loading'], true));

@@ -12,7 +12,7 @@ import { type <%= Name%>Dto } from './<%= Name%>.dto';
 /**
  * Performs request to the api for load single instance of <%= Name %>.
  *
- * @param {Object} params
+ * @param {Object} params Parameters for load instance of <%= Name %>.
  * @param {string} params.<%= name %>Id The <%= Name %>'s id. Is used to get it from api.
  * @returns {Object} Promise-like object.
  * @memberof <%= moduleName %>/api
@@ -27,7 +27,7 @@ export function fetch<%= Name %>({ <%= name %>Id }<% if (flow) { %>: { <%= name 
 /**
  * Performs request to the api for load list of <%= Name %>.
  *
- * @param {Object} params
+ * @param {Object} params Parameters for load list of <%= Name %>.
  * @param {Object} params.query Query that filters list of <%= Name %>.
  * @returns {Object} Promise-like object.
  * @memberof <%= moduleName %>/api
@@ -73,7 +73,7 @@ export function create<%= Name %>(<%= name %><% if (flow) { %>: <%= Name%>Dto<% 
 /**
  * Performs request to the api for delete existed instance of <%= Name %>.
  *
- * @param {Object} params
+ * @param {Object} params Parameters for delete instance of <%= Name %>.
  * @param {string} params.<%= name %>Id The <%= Name %>'s id to delete.
  * @returns {Object} Promise-like object.
  * @memberof <%= moduleName %>/api
