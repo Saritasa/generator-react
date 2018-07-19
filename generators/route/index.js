@@ -1,3 +1,8 @@
+/**
+ * Route module.
+ * @module route
+ */
+
 const BaseSubGenerator = require('../_base/BaseSubGenerator');
 
 const DESTINATION_FOLDER = null;
@@ -20,7 +25,19 @@ const PARTED_TEMPLATES = {
 
 const PARTED_NAMED_TEMPLATES = {};
 
-module.exports = class PageGenerator extends BaseSubGenerator {
+/**
+ * Route generator class.
+ *
+ * @extends BaseSubGenerator
+ * @type {module.RouteGenerator}
+ */
+module.exports = class RouteGenerator extends BaseSubGenerator {
+  /**
+   * Setup.
+   *
+   * @param {string|Array} args - Arguments at initialization.
+   * @param {Object} opts - Options at initialization.
+   */
   constructor(args, opts) {
     // Calling the super constructor is important so our generator is correctly set up
     super(args, opts);
@@ -31,6 +48,12 @@ module.exports = class PageGenerator extends BaseSubGenerator {
     );
   }
 
+  /**
+   * Transform moduele name.
+   *
+   * @param {string} name - Name to transform.
+   * @returns {string} - Transformed name.
+   */
   transformModuleName(name) {
     const parts = name.split('/');
 
@@ -40,11 +63,17 @@ module.exports = class PageGenerator extends BaseSubGenerator {
     return parts.join('/');
   }
 
+  /**
+   * Initialize.
+   */
   initializing() {
     this.setDestination(DESTINATION_FOLDER);
     super.initializing();
   }
 
+  /**
+   * Install.
+   */
   install() {
     super.install(['react', 'react-dom', 'recompose', 'classnames'], { save: true });
     super.install(
@@ -58,6 +87,9 @@ module.exports = class PageGenerator extends BaseSubGenerator {
     );
   }
 
+  /**
+   * Create template.
+   */
   writing() {
     this.writeTemplates(TEMPLATES);
     this.writeNamedTemplates(NAMED_TEMPLATES);

@@ -1,3 +1,8 @@
+/**
+ * Component module.
+ * @module component
+ */
+
 const BaseSubGenerator = require('../_base/BaseSubGenerator');
 
 const DESTINATION_FOLDER = 'components';
@@ -12,7 +17,19 @@ const NAMED_TEMPLATES = {
   stories: ['view.stories.js'],
 };
 
+/**
+ * Component generator class.
+ *
+ * @extends BaseSubGenerator
+ * @type {module.ComponentGenerator}
+ */
 module.exports = class ComponentGenerator extends BaseSubGenerator {
+  /**
+   * Setup.
+   *
+   * @param {string|Array} args - Arguments at initialization.
+   * @param {Object} opts - Options at initialization.
+   */
   constructor(args, opts) {
     // Calling the super constructor is important so our generator is correctly set up
     super(args, opts);
@@ -23,11 +40,17 @@ module.exports = class ComponentGenerator extends BaseSubGenerator {
     );
   }
 
+  /**
+   * Initialize.
+   */
   initializing() {
     this.setDestination(DESTINATION_FOLDER);
     super.initializing();
   }
 
+  /**
+   * Install.
+   */
   install() {
     super.install(['react', 'react-dom', 'recompose', 'classnames'], { save: true });
     super.install(
@@ -41,6 +64,9 @@ module.exports = class ComponentGenerator extends BaseSubGenerator {
     );
   }
 
+  /**
+   * Create template.
+   */
   writing() {
     this.writeTemplates(TEMPLATES);
     this.writeNamedTemplates(NAMED_TEMPLATES);

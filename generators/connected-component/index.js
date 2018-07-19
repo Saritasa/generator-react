@@ -1,3 +1,8 @@
+/**
+ * Connected component module.
+ * @module connectedComponent
+ */
+
 const path = require('path');
 const fs = require('fs');
 
@@ -12,7 +17,19 @@ const NAMED_TEMPLATES = {
   files: ['documentation.yml', 'connect.js'],
 };
 
-module.exports = class ComponentGenerator extends BaseSubGenerator {
+/**
+ * Connected component generator class.
+ *
+ * @extends BaseSubGenerator
+ * @type {module.ConnectedComponentGenerator}
+ */
+module.exports = class ConnectedComponentGenerator extends BaseSubGenerator {
+  /**
+   * Setup.
+   *
+   * @param {string|Array} args - Arguments at initialization.
+   * @param {Object} opts - Options at initialization.
+   */
   constructor(args, opts) {
     // Calling the super constructor is important so our generator is correctly set up
     super(args, opts);
@@ -23,10 +40,22 @@ module.exports = class ComponentGenerator extends BaseSubGenerator {
     );
   }
 
+  /**
+   * Transform name.
+   *
+   * @param {string} name - Name to transform.
+   * @returns {string} - Transformed name.
+   */
   transformName(name) {
     return `Connected${name}`;
   }
 
+  /**
+   * Transform module name.
+   *
+   * @param {string} name - Name to transform.
+   * @returns {string} - Transformed name.
+   */
   transformModuleName(name) {
     const parts = name.split('/');
     const realName = parts.pop();
@@ -39,11 +68,19 @@ module.exports = class ComponentGenerator extends BaseSubGenerator {
     return parts.join('/');
   }
 
+  /**
+   * Initialize.
+   */
   initializing() {
     this.setDestination(DESTINATION_FOLDER);
     super.initializing();
   }
 
+  /**
+   * Prompting.
+   *
+   * @returns {Promise} Prompt promise.
+   */
   prompting() {
     return this.prompt([
       {
@@ -145,10 +182,16 @@ module.exports = class ComponentGenerator extends BaseSubGenerator {
     });
   }
 
+  /**
+   * Install.
+   */
   install() {
     super.install(['react-redux'], { save: true });
   }
 
+  /**
+   * Create template.
+   */
   writing() {
     this.writeTemplates(TEMPLATES);
     this.writeNamedTemplates(NAMED_TEMPLATES);
