@@ -89,7 +89,7 @@ module.exports = class BaseGenerator extends Generator {
   }
 
   /**
-   * Create template from files.
+   * Method for "writing" phase of yeaoman generator.
    *
    * @param {Array} files - Array of files.
    * @param {Array} units - Array of files.

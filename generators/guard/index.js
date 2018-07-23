@@ -65,7 +65,7 @@ module.exports = class GuardGenerator extends BaseSubGenerator {
   }
 
   /**
-   * Create template.
+   * Method for "writing" phase of yeaoman generator.
    */
   writing() {
     this.writeTemplates(TEMPLATES);

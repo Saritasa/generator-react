@@ -135,8 +135,6 @@ module.exports = class BaseSubGenerator extends BaseGenerator {
    * @returns {string} - Transformed name.
    */
   transformName(name) {
-    // todo maybe this method should be private
-    // todo add code
     return name;
   }
 
@@ -147,8 +145,6 @@ module.exports = class BaseSubGenerator extends BaseGenerator {
    * @returns {string} - Transformed name.
    */
   transformModuleName(name) {
-    // todo maybe this method should be private
-    // todo add code
     return name;
   }
 
@@ -199,7 +195,7 @@ module.exports = class BaseSubGenerator extends BaseGenerator {
   }
 
   /**
-   * Install.
+   * Install dependencies.
    *
    * @param {*} rest - A list of packages and an options object to install through npm.
    */

@@ -30,7 +30,7 @@ const TEMPLATES = {
  */
 module.exports = class AppGenerator extends BaseGenerator {
   /**
-   * Create template.
+   * Method for "writing" phase of yeaoman generator.
    */
   writing() {
     this.writeTemplates(TEMPLATES);

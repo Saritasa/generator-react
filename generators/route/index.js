@@ -88,7 +88,7 @@ module.exports = class RouteGenerator extends BaseSubGenerator {
   }
 
   /**
-   * Create template.
+   * Method for "writing" phase of yeaoman generator.
    */
   writing() {
     this.writeTemplates(TEMPLATES);
