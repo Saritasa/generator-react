@@ -1,3 +1,8 @@
+/**
+ * BaseGenerator module.
+ * @module BaseGenerator
+ */
+
 const path = require('path');
 const cp = require('child_process');
 
@@ -5,7 +10,19 @@ const Generator = require('yeoman-generator');
 
 const SOURCE_PATH = 'src';
 
+/**
+ * Yo generator class.
+ *
+ * @type {module.BaseGenerator}
+ * @extends Generator
+ */
 module.exports = class BaseGenerator extends Generator {
+  /**
+   * Setup.
+   *
+   * @param {string|Array} args - Arguments at initialization.
+   * @param {Object} opts - Options at initialization.
+   */
   constructor(args, opts) {
     // Calling the super constructor is important so our generator is correctly set up
     super(args, opts);
@@ -33,13 +50,12 @@ module.exports = class BaseGenerator extends Generator {
     });
   }
 
-  initializing() {
-    // use current folder as default destination
-    this.options.dest = '.';
-    this._checkNodejsVerion();
-    this._checkNpx();
-  }
-
+  /**
+   * Check Node.js version.
+   * Throw error if version is incorrect.
+   *
+   * @private
+   */
   _checkNodejsVerion() {
     const { node } = process.versions;
 
@@ -48,6 +64,12 @@ module.exports = class BaseGenerator extends Generator {
     }
   }
 
+  /**
+   * Check NPX version.
+   * Throw error if NPX is absent.
+   *
+   * @private
+   */
   _checkNpx() {
     try {
       cp.execSync('npx --version');
@@ -56,6 +78,23 @@ module.exports = class BaseGenerator extends Generator {
     }
   }
 
+  /**
+   * Initialize.
+   */
+  initializing() {
+    // use current folder as default destination
+    this.options.dest = '.';
+    this._checkNodejsVerion();
+    this._checkNpx();
+  }
+
+  /**
+   * Method for "writing" phase of yeaoman generator.
+   *
+   * @param {Array} files - Array of files.
+   * @param {Array} units - Array of files.
+   * @param {Array} stories - Array of files.
+   */
   writeTemplates({ files = [], units = [], stories = [] }) {
     const {
       unit: writeUnit,

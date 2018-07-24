@@ -1,3 +1,8 @@
+/**
+ * App module.
+ * @module app
+ */
+
 const BaseGenerator = require('../_base/BaseGenerator');
 
 const TEMPLATES = {
@@ -17,7 +22,16 @@ const TEMPLATES = {
   ],
 };
 
-module.exports = class extends BaseGenerator {
+/**
+ * App generator class.
+ *
+ * @extends BaseGenerator
+ * @type {module.AppGenerator}
+ */
+module.exports = class AppGenerator extends BaseGenerator {
+  /**
+   * Method for "writing" phase of yeaoman generator.
+   */
   writing() {
     this.writeTemplates(TEMPLATES);
   }

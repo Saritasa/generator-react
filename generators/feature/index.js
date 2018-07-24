@@ -1,3 +1,8 @@
+/**
+ * Feature module.
+ * @module feature
+ */
+
 const BaseSubGenerator = require('../_base/BaseSubGenerator');
 
 const DESTINATION_FOLDER = 'features';
@@ -23,7 +28,19 @@ const NAMED_TEMPLATES = {
   ],
 };
 
+/**
+ * Feature generator class.
+ *
+ * @extends BaseSubGenerator
+ * @type {module.FeatureGenerator}
+ */
 module.exports = class FeatureGenerator extends BaseSubGenerator {
+  /**
+   * Setup.
+   *
+   * @param {string|Array} args - Arguments at initialization.
+   * @param {Object} opts - Options at initialization.
+   */
   constructor(args, opts) {
     // Calling the super constructor is important so our generator is correctly set up
     super(args, opts);
@@ -34,7 +51,12 @@ module.exports = class FeatureGenerator extends BaseSubGenerator {
     );
   }
 
-  // used to use lower-cased feature names in paths
+  /**
+   * Calculate path of destination.
+   * Lower-cased feature names in paths.
+   *
+   * @private
+   */
   _calcDest() {
     this.options.dest = [
       ...this.options.featureName
@@ -46,18 +68,29 @@ module.exports = class FeatureGenerator extends BaseSubGenerator {
     ].join('/');
   }
 
-  // used to use prevent extra "feature" inside module
+  /**
+   * Calculate module name.
+   * Prevent extra "feature" inside module.
+   *
+   * @private
+   */
   _calcModuleName() {
     this.options.moduleName = [this.options.FeatureName, this.options.Name]
       .filter(Boolean)
       .join('/');
   }
 
+  /**
+   * Initialize.
+   */
   initializing() {
     this.setDestination(DESTINATION_FOLDER);
     super.initializing();
   }
 
+  /**
+   * Method for "writing" phase of yeaoman generator.
+   */
   writing() {
     this.writeTemplates(TEMPLATES);
     this.writeNamedTemplates(NAMED_TEMPLATES);
