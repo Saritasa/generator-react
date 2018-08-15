@@ -13,6 +13,8 @@
 
 <% if (flow) { %>/**
  * Type that describes <%= Name %>'s values' shape.
+ *
+ * @memberof <%= moduleName %>/values
  */
 export type <%= Name %>Values = $Exact<{}>;
 export type <%= Name %>Errors = $Exact<{ [$Keys<<%= Name %>Values>]: ?string }>;

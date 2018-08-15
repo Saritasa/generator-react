@@ -2,6 +2,7 @@ toc:
   - name: "<%= moduleName.split('/').join('::') %>"
     description: |
       Component <%= Name %>.
-  - <%= moduleName %>
-  - <%= moduleName %>/controller
-  - <%= moduleName %>/view
+    children:
+    - <%= moduleName %>
+    - <%= moduleName %>/controller
+    - <%= moduleName %>/view

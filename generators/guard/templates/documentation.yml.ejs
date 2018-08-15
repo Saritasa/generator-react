@@ -1,2 +1,4 @@
 toc:
-  - <%= moduleName %>
+  - name: "<%= moduleName.split('/').join('::') %>"
+    children:
+    - <%= moduleName %>

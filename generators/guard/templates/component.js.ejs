@@ -1,10 +1,6 @@
 <% if (flow) { %>// @flow
 <% } %>import * as React from 'react';
 
-/**
- * <%= Name %> component.
- * @module <%= moduleName %>
- */
 <% if (flow) { %>
 /**
  * Shape of props for <%= Name %>Component.
@@ -42,6 +38,7 @@ export class <%= Name %>Component extends React.PureComponent<% if (flow) { %><<
    * @param {<%= Name %>ComponentProps} props Current component's props.
    * @param {<%= Name %>ComponentState} state Old component's state.
    * @returns {<%= Name %>ComponentState} New comports's state.
+   * @memberof <%= moduleName %>.<%= Name %>Component
    */
   static getDerivedStateFromProps(props<% if (flow) { %>: <%= Name %>ComponentProps<% } %>, state<% if (flow) { %>: <%= Name %>ComponentState<% } %>)<% if (flow) { %>: <%= Name %>ComponentState<% } %> {
     return state;
@@ -49,6 +46,7 @@ export class <%= Name %>Component extends React.PureComponent<% if (flow) { %><<
 
   /**
    * Guard component's default state.
+   * @memberof <%= moduleName %>.<%= Name %>Component#
    */
   state = { accessAllowed: false };
 
@@ -56,6 +54,7 @@ export class <%= Name %>Component extends React.PureComponent<% if (flow) { %><<
    * React's method that is called after the component output has been rendered to the DOM.
    *
    * Calls external check to know if user can access its children.
+   * @memberof <%= moduleName %>.<%= Name %>Component#
    */
   componentDidMount() {
     // TODO: write external check call
@@ -67,6 +66,7 @@ export class <%= Name %>Component extends React.PureComponent<% if (flow) { %><<
    * Render's children of <%= Name %>Component in case of allowed access.
    *
    * @returns {?React.Node} Guard's children or possible `null`.
+   * @memberof <%= moduleName %>.<%= Name %>Component#
    */
   render() {
     const { accessAllowed } = this.state;
