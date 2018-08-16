@@ -15,7 +15,7 @@ import { ExampleNestedPage } from '../pages/ExampleNestedPage';
  * - featureRoot/nested
  *
  * @type {ReactAppCode.RouteStore} See react-app-core to learn more about it.
- * @memberof <%= moduleName %>/routes
+ * @memberof <%= moduleName %>/Routing/routes
  */
 export const <%= name %>RouteStore = new RouteStore()
   .setName('<%= name %>')
@@ -40,5 +40,7 @@ export const <%= name %>RouteStore = new RouteStore()
 
 /**
  * Used for RouteStores' composition.
+ *
+ * @memberof <%= moduleName %>/Routing/routes
  */
 export const routeStore = <%= name %>RouteStore;
