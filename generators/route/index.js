@@ -69,6 +69,8 @@ module.exports = class RouteGenerator extends BaseSubGenerator {
   initializing() {
     this.setDestination(DESTINATION_FOLDER);
     super.initializing();
+    this.options.linksModuleName = this.options.moduleName ? `${this.options.moduleName}/Routing/links` : 'Routing/links';
+    this.options.routesModuleName = this.options.moduleName ? `${this.options.moduleName}/Routing/routes` : 'Routing/routes';
   }
 
   /**

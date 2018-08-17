@@ -37,6 +37,7 @@ export class <%= Name %>Controller extends React.PureComponent<% if (flow) { %><
    * Method to generate properties for view part of page.
    *
    * @returns {<%= Name %>ViewProps} Props for view part of page.
+   * @memberof <%= moduleName %>/controller.<%= Name %>Controller#
    */
   getViewProps()<% if (flow) { %>: $Exact<<%= Name %>ViewProps><% } %> {
     return {};
@@ -48,6 +49,7 @@ export class <%= Name %>Controller extends React.PureComponent<% if (flow) { %><
    * Does not render something except page's view part.
    *
    * @returns {?React.Node} View part of <%= Name %> or possible `null`.
+   * @memberof <%= moduleName %>/controller.<%= Name %>Controller#
    */
   render() {
     return React.createElement(<%= Name %>View, this.getViewProps());

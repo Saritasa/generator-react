@@ -20,8 +20,8 @@ const TEMPLATES = {
 const NAMED_TEMPLATES = {
   files: [
     'documentation.yml',
-    'links/root.link.js',
-    'links/nested.link.js',
+    'links/Root.link.js',
+    'links/Nested.link.js',
     'routes/paths.js',
     'routes/routeStore.js',
     'inject.js',

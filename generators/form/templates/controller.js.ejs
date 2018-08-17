@@ -54,6 +54,7 @@ export class <%= Name %>Controller extends React.PureComponent<% if (flow) { %><
    * Method to generate properties for view part of component.
    *
    * @returns {<%= Name %>ViewProps} Props for view part of component.
+   * @memberof <%= moduleName %>/controller.<%= Name %>Controller#
    */
   getViewProps()<% if (flow) { %>: $Exact<<%= Name %>ViewProps><% } %> {
     return {};
@@ -63,6 +64,7 @@ export class <%= Name %>Controller extends React.PureComponent<% if (flow) { %><
    * Method to generate properties for form's view part's wrapper.
    *
    * @returns {<%= Name %>Props} Props for form's view part's wrapper.
+   * @memberof <%= moduleName %>/controller.<%= Name %>Controller#
    */
   getFormProps()<% if (flow) { %>: $Exact<<%= Name %>Props><% } %> {
     const { onSubmit } = this.props;
@@ -82,6 +84,7 @@ export class <%= Name %>Controller extends React.PureComponent<% if (flow) { %><
    * Renders form with view part of component.
    *
    * @returns {?React.Node} Form with view part of <%= Name %> or possible `null`.
+   * @memberof <%= moduleName %>/controller.<%= Name %>Controller#
    */
   render() {
     return React.createElement(Form, this.getFormProps());

@@ -2,6 +2,8 @@ toc:
   - name: "<%= moduleName.split('/').join('::') %>"
     description: |
       Form component <%= Name %>.
-  - <%= Name %>
-  - <%= Name %>/controller
-  - <%= Name %>/view
+    children:
+    - <%= moduleName %>
+    - <%= moduleName %>/controller
+    - <%= moduleName %>/view
+    - <%= moduleName %>/values
