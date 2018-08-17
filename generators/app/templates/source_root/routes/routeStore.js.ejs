@@ -6,7 +6,6 @@ import { ExampleHeader } from '../components/ExampleHeader';
 import { ExampleRootPage } from '../pages/ExampleRootPage';
 import { ExampleNestedPage } from '../pages/ExampleNestedPage';
 
-export const { routeStore } = Runtime.getInstance();
 /**
  * RouteStore for application.
  *
@@ -16,8 +15,10 @@ export const { routeStore } = Runtime.getInstance();
  * - `/nested`
  *
  * @type {ReactAppCode.RouteStore} See react-app-core to learn more about it.
- * @memberof routes
+ * @memberof Routing/routes
  */
+const { routeStore } = Runtime.getInstance();
+
 routeStore
   .setName('')
   .inject(
@@ -38,3 +39,5 @@ routeStore
       },
     ],
   );
+
+export { routeStore }

@@ -1,6 +1,7 @@
 toc:
-  - name: "<%= moduleName.split('/').join('::') %>/routes"
+  - name: "<%= routesModuleName.split('/').join('::') %>"
     description: |
       Routes for <%= moduleName %>.
-  - <%= moduleName %>/routes
+    children:
+    - <%= routesModuleName %>
 

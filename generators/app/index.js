@@ -1,3 +1,8 @@
+/**
+ * App module.
+ * @module app
+ */
+
 const BaseGenerator = require('../_base/BaseGenerator');
 
 const TEMPLATES = {
@@ -7,8 +12,8 @@ const TEMPLATES = {
     `source_root/index.client.js`,
     `source_root/components/ExampleHeader.js`,
     `source_root/links/index.js`,
-    `source_root/links/nested.link.js`,
-    `source_root/links/root.link.js`,
+    `source_root/links/Nested.link.js`,
+    `source_root/links/Root.link.js`,
     `source_root/routes/index.js`,
     `source_root/routes/paths.js`,
     `source_root/routes/routeStore.js`,
@@ -17,7 +22,16 @@ const TEMPLATES = {
   ],
 };
 
-module.exports = class extends BaseGenerator {
+/**
+ * App generator class.
+ *
+ * @extends BaseGenerator
+ * @type {module.AppGenerator}
+ */
+module.exports = class AppGenerator extends BaseGenerator {
+  /**
+   * Method for "writing" phase of yeaoman generator.
+   */
   writing() {
     this.writeTemplates(TEMPLATES);
   }
