@@ -1,3 +1,12 @@
+### 1.0.1
+#### Bugfixes
+- Resolve issue with generated types that cause
+ an error if component has no props. 
+
+### 1.0.0
+#### Features
+- Improve generated jsdoc to simple documentation.js usage.
+
 ### 1.0.0-rc.8
 #### Bugfixes
 - Add `ajv` into installed dependencies.
