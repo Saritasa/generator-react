@@ -17,7 +17,7 @@
  * @memberof <%= moduleName %>/values
  */
 export type <%= Name %>Values = $Exact<{}>;
-export type <%= Name %>Errors = $Exact<{ [$Keys<<%= Name %>Values>]: ?string }>;
+export type <%= Name %>Errors = $Shape<$Exact<{ [$Keys<<%= Name %>Values>]: string }>>;
 <% } %>
 /**
  * Method to transform values after any change.
@@ -49,4 +49,4 @@ export const <%= name %>FieldRules = createFieldRules(<% if (flow) { %>(<% } %>v
  * @returns {null|Object} `null` or errors' object.
  * @memberof <%= moduleName %>/values
  */
-export const validate<%= Name %><% if (flow) { %>: (<%= Name %>Values) => ?<%= Name %>Errors<% } %> = <% if (flow) { %>(<% } %>values<% if (flow) { %>: <%= Name %>Values)<% } %> => null;
+export const validate<%= Name %><% if (flow) { %>: (<%= Name %>Values) => <%= Name %>Errors<% } %> | null = <% if (flow) { %>(<% } %>values<% if (flow) { %>: <%= Name %>Values)<% } %> => null;

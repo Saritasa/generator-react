@@ -14,7 +14,7 @@ import { <%= Name %>View<% if (flow) { %>, type <%= Name %>ViewProps<% } %> } fr
  *
  * @memberof <%= moduleName %>/controller
  */
-export type <%= Name %>ControllerProps = {};
+export type <%= Name %>ControllerProps = { children: ?React.Node };
 
 /**
  * Shape of <%= Name %>Controller's State.
@@ -40,7 +40,9 @@ export class <%= Name %>Controller extends React.PureComponent<% if (flow) { %><
    * @memberof <%= moduleName %>/controller.<%= Name %>Controller#
    */
   getViewProps()<% if (flow) { %>: $Exact<<%= Name %>ViewProps><% } %> {
-    return {};
+    return {
+      children: this.props.children,
+    };
   }
 
   /**

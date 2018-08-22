@@ -57,7 +57,7 @@ export class <%= Name %>Controller extends React.PureComponent<% if (flow) { %><
    * @memberof <%= moduleName %>/controller.<%= Name %>Controller#
    */
   getViewProps()<% if (flow) { %>: $Exact<<%= Name %>ViewProps><% } %> {
-    return {};
+    return { formName: '<%= Name %>' };
   }
 
   /**

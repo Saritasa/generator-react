@@ -22,7 +22,7 @@ const cls = classNames.bind(styles);
  *
  * @memberof <%= moduleName %>/view
  */
-export type <%= Name %>ViewProps = {};
+export type <%= Name %>ViewProps = { formName: ?React.Node };
 
 /**
  * Shape of all props passed from main Form component.
@@ -46,6 +46,7 @@ type Full<%= Name %>ViewProps = <%= Name %>ViewProps & FromInternalComponentProp
  * @memberof <%= moduleName %>/view
  */
 export const <%= Name %>ViewPlain = ({
+  formName,
   disabledSubmit,
   submitting,
   valid,
@@ -54,6 +55,7 @@ export const <%= Name %>ViewPlain = ({
   error,
 }<% if (flow) { %>: Full<%= Name %>ViewProps<% } %>) => (
   <form onSubmit={onSubmit} className={cls('host', { invalid: !valid })}>
+    <h3>{formName}</h3>
     <FormField name="myField" />
     <FormFieldError name="myField" component="div" />
     <%= Name %>View works!

@@ -19,7 +19,7 @@ const cls = classNames.bind(styles);
  *
  * @memberof <%= moduleName %>/view
  */
-export type <%= Name %>ViewProps = {};
+export type <%= Name %>ViewProps = { children: ?React.Node };
 <% } %>
 /**
  * Plain part of <%= Name %>'s View.
@@ -28,7 +28,7 @@ export type <%= Name %>ViewProps = {};
  * @returns {?React.Node} Rendered <%= Name %>.
  * @memberof <%= moduleName %>/view
  */
-export const <%= Name %>ViewPlain = ({}<% if (flow) { %>: <%= Name %>ViewProps<% } %>) => (
+export const <%= Name %>ViewPlain = ({ children }<% if (flow) { %>: <%= Name %>ViewProps<% } %>) => (
   <div className={cls('host')}>
     <%= Name %>View works!
   </div>

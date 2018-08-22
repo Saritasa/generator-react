@@ -9,4 +9,4 @@ const stories = storiesOf('<%= [FeatureName.split('/').join('::'), 'Component'].
 
 stories.addDecorator(withKnobs);
 
-stories.add('without props', () => <<%= Name %>View />);
+stories.add('with #children only', () => <<%= Name %>View >children</<%= Name %>View >);
