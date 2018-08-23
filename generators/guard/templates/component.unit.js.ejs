@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import { <%= Name %> } from './<%= Name %>.component';
+import { <%= Name %>Component } from './<%= Name %>.component';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -17,15 +17,15 @@ describe('<%= [FeatureName.split('/').join('::'), 'Guard'].filter(Boolean).join(
   });
 
   function renderDoc(override = {}) {
-    return shallow(<<%= Name %> {...props} {...override} />);
+    return shallow(<<%= Name %>Component {...props} {...override} />);
   }
 
   function renderDocWithMultipleChildren(override = {}) {
     return shallow(
-      <<%= Name %> {...props} {...override}>
+      <<%= Name %>Component {...props} {...override}>
         <div>child1</div>
         <div>child2</div>
-      </<%= Name %>>
+      </<%= Name %>Component>
     );
   }
 
@@ -34,24 +34,30 @@ describe('<%= [FeatureName.split('/').join('::'), 'Guard'].filter(Boolean).join(
   });
 
   it('renders nothing by default', function() {
-    expect(renderDoc().exists()).to.be.equal(false);
+    expect(renderDoc().getElement()).to.be.equal(null);
   });
 
-  it('renders single child from #children in case of #allowedAccess=true', function() {
+  it('renders single child from #children in case of #accessAllowed=true', function(done) {
     const doc = renderDoc();
 
-    doc.setState({ allowedAccess: true });
-
-    expect(doc.text()).to.be.equal("This should be rendered only after passing <%= Name %>'s check.");
+    doc.setState(
+      { accessAllowed: true },
+      () => {
+        expect(doc.text()).to.be.equal("This should be rendered only after passing <%= Name %>'s check,");
+        done();
+      });
   });
 
-  it('renders many children from #children in case of #allowedAccess=true', function() {
+  it('renders many children from #children in case of #accessAllowed=true', function(done) {
     const doc = renderDocWithMultipleChildren();
 
-    doc.setState({ allowedAccess: true });
-
-    expect(doc.text()).to.include('child1');
-    expect(doc.text()).to.include('child2');
+    doc.setState(
+      { accessAllowed: true },
+      () => {
+        expect(doc.text()).to.include('child1');
+        expect(doc.text()).to.include('child2');
+        done();
+      });
   });
 
   it('calls external check while mounting', function() {

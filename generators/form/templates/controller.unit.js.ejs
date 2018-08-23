@@ -2,6 +2,7 @@ import * as React from 'react';
 import { expect } from 'chai';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import { Form } from '@saritasa/react-form'
 
 import { <%= Name %>Controller } from './<%= Name %>.controller';
 import { <%= Name %>View } from './<%= Name %>.view';
@@ -23,11 +24,17 @@ describe('<%= [FeatureName.split('/').join('::'), 'Form'].filter(Boolean).join('
     expect(renderDoc).not.to.throw(Error);
   });
 
-  it('renders <%= Name %>View only', function() {
+  it('renders Form only', function() {
     const doc = renderDoc();
 
-    expect(doc.is(<%= Name %>View)).to.be.equal(true);
+    expect(doc.type()).to.be.equal(Form);
   });
+
+  it('renders Form with <%= Name %>View as #component property', function() {
+    const doc = renderDoc();
+
+    expect(doc.prop('component')).to.be.equal(<%= Name %>View);
+  })
 
   it('does not pass any property with `handle` prefix into <%= Name %>View', function() {
     const doc = renderDoc();
