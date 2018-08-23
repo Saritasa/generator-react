@@ -14,7 +14,7 @@ describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join
       const endsWithName = /[a-z]<%= Name %>$/.test(actionName);
       const includesName = /[a-z]<%= Name %>[A-Z]/.test(actionName);
 
-      expect(endsWithName || includesName).to.be.euqal(true);
+      expect(endsWithName || includesName).to.be.equal(true);
     });
   });
 });

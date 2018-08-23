@@ -22,13 +22,13 @@ describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join
   });
 
   it('returns the same state as passed in case of unknown action', function() {
-    const state = Immutable.from({});
+    const state = Immutable.fromJS({});
 
     expect(<%= name %>Reducer(state, { type: 'UNKNOWN' })).to.be.equal(state);
   });
 
   it('returns the same state as passed in case of unknown action', function() {
-    const state = Immutable.from({});
+    const state = Immutable.fromJS({});
 
     expect(<%= name %>Reducer(state, { type: 'UNKNOWN' })).to.be.equal(state);
   });
@@ -36,7 +36,7 @@ describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join
   it('returns immutable state in case of passed state = undefined', function() {
     const state = <%= name %>Reducer(undefined, { type: 'UNKNOWN' });
 
-    expect(Immutable.Iterable.isIterable(state)).to.be.equal(true);
+    expect(Immutable.isImmutable(state)).to.be.equal(true);
   });
 
   it('returns immutable record in case of passed state = undefined', function() {
