@@ -11,7 +11,7 @@ import * as Saga from './<%= Name %>.sagas';
  * @module <%= moduleName %>/inject
  */
 
-Runtime.entityStore.inject({
+Runtime.getInstance().entityStore.inject({
   name: '<%= featureName ? `${featureName}::${name}` : name %>',
   reducer: <%= name %>Reducer,
   setBaseSelectorPath,

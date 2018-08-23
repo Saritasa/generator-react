@@ -1,3 +1,7 @@
+### 1.0.2
+#### Features
+- Improve templates for simple single-test run.
+ 
 ### 1.0.1
 #### Bugfixes
 - Resolve issue with generated types that cause

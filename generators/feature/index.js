@@ -12,20 +12,15 @@ const TEMPLATES = {
     'components/ExampleHeader.js',
     'links/index.js',
     'pages/ExampleRootPage.js',
-    'pages/ExampleNestedPage.js',
     'routes/index.js',
+    'links/Root.link.js',
+    'routes/paths.js',
+    'routes/routeStore.js',
     'index.js',
   ],
 };
 const NAMED_TEMPLATES = {
-  files: [
-    'documentation.yml',
-    'links/Root.link.js',
-    'links/Nested.link.js',
-    'routes/paths.js',
-    'routes/routeStore.js',
-    'inject.js',
-  ],
+  files: ['documentation.yml', 'inject.js'],
 };
 
 /**
