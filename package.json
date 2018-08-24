@@ -1,6 +1,6 @@
 {
   "name": "@saritasa/generator-react",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Package for generating boilerplated code",
   "main": "generators/app/index.js",
   "bin": "create-saritasa-react-app",
