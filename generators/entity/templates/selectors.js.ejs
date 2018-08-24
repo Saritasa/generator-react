@@ -46,7 +46,7 @@ export const setBaseSelectorPath = (path<% if (flow) { %>: Array<string><% } %>)
  * @returns {<%= Name %>StateRecord} - State of <%= Name %> from store.
  * @memberof <%= moduleName %>/selectors
  */
-export const selectBase<% if (flow) { %>: (*) => <%= Name %>StateRecord<% } %> = createSelector(state => state, state => state.getIn(baseSelectorPath));
+export const selectBase<% if (flow) { %>: (*) => <%= Name %>StateRecord<% } %> = createSelector(state => state, state => state.getIn(baseSelectorPath, new <%= Name %>StateRecord()));
 
 /**
  * Selects flag if list of <%= Name %> is loading.
