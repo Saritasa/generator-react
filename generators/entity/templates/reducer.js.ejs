@@ -83,7 +83,7 @@ function set<%= Name %>(state, { <%= name %>, time }) {
  * @memberof <%= moduleName %>/reducer
  */
 function set<%= Name %>List(state, { <%= name %>List, time }) {
-  return <%= name %>List.reduce((currentState, <%= name %>) => set<%= Name %>(currentState, { <%= name %>, time }).update('keys', keys => keys.push(get<%= Name %>Key(<%= name %>))), state.set('keys', new Immutable.List()));
+  return <%= name %>List.reduce((currentState, <%= name %>) => set<%= Name %>(currentState, { <%= name %>, time }), state).update('keys', () => <%= name %>List.map(<%= name %> => get<%= Name %>Key(<%= name %>))));
 }
 
 /**
