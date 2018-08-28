@@ -38,6 +38,8 @@ const devDeps = [
   'chai',
   'flow-bin',
   'husky',
+  'lint-staged',
+  'prettier',
   'nyc',
   'react-app-rewired',
 ].join(' ');
