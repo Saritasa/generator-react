@@ -31,6 +31,7 @@ export type <%= Name %>ViewProps = { children: ?React.Node };
 export const <%= Name %>ViewPlain = ({ children }<% if (flow) { %>: <%= Name %>ViewProps<% } %>) => (
   <div className={cls('host')}>
     <%= Name %>View works!
+    <div>{children}</div>
   </div>
 );
 
