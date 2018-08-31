@@ -7,7 +7,6 @@ const BaseGenerator = require('../_base/BaseGenerator');
 
 const TEMPLATES = {
   files: [
-    'config-overrides.js',
     '.env',
     `source_root/index.js`,
     `source_root/index.client.js`,

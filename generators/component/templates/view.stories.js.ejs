@@ -1,6 +1,7 @@
 <% if (flow) { %>// @flow
 <% } %>import * as React from 'react';
 import { storiesOf } from '@storybook/react';
+import { action, configureActions } from '@storybook/addon-actions';
 import { withKnobs /*, text, boolean, select*/ } from '@storybook/addon-knobs';
 
 import { <%= Name %>View } from './<%= Name %>.view';

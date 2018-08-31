@@ -18,7 +18,7 @@ const deps = [
   'ajv',
   'axios',
   '@saritasa/react-form',
-  'recompose',
+  'recompose@0.27',
   'classnames',
   'react-app-core',
   'react-router',
@@ -29,6 +29,7 @@ const devDeps = [
   '@saritasa/generator-react',
   'yo',
   '@storybook/react',
+  '@storybook/addon-actions',
   '@storybook/addon-knobs',
   '@storybook/addon-links',
   '@storybook/addon-actions',
@@ -71,7 +72,7 @@ function checkArguments({ name }) {
 }
 
 function install({ name }) {
-  cp.execSync(`npx create-react-app ${name} --use-npm`);
+  cp.execSync(`npx @saritasa/create-react-app ${name} --use-npm`);
   cp.execSync(`npm install --save ${deps}`, { cwd: path.join(process.cwd(), name) });
   cp.execSync(`npm install --save-dev ${devDeps}`, { cwd: path.join(process.cwd(), name) });
   cp.execSync('npx flow init', { cwd: path.join(process.cwd(), name) });
@@ -79,10 +80,6 @@ function install({ name }) {
   cp.execSync(`npx rimraf ${filesToRemove.join(' ')}`, { cwd: path.join(process.cwd(), name) });
   cp.execSync(`npx yo @saritasa/react ${name}`, { cwd: path.join(process.cwd(), name) });
   console.log('Done.');
-  console.log('Replace some scripts in your package.json file:');
-  console.log('start: "react-scripts start" -> "react-app-rewired start"');
-  console.log('start: "react-scripts build" -> "react-app-rewired build"');
-  //console.log('start: "react-scripts test" -> "react-app-rewired test"');
 }
 
 function run() {
