@@ -69,7 +69,7 @@ function checkArguments({ name }) {
 }
 
 function install({ name }) {
-  cp.execSync(`npx create-react-app ${name} --use-npm`);
+  cp.execSync(`npx antonkomkov-create-react-app ${name} --use-npm`);
   cp.execSync(`npm install --save ${deps}`, { cwd: path.join(process.cwd(), name) });
   cp.execSync(`npm install --save-dev ${devDeps}`, { cwd: path.join(process.cwd(), name) });
   cp.execSync('npx flow init', { cwd: path.join(process.cwd(), name) });
