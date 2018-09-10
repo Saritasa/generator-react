@@ -27,7 +27,7 @@ function* load<%= Name %>(action<% if (flow) { %>: $Call<typeof Action.load<%= N
     const <%= name %>Dto<% if (flow) { %>: <%= Name %>Dto<% } %> = yield call(Api.fetch<%= Name %>, action.payload);
 
     yield put({ type: ActionType.LOAD_SUCCESS });
-    yield put({ type: ActionType.SET, payload: dtoToRecord(<%= name %>Dto) });
+    yield put(Action.set<%= Name %>({ <%= name %>: dtoToRecord(<%= name %>Dto), time: Date.now() }));
   } catch (error) {
     yield put({ type: ActionType.LOAD_FAILED, message: error.message, error });
   }
@@ -48,7 +48,7 @@ function* save<%= Name %>(action<% if (flow) { %>: $Call<typeof Action.save<%= N
     const <%= name %>Dto<% if (flow) { %>: <%= Name %>Dto<% } %> = yield call(apiAction, action.payload.<%= name %>);
 
     yield put({ type: ActionType.SAVE_SUCCESS });
-    yield put({ type: ActionType.SET, payload: { <%= name %>: dtoToRecord(<%= name %>Dto), time: Date.now() } });
+    yield put(Action.set<%= Name %>({ <%= name %>: dtoToRecord(<%= name %>Dto), time: Date.now() }));
   } catch (error) {
     yield put({ type: ActionType.SAVE_FAILED, message: error.message, error });
   }

@@ -34,11 +34,8 @@ type <%= Name %>ControllerState = null;
  */
 type <%= Name %>Props = {
   ...$Exact<<%= Name %>ViewProps>,
-  onSubmit: *,
-  component: *,
-  fieldRules: *,
-  validate: *,
-  } & FormProps<<%= Name %>Values>;
+  ...$Exact<FormProps<<%= Name %>Values>>,
+};
 <% } %>
 /**
  * Controller for <%= Name %> form.

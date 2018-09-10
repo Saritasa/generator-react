@@ -16,8 +16,6 @@ describe('<%= [FeatureName.split('/').join('::'), 'Form'].filter(Boolean).join('
   });
 
   it('returns the same object if changed field is unknown', function() {
-    const values = {};
-
     expect(<%= name %>FieldRules(values, 'unknown field')).to.be.equal(values);
   });
 });
@@ -25,7 +23,7 @@ describe('<%= [FeatureName.split('/').join('::'), 'Form'].filter(Boolean).join('
 describe('Component::<%= Name %>::values::validate<%= Name %>()', function() {
   beforeEach(fillValues);
 
-  it('returns `null` in case of valid values', function() {
-    expect(validate<%= Name %>(fillValues)).to.be.equal(null);
+  it('returns `null` for every field in case of valid values', function() {
+    expect(validate<%= Name %>(values)).to.be.deep.equal(null);
   });
 });

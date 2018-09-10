@@ -119,3 +119,24 @@ export function delete<%= Name %>(<%= name %><% if (flow) { %>: <%= Name %><% } 
 
   return delete<%= Name %>ByKey(key);
 }
+
+
+/**
+ * Action for set <%= Name %> record inside the store.
+ *
+ * @param {<%= Name %>} <%= name %> - Instance of <%= Name %> to set.
+ *     This should be a Immutable.Record.
+ *
+ * @returns {Object} see delete<%= Name %>.
+ * @memberof <%= moduleName %>/actions
+ */
+export function set<%= Name %>({ <%= name %>, time }<% if (flow) { %>: { <%= name %>: <%= Name %>, time: number }<% } %>) {
+  return {
+    type: ActionType.SET,
+    payload: {
+      <%= name %>,
+      time,
+    },
+  };
+}
+
