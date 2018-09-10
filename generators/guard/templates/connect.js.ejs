@@ -33,7 +33,7 @@ const mapActionToProps = {
 <% if (flow) { %>
 export type <%= Name %>ConnectedProps = $Diff<<%= Name %>ComponentProps, $Call<typeof mapStateToProps, any, any>>;
 <% } %>
-export const <%= Name %>Connected<% if (flow) { %>: React.Component<<%= Name %>ConnectedProps, any><% } %> = connect(
+export const <%= Name %>Connected<% if (flow) { %>: React.ComponentType<<%= Name %>ConnectedProps><% } %> = connect(
   mapStateToProps,
   mapActionToProps,
 )(<%= Name %>Component);
