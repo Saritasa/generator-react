@@ -45,7 +45,7 @@ export type <%= Name %>Props = $Diff<<%= Component %>Props, $Call<typeof mapStat
  * Takes dummy <%= Component %> and allows it to work with global application's state.
  * Passes props created via `mapStateToProps` and `mapActionToProps` into <%= Component %>.
  */
-export const <%= Name %><% if (flow) { %>: React.Component<<%= Name %>Props, any><% } %> = connect(
+export const <%= Name %><% if (flow) { %>: React.ComponentType<<%= Name %>Props><% } %> = connect(
   mapStateToProps,
   mapActionToProps,
 )(<%= Component %>);
