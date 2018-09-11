@@ -27,12 +27,6 @@ describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join
     expect(<%= name %>Reducer(state, { type: 'UNKNOWN' })).to.be.equal(state);
   });
 
-  it('returns the same state as passed in case of unknown action', function() {
-    const state = Immutable.fromJS({});
-
-    expect(<%= name %>Reducer(state, { type: 'UNKNOWN' })).to.be.equal(state);
-  });
-
   it('returns immutable state in case of passed state = undefined', function() {
     const state = <%= name %>Reducer(undefined, { type: 'UNKNOWN' });
 

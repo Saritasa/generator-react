@@ -194,7 +194,7 @@ export function save<%= Name %>Success(key<% if (flow) { %>: string<% } %>) {
  * @returns {Action} Action with type SAVE_FAILED and `{ <%= name %>Id: key }` as payload.
  * @memberof <%= moduleName %>/actions
  */
-export function load<%= Name %>yFailed({ <%= name %>Id, error }<% if (flow) { %>: { <%= name %>Id: string, error: { message: string } }<% } %>) {
+export function save<%= Name %>Failed({ <%= name %>Id, error }<% if (flow) { %>: { <%= name %>Id: string, error: { message: string } }<% } %>) {
   return {
     type: ActionType.SAVE_FAILED,
     payload: {

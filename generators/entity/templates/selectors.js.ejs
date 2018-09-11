@@ -31,7 +31,7 @@ const empty<%= Name %>Entity: <%= Name %> = new <%= Name %>();
  * Sets path to get state of <%= Name %> in store.
  *
  * @function
- * @param {Array<string>} path - Path in store like `['entities', '<%= name %>']`
+ * @param {Array<string>} path - Path in store like `['entities', '<%= name %>']`.
  * @memberof <%= moduleName %>/selectors
  */
 export const setBaseSelectorPath = (path<% if (flow) { %>: Array<string><% } %>) => {
