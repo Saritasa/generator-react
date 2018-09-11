@@ -309,7 +309,7 @@ export function set<%= Name %>({ <%= name %>, time }<% if (flow) { %>: { <%= nam
 }
 
 /**
- * Action for set <%= Name %> record inside the store.
+ * Action for set <%= Name %> record list inside the store.
  *
  * @param {Object} $1 - Params for action.
  * @param {Array<<%= Name %>>} $1.<%= name %>List - Array of instances of <%= Name %> to set.
@@ -319,7 +319,7 @@ export function set<%= Name %>({ <%= name %>, time }<% if (flow) { %>: { <%= nam
  * @returns {Object} Action with type SET_LIST and `{ <%= name %>List, time }` as payload.
  * @memberof <%= moduleName %>/actions
  */
-export function set<%= Name %>({ <%= name %>List, time }<% if (flow) { %>: { <%= name %>List: Array<<%= Name %>>, time: number }<% } %>) {
+export function set<%= Name %>List({ <%= name %>List, time }<% if (flow) { %>: { <%= name %>List: Array<<%= Name %>>, time: number }<% } %>) {
   return {
     type: ActionType.SET_LIST,
     payload: {
