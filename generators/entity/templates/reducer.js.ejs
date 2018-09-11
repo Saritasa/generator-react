@@ -58,16 +58,13 @@ const defaultState = new <%= Name %>StateRecord();
 function set<%= Name %>(state, { <%= name %>, time }) {
   const key = get<%= Name %>Key(<%= name %>);
 
-  if (state.hasIn(['entities', key])) {
-    return state.updateIn(
-      ['entities', key],
-      <%= name %>Old => <%= name %>Old.setIn(['meta', 'updatedAt'], time).set('data', <%= name %>),
-    );
-  }
-
-  return state.setIn(
-    ['entities', key],
-    (new <%= Name %>Model()).setIn(['meta', 'updatedAt'], time).set('data', <%= name %>),
+  return state.update('entities', entities =>
+    entities.set(
+      key,
+      (entities.get(key) || new <%= Name %>Model())
+        .update('meta', meta => meta.set('updatedAt', time))
+        .set('data', <%= name %>>),
+    ),
   );
 }
 
