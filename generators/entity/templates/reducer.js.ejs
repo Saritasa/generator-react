@@ -63,7 +63,7 @@ function set<%= Name %>(state, { <%= name %>, time }) {
       key,
       (entities.get(key) || new <%= Name %>Model())
         .update('meta', meta => meta.set('updatedAt', time))
-        .set('data', <%= name %>>),
+        .set('data', <%= name %>),
     ),
   );
 }
