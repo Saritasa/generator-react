@@ -26,10 +26,10 @@ function* load<%= Name %>(action<% if (flow) { %>: $Call<typeof Action.load<%= N
   try {
     const <%= name %>Dto<% if (flow) { %>: <%= Name %>Dto<% } %> = yield call(Api.fetch<%= Name %>, action.payload);
 
-    yield put({ type: ActionType.LOAD_SUCCESS });
     yield put(Action.set<%= Name %>({ <%= name %>: dtoToRecord(<%= name %>Dto), time: Date.now() }));
+    yield put(Action.load<%= Name %>ByKeySuccess(action.payload.<%= name %>Id));
   } catch (error) {
-    yield put({ type: ActionType.LOAD_FAILED, message: error.message, error });
+    yield put(Action.load<%= Name %>ByKeyFailed({ <%= name %>Id: action.payload.<%= name %>Id, error }));
   }
 }
 
@@ -47,10 +47,10 @@ function* save<%= Name %>(action<% if (flow) { %>: $Call<typeof Action.save<%= N
     const apiAction = action.payload.<%= name %>Id ? Api.save<%= Name %> : Api.create<%= Name %>;
     const <%= name %>Dto<% if (flow) { %>: <%= Name %>Dto<% } %> = yield call(apiAction, action.payload.<%= name %>);
 
-    yield put({ type: ActionType.SAVE_SUCCESS });
     yield put(Action.set<%= Name %>({ <%= name %>: dtoToRecord(<%= name %>Dto), time: Date.now() }));
+    yield put(Action.save<%= Name %>Success(action.payload.<%= name %>Id));
   } catch (error) {
-    yield put({ type: ActionType.SAVE_FAILED, message: error.message, error });
+    yield put(Action.save<%= Name %>Failed({ <%= name %>Id: action.payload.<%= name %>Id, error }));
   }
 }
 
@@ -66,10 +66,9 @@ function* save<%= Name %>(action<% if (flow) { %>: $Call<typeof Action.save<%= N
 function* delete<%= Name %>(action<% if (flow) { %>: $Call<typeof Action.delete<%= Name %>ByKey, any><% } %>) {
   try {
     yield call(Api.delete<%= Name %>, action.payload);
-
-    yield put({ type: ActionType.DELETE_SUCCESS, payload: action.payload });
+    yield put(Action.delete<%= Name %>ByKeySuccess(action.payload.<%= name %>Id));
   } catch (error) {
-    yield put({ type: ActionType.DELETE_FAILED, message: error.message, error });
+    yield put(Action.delete<%= Name %>ByKeyFailed({ <%= name %>Id: action.payload.<%= name %>Id, error }));
   }
 }
 
@@ -86,11 +85,11 @@ function* load<%= Name %>List(action<% if (flow) { %>: $Call<typeof Action.load<
   try {
     const <%= name %>ListDto<% if (flow) { %>: <%= Name %>ListDto<% } %> = yield call(Api.fetch<%= Name %>List, action.payload);
 
-    yield put({ type: ActionType.LOAD_LIST_SUCCESS });
-    yield put({ type: ActionType.SET_LIST, payload: { <%= name %>List: <%= name %>ListDto.results.map(dtoToRecord), time: Date.now() } });
+    yield put(Action.set<%= Name %>List({ <%= name %>List: <%= name %>ListDto.results.map(dtoToRecord), time: Date.now() }));
     yield put({ type: ActionType.SET_PAGINATION, payload: <%= name %>ListDto.pagination });
+    yield put(Action.load<%= Name %>ListSuccess());
   } catch (error) {
-    yield put({ type: ActionType.LOAD_LIST_FAILED, message: error.message, error });
+    yield put(Action.load<%= Name %>ListFailed(error));
   }
 }
 

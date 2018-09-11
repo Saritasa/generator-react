@@ -2,14 +2,36 @@
 <% } %>import * as Immutable from 'immutable';
 
 /**
+ * Type of <%= Name %> record that describes default values and shape.
+ *
+ * @name <%= Name %>Shape
+ * @type {Object}
+ * @property {string} id - <%= Name %>'s id.
+ * @memberof <%= moduleName %>/reducer
+ */<% if (flow) { %>
+type <%= Name %>Shape = { id: string };<% } %>
+
+/**
  * This is the shape and default properties for every instance of <%= Name %>.
  *
  * @property {string} id - The id of <%= Name %>.
  * @memberof <%= moduleName %>/reducer
  */
-export const <%= Name %> = Immutable.Record({
+export const <%= Name %> = Immutable.Record(({
   id: '',
-});
+}: <%= Name %>Shape));
+
+/**
+ * Type of <%= Name %>Meta record.
+ *
+ * Type describes default values and shape for meta info about <%= Name %> instance.
+ * @name <%= Name %>MetaShape
+ * @type {Object}
+ * @property {boolean} loading - Is current instance in process of loading.
+ * @property {?number} updatedAt - Time of last entity update if present.
+ * @memberof <%= moduleName %>/reducer
+ */<% if (flow) { %>
+type <%= Name %>MetaShape = { loading: boolean, updatedAt: number | null };<% } %>
 
 /**
  * This is the shape and default properties for meta info for every instance of <%= Name %>.
@@ -18,10 +40,22 @@ export const <%= Name %> = Immutable.Record({
  * @property {?number} updatedAt - The time of last <%= name %>'s info updating.
  * @memberof <%= moduleName %>/reducer
  */
-export const <%= Name %>Meta = Immutable.Record({
+export const <%= Name %>Meta = Immutable.Record(({
   loading: false,
   updatedAt: null,
-});
+}: <%= Name %>MetaShape));
+
+/**
+ * Type of <%= Name %>Model record.
+ *
+ * Type describes default values and shape for all info (main and meta) about <%= Name %> instance.
+ * @name <%= Name %>ModelShape
+ * @type {Object}
+ * @property {<%= Name %>} data - Main info about entity.
+ * @property {<%= Name %>Meta} meta - Meta info about entity.
+ * @memberof <%= moduleName %>/reducer
+ */<% if (flow) { %>
+type <%= Name %>ModelShape = { data: <%= Name %>, meta: <%= Name %>Meta };<% } %>
 
 /**
  * This is the shape and default properties <%= Name %>'s model.
@@ -30,7 +64,7 @@ export const <%= Name %>Meta = Immutable.Record({
  * @property {<%= Name %>Meta} meta - Meta info about <%= name %>.
  * @memberof <%= moduleName %>/reducer
  */
-export const <%= Name %>Model = Immutable.Record({
+export const <%= Name %>Model = Immutable.Record(({
   data: new <%= Name %>(),
   meta: new <%= Name %>Meta(),
-});
+}: <%= Name %>ModelShape));
