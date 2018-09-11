@@ -2,7 +2,7 @@
 <% } %>import * as Immutable from 'immutable';
 
 import * as ActionType from './<%= Name %>.actionTypes';
-<% if (flow) { %>import typeof * as Action from './<%= Name %>.action';
+<% if (flow) { %>import typeof * as Action from './<%= Name %>.actions';
 <% } %>import { <%= Name %>Model } from './<%= Name %>.record';
 import { get<%= Name %>Key } from './<%= Name %>.utils';
 /**
