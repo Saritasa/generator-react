@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import DefaultExport, * as Dto from './<%= Name %>.dto';
+import * as Dto from './<%= Name %>.dto';
 
 describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join('::') %>::<%= Name %>::dto', function() {
   it('exports only default export', function() {
