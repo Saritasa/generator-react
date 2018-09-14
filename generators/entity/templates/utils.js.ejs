@@ -37,7 +37,7 @@ export const validateDto = ajv.compile(<%= Name %>DtoSchema);
  * @memberof <%= moduleName %>/utils
  */
 export function get<%= Name %>Key(<%= name %><% if (flow) { %>: <%= Name %><% } %>)<% if (flow) { %>: string<% } %> {
-  return String(<%= name %>.get('id'));
+  return String(<%= name %>.get('key'));
 }
 
 /**
@@ -48,7 +48,7 @@ export function get<%= Name %>Key(<%= name %><% if (flow) { %>: <%= Name %><% } 
  * @memberof <%= moduleName %>/utils
  */
 export function recordToDto(<%= name %><% if (flow) { %>: <%= Name %><% } %>)<% if (flow) { %>: <%= Name %>Dto<% } %> {
-  return <%= name %>.toJS();
+  return { id: <%= name %>.get('key') };
 }
 
 /**
@@ -62,6 +62,8 @@ export function recordToDto(<%= name %><% if (flow) { %>: <%= Name %><% } %>)<% 
  * @memberof <%= moduleName %>/utils
  */
 export function dtoToRecord(<%= name %>Dto<% if (flow) { %>: <%= Name %>Dto<% } %>)<% if (flow) { %>: <%= Name %><% } %> {
+  // ignore else statement, cause testing always run with NODE_ENV=test
+  /* istanbul ignore else */
   if (process.env.NODE_ENV !== 'production') {
     if (!validateDto(<%= name %>Dto)) {
       const { errors } = validateDto;
@@ -75,7 +77,7 @@ Errors: ${errors.map(({ message, dataPath }) => `${dataPath}: ${message}`).join(
     }
   }
 
-  return new <%= Name %>(<%= name %>Dto);
+  return new <%= Name %>({ key: <%= name %>Dto.id });
 }
 
 /**

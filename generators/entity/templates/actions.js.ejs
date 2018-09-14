@@ -151,13 +151,13 @@ export function load<%= Name %>ListFailed(error<% if (flow) { %>: { message: str
  */
 export function save<%= Name %>(<%= name %><% if (flow) { %>: <%= Name %><% } %>) {
   const key = get<%= Name %>Key(<%= name %>);
-  const body = recordToDto(<%= name %>);
+  const <%= name %>Dto = recordToDto(<%= name %>);
 
   return {
     type: ActionType.SAVE,
     payload: {
       <%= name %>Id: key,
-      <%= name %>: body,
+      <%= name %>: <%= name %>Dto,
     },
   };
 }

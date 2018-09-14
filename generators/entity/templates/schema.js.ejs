@@ -4,4 +4,12 @@
  *
  * @memberof <%= moduleName %>/api
  */
-export const <%= Name %>DtoSchema = {};
+export const <%= Name %>DtoSchema = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string',
+    },
+  },
+  required: ['id'],
+};

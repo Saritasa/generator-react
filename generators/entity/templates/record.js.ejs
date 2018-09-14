@@ -6,19 +6,19 @@
  *
  * @name <%= Name %>Shape
  * @type {Object}
- * @property {string} id - <%= Name %>'s id.
+ * @property {string} key - <%= Name %>'s key.
  * @memberof <%= moduleName %>/reducer
  */<% if (flow) { %>
-type <%= Name %>Shape = { id: string };<% } %>
+type <%= Name %>Shape = { key: string };<% } %>
 
 /**
  * This is the shape and default properties for every instance of <%= Name %>.
  *
- * @property {string} id - The id of <%= Name %>.
+ * @property {string} key - The key of <%= Name %>.
  * @memberof <%= moduleName %>/reducer
  */
 export const <%= Name %> = Immutable.Record(({
-  id: '',
+  key: '',
 }: <%= Name %>Shape));
 
 /**

@@ -1,6 +1,9 @@
 import { expect } from 'chai';
 
 import * as Action from './<%= Name %>.actions';
+import * as ActionType from './<%= Name %>.actionTypes';
+import { <%= Name %> } from './<%= Name %>.record';
+import { recordToDto } from './<%= Name %>.utils';
 
 describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join('::') %>::<%= Name %>::actions', function() {
   it('exports only functions', function() {
@@ -15,6 +18,182 @@ describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join
       const includesName = /[a-z]<%= Name %>[A-Z]/.test(actionName);
 
       expect(endsWithName || includesName).to.be.equal(true);
+    });
+  });
+
+  describe('load<%= Name %>ByKey(key)', function(){
+    it('returns object with type = ActionType.LOAD', function() {
+      expect(Action.load<%= Name %>ByKey('<%= name %>-key')).to.have.property('type', ActionType.LOAD);
+    });
+
+    it('returns object with payload = { <%= name %>Id: keyValue }', function() {
+      expect(Action.load<%= Name %>ByKey('<%= name %>-key')).to.have.deep.property('payload', { <%= name %>Id: '<%= name %>-key' });
+    });
+  });
+
+  describe('load<%= Name %>ByKeyFailed({ <%= name %>Id, error })', function(){
+    it('returns object with type = ActionType.LOAD_FAILED', function() {
+      const error = {};
+
+      expect(Action.load<%= Name %>ByKeyFailed({ <%= name %>Id: '<%= name %>-key', error })).to.have.property('type', ActionType.LOAD_FAILED);
+    });
+
+    it('returns object with payload = { <%= name %>Id: keyValue, error:  }', function() {
+      const error = {};
+
+      expect(Action.load<%= Name %>ByKeyFailed({ <%= name %>Id: '<%= name %>-key', error })).to.have.deep.property('payload', { <%= name %>Id: '<%= name %>-key', error });
+    });
+  });
+
+  describe('load<%= Name %>ByKeySuccess(key)', function(){
+    it('returns object with type = ActionType.LOAD_SUCCESS', function() {
+      expect(Action.load<%= Name %>ByKeySuccess('<%= name %>-key')).to.have.property('type', ActionType.LOAD_SUCCESS);
+    });
+
+    it('returns object with payload = { <%= name %>Id: keyValue }', function() {
+      expect(Action.load<%= Name %>ByKeySuccess('<%= name %>-key')).to.have.deep.property('payload', { <%= name %>Id: '<%= name %>-key' });
+    });
+  });
+
+  describe('load<%= Name %>List(queryValue)', function(){
+    let query;
+
+    beforeEach(function () {
+      query = {};
+    });
+
+    it('returns object with type = ActionType.LOAD_LIST', function() {
+      expect(Action.load<%= Name %>List(query)).to.have.property('type', ActionType.LOAD_LIST);
+    });
+
+    it('returns object with payload = { query: queryValue }', function() {
+      expect(Action.load<%= Name %>List(query)).to.have.deep.property('payload', { query });
+    });
+  });
+
+  describe('load<%= Name %>ListFailed(error)', function(){
+    it('returns object with type = ActionType.LOAD_LIST_FAILED', function() {
+      const error = {};
+
+      expect(Action.load<%= Name %>ListFailed(error)).to.have.property('type', ActionType.LOAD_LIST_FAILED);
+    });
+
+    it('returns object with payload = { error }', function() {
+      const error = {};
+
+      expect(Action.load<%= Name %>ListFailed(error)).to.have.deep.property('payload', { error });
+    });
+  });
+
+  describe('load<%= Name %>ListSuccess()', function(){
+    it('returns object with type = ActionType.LOAD_LIST_SUCCESS', function() {
+      expect(Action.load<%= Name %>ListSuccess()).to.have.property('type', ActionType.LOAD_LIST_SUCCESS);
+    });
+  });
+
+  describe('save<%= Name %>(<%= name %>)', function(){
+    const <%= name %> = <%= Name %>({ key: '<%= name %>-key' });
+
+    it('returns object with type = ActionType.SAVE', function() {
+      expect(Action.save<%= Name %>(<%= name %>)).to.have.property('type', ActionType.SAVE);
+    });
+
+    it('returns object with payload = { <%= name %>Id: keyValue, <%= name %> }', function() {
+      expect(Action.save<%= Name %>(<%= name %>)).to.have.deep.property('payload', { <%= name %>Id: '<%= name %>-key', <%= name %>: recordToDto(<%= name %>) });
+    });
+  });
+
+  describe('save<%= Name %>Success(key)', function(){
+    it('returns object with type = ActionType.SAVE_SUCCESS', function() {
+      expect(Action.save<%= Name %>Success('<%= name %>-key')).to.have.property('type', ActionType.SAVE_SUCCESS);
+    });
+
+    it('returns object with payload = { <%= name %>Id: keyValue }', function() {
+      expect(Action.save<%= Name %>Success('<%= name %>-key')).to.have.deep.property('payload', { <%= name %>Id: '<%= name %>-key' });
+    });
+  });
+
+  describe('save<%= Name %>Failed({ <%= name %>Id, error })', function(){
+    it('returns object with type = ActionType.SAVE_FAILED', function() {
+      const error = {};
+
+      expect(Action.save<%= Name %>Failed({ <%= name %>Id: '<%= name %>-key', error })).to.have.property('type', ActionType.SAVE_FAILED);
+    });
+
+    it('returns object with payload = { <%= name %>Id: keyValue, error }', function() {
+      const error = {};
+
+      expect(Action.save<%= Name %>Failed({ <%= name %>Id: '<%= name %>-key', error })).to.have.deep.property('payload', { <%= name %>Id: '<%= name %>-key', error });
+    });
+  });
+
+  describe('delete<%= Name %>(<%= name %>)', function(){
+    const <%= name %> = <%= Name %>({ key: '<%= name %>-key' });
+
+    it('returns object with type = ActionType.DELETE', function() {
+      expect(Action.delete<%= Name %>(<%= name %>)).to.have.property('type', ActionType.DELETE);
+    });
+
+    it('returns object with payload = { <%= name %>Id: keyValue }', function() {
+      expect(Action.delete<%= Name %>(<%= name %>)).to.have.deep.property('payload', { <%= name %>Id: '<%= name %>-key' });
+    });
+  });
+
+  describe('delete<%= Name %>ByKey(key)', function(){
+    it('returns object with type = ActionType.DELETE', function() {
+      expect(Action.delete<%= Name %>ByKey('<%= name %>-key')).to.have.property('type', ActionType.DELETE);
+    });
+
+    it('returns object with payload = { <%= name %>Id: keyValue }', function() {
+      expect(Action.delete<%= Name %>ByKey('<%= name %>-key')).to.have.deep.property('payload', { <%= name %>Id: '<%= name %>-key' });
+    });
+  });
+
+  describe('delete<%= Name %>ByKeyFailed({ <%= name %>Id, error })', function(){
+    it('returns object with type = ActionType.DELETE_FAILED', function() {
+      const error = {};
+
+      expect(Action.delete<%= Name %>ByKeyFailed({ <%= name %>Id: '<%= name %>-key', error })).to.have.property('type', ActionType.DELETE_FAILED);
+    });
+
+    it('returns object with payload = { <%= name %>Id: keyValue, error:  }', function() {
+      const error = {};
+
+      expect(Action.delete<%= Name %>ByKeyFailed({ <%= name %>Id: '<%= name %>-key', error })).to.have.deep.property('payload', { <%= name %>Id: '<%= name %>-key', error });
+    });
+  });
+
+  describe('delete<%= Name %>ByKeySuccess(key)', function() {
+    it('returns object with type = ActionType.DELETE_SUCCESS', function() {
+      expect(Action.delete<%= Name %>ByKeySuccess('<%= name %>-key')).to.have.property('type', ActionType.DELETE_SUCCESS);
+    });
+
+    it('returns object with payload = { <%= name %>Id: keyValue }', function() {
+      expect(Action.delete<%= Name %>ByKeySuccess('<%= name %>-key')).to.have.deep.property('payload', { <%= name %>Id: '<%= name %>-key' });
+    });
+  });
+
+  describe('set<%= Name %>({ <%= name %>, time })', function() {
+    const <%= name %> = <%= Name %>({ key: '<%= name %>-key' });
+
+    it('returns object with type = ActionType.SET', function() {
+      expect(Action.set<%= Name %>({ <%= name %>, time: 164 })).to.have.property('type', ActionType.SET);
+    });
+
+    it('returns object with payload = { <%= name %>, time }', function() {
+      expect(Action.set<%= Name %>({ <%= name %>, time: 164 })).to.have.deep.property('payload', { <%= name %>, time: 164 });
+    });
+  });
+
+  describe('set<%= Name %>List({ <%= name %>List, time })', function() {
+    const <%= name %>List = Array.from({ length: 10 }, (_, i) => <%= Name %>({ key: `<%= name %>-key-${i}` }));
+
+    it('returns object with type = ActionType.SET_LIST', function() {
+      expect(Action.set<%= Name %>List({ <%= name %>List, time: 164 })).to.have.property('type', ActionType.SET_LIST);
+    });
+
+    it('returns object with payload = { <%= name %>List, time }', function() {
+      expect(Action.set<%= Name %>List({ <%= name %>List, time: 164 })).to.have.deep.property('payload', { <%= name %>List, time: 164 });
     });
   });
 });
