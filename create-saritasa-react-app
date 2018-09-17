@@ -23,6 +23,7 @@ const deps = [
   'react-app-core',
   'react-router',
   'react-router-dom',
+  'get-e2e-test-classname',
 ].join(' ');
 
 const devDeps = [

@@ -37,6 +37,27 @@ module.exports = class BaseSubGenerator extends BaseGenerator {
   }
 
   /**
+   * Change "word" to kebab-case.
+   *
+   * @param {string} word - Word for kebabizing.
+   * @returns {string} - Kebabized word.
+   * @static
+   */
+  static kebabize(word) {
+    const [first, ...rest] = word.split('');
+
+    return `${first.toLowerCase()}${rest
+      .map(char => {
+        const lowerChar = char.toLowerCase();
+
+        if (lowerChar === char) return char;
+
+        return `-${lowerChar}`;
+      })
+      .join('')}`;
+  }
+
+  /**
    * Setup.
    *
    * @param {string|Array} args - Arguments at initialization.
@@ -66,6 +87,7 @@ module.exports = class BaseSubGenerator extends BaseGenerator {
 
     this.options.name = BaseSubGenerator.camelize(name);
     this.options.Name = BaseSubGenerator.pascalize(name);
+    this.options.kebabName = BaseSubGenerator.kebabize(name);
   }
 
   /**

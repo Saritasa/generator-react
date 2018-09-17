@@ -2,6 +2,7 @@
 <% } %>import * as React from 'react';
 import { pure } from 'recompose';
 import classNames from 'classnames/bind';
+import { createScoped } from 'get-e2e-test-classname';
 import { FormError, FormFieldError, FormField<% if (flow) { %>, type FromInternalComponentProps<% } %> } from '@saritasa/react-form';
 <% if (flow) { %>
 import { type <%= Name %>Values } from './<%= Name %>.values';
@@ -16,6 +17,12 @@ import styles from './<%= Name %>.view.css';
 
 // Use css-modules. This allows to use `cls('host') that returns styles.host's value that is real classname.
 const cls = classNames.bind(styles);
+const getE2eTestClassName = createScoped('<%= kebabName %>');
+const e2e = {
+  myFieldError: getE2eTestClassName('myField-error'),
+  error: getE2eTestClassName('error'),
+};
+
 <% if (flow) { %>
 /**
  * PartShape of <%= Name %>View's props.
@@ -54,16 +61,15 @@ export const <%= Name %>ViewPlain = ({
   onReset,
   error,
 }<% if (flow) { %>: Full<%= Name %>ViewProps<% } %>) => (
-  <form onSubmit={onSubmit} className={cls('host', { invalid: !valid })}>
-    <h3>{formName}</h3>
+  <form onSubmit={onSubmit} name={formName} className={cls('host', { invalid: !valid })}>
     <FormField name="myField" />
-    <FormFieldError name="myField" component="div" />
+    <FormFieldError name="myField" className={e2e.myFieldError} component="div" />
     <%= Name %>View works!
-    <FormError error={error} component="div" />
-    <button type="submit" disabled={disabledSubmit}>
+    <FormError error={error} className={e2e.error} component="div" />
+    <button type="submit" name="submit" disabled={disabledSubmit}>
       {submitting ? 'Submitting' : 'Submit'}
     </button>
-    <button type="reset" onClick={onReset}>
+    <button type="reset" name="reset" onClick={onReset}>
       Reset
     </button>
   </form>
