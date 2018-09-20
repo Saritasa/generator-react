@@ -124,8 +124,6 @@ describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join
     });
 
     it('sets times into entities', function() {
-      const <%= name %> = <%= Name %>({ key: '<%= name %>-key' });
-      const another<%= Name %> = <%= Name %>({ key: 'another-<%= name %>-key' });
       const time = Date.now();
       const state = <%= name %>Reducer(undefined, { type: ActionType.SET_LIST, payload: { <%= name %>List: [<%= name %>, another<%= Name %>], time } });
 
@@ -134,8 +132,6 @@ describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join
     });
 
     it('sets keys into keys', function() {
-      const <%= name %> = <%= Name %>({ key: '<%= name %>-key' });
-      const another<%= Name %> = <%= Name %>({ key: 'another-<%= name %>-key' });
       const state = <%= name %>Reducer(undefined, { type: ActionType.SET_LIST, payload: { <%= name %>List: [<%= name %>, another<%= Name %>], time: Date.now() } });
 
       expect(state.get('keys').toArray()).to.includes('<%= name %>-key');
@@ -143,8 +139,6 @@ describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join
     });
 
     it('updates times if set existed <%= name %>', function() {
-      const <%= name %> = <%= Name %>({ key: '<%= name %>-key' });
-      const another<%= Name %> = <%= Name %>({ key: 'another-<%= name %>-key' });
       const time = Date.now() + 1000;
       const preState = <%= name %>Reducer(undefined, { type: ActionType.SET_LIST, payload: { <%= name %>List: [<%= name %>, another<%= Name %>], time: Date.now() - 1000 } });
       const state = <%= name %>Reducer(preState, { type: ActionType.SET_LIST, payload: { <%= name %>List: [<%= name %>, another<%= Name %>], time } });
@@ -154,7 +148,6 @@ describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join
     });
 
     it('does not add existed keys into keys', function() {
-      const <%= name %> = <%= Name %>({ key: '<%= name %>-key' });
       const time = Date.now() + 1000;
       const preState = <%= name %>Reducer(undefined, { type: ActionType.SET_LIST, payload: { <%= name %>List: [<%= name %>, another<%= Name %>], time: Date.now() - 1000 } });
       const state = <%= name %>Reducer(preState, { type: ActionType.SET_LIST, payload: { <%= name %>List: [<%= name %>, another<%= Name %>], time } });
