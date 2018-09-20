@@ -1,7 +1,14 @@
 <% if (flow) { %>// @flow
-<% } %>import http from 'axios'; // use internal module if need
+<% } %>import http, * as Axios from 'axios'; // use internal module if need
 <% if (flow) { %>
-import { type <%= Name%>Dto } from './<%= Name%>.dto';
+import type {
+  <%= Name%>Dto,
+  <%= Name%>ListDto,
+  <%= Name %>LoadErrorDto,
+  <%= Name %>SaveErrorDto,
+  <%= Name %>DeleteDto,
+  <%= Name %>DeleteErrorDto,
+} from './<%= Name%>.dto';
 <% } %>
 /**
  * Requests to API for working with <%= Name %>.
@@ -24,6 +31,9 @@ export function fetch<%= Name %>({ <%= name %>Id }<% if (flow) { %>: { <%= name 
   });
 }
 
+export type Fetch<%= Name %>Result = Axios.AxiosXHR<<%= Name%>Dto>;
+export type Fetch<%= Name %>Error = Error | Axios.AxiosError<<%= Name %>LoadErrorDto>;
+
 /**
  * Performs request to the api for load list of <%= Name %>.
  *
@@ -40,6 +50,9 @@ export function fetch<%= Name %>List({ query }<% if (flow) { %>: *<% } %>) {
   });
 }
 
+export type Fetch<%= Name %>ListResult = Axios.AxiosXHR<<%= Name%>ListDto>;
+export type Fetch<%= Name %>ListError = Error | Axios.AxiosError<<%= Name %>LoadErrorDto>;
+
 /**
  * Performs request to the api for changing existed instance of <%= Name %>.
  *
@@ -55,6 +68,9 @@ export function save<%= Name %>(<%= name %><% if (flow) { %>: <%= Name%>Dto<% } 
   });
 }
 
+export type Save<%= Name %>Result = Axios.AxiosXHR<<%= Name%>Dto>;
+export type Save<%= Name %>Error = Error | Axios.AxiosError<<%= Name %>SaveErrorDto>;
+
 /**
  * Performs request to the api for creating new instance of <%= Name %>.
  *
@@ -69,6 +85,9 @@ export function create<%= Name %>(<%= name %><% if (flow) { %>: <%= Name%>Dto<% 
     data: <%= name %>,
   });
 }
+
+export type Delete<%= Name %>Result = Axios.AxiosXHR<<%= Name%>DeleteDto>;
+export type Delete<%= Name %>Error = Error | Axios.AxiosError<<%= Name %>DeleteErrorDto>;
 
 /**
  * Performs request to the api for delete existed instance of <%= Name %>.

@@ -58,12 +58,18 @@ const defaultState = new <%= Name %>StateRecord();
 function set<%= Name %>(state, { <%= name %>, time }) {
   const key = get<%= Name %>Key(<%= name %>);
 
-  return state.update('entities', entities =>
-    entities.set(
-      key,
-      (entities.get(key) || new <%= Name %>Model())
-        .update('meta', meta => meta.set('updatedAt', time))
-        .set('data', <%= name %>),
+  return state
+    .update('keys', keys => {
+      if (keys.includes(key)) return keys;
+
+      return keys.push(key);
+    })
+    .update('entities', entities =>
+      entities.set(
+        key,
+        (entities.get(key) || new <%= Name %>Model())
+          .update('meta', meta => meta.set('updatedAt', time))
+          .set('data', <%= name %>),
     ),
   );
 }
@@ -80,7 +86,7 @@ function set<%= Name %>(state, { <%= name %>, time }) {
  * @memberof <%= moduleName %>/reducer
  */
 function set<%= Name %>List(state, { <%= name %>List, time }) {
-  return <%= name %>List.reduce((currentState, <%= name %>) => set<%= Name %>(currentState, { <%= name %>, time }), state).update('keys', () => <%= name %>List.map(<%= name %> => get<%= Name %>Key(<%= name %>)));
+  return <%= name %>List.reduce((currentState: <%= Name %>StateRecord, <%= name %>) => set<%= Name %>(currentState, { <%= name %>, time }), state.delete('keys'));
 }
 <% if (flow) { %>
 type GetReturnType = <V>((...rest: any) => V) => V;

@@ -31,6 +31,7 @@ const NAMED_TEMPLATES = {
     'actionTypes.unit.js',
     'dto.unit.js',
     'reducer.unit.js',
+    'sagas.unit.js',
     'schema.unit.js',
     'selectors.unit.js',
     'utils.unit.js',

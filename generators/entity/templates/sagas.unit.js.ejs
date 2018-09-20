@@ -1,0 +1,191 @@
+import { expect } from 'chai';
+import { takeEvery, takeLatest, call, put } from 'redux-saga/effects';
+
+import * as ActionType from './<%= Name %>.actionTypes';
+import * as Action from './<%= Name %>.actions';
+import * as Api from './<%= Name %>.api';
+import { dtoToRecord, listQueryToListQueryDto } from './<%= Name %>.utils';
+import { <%= Name %> } from './<%= Name %>.record';
+import {
+  load<%= Name %>Saga,
+  load<%= Name %>ListSaga,
+  save<%= Name %>Saga,
+  delete<%= Name %>Saga,
+  load<%= Name %>,
+  load<%= Name %>List,
+  save<%= Name %>,
+  delete<%= Name %>,
+} from './<%= Name %>.sagas';
+
+describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join('::') %>::<%= Name %>::sagas', function() {
+  const { now } = Date;
+
+  before(function() {
+    Date.now = function() { return 123456; };
+  });
+
+  after(function() {
+    Date.now = now;
+  });
+
+  describe('load<%= Name %>Saga', function() {
+    it('takes every LOAD action and runs load<%= Name %> saga', function() {
+      const saga = load<%= Name %>Saga();
+
+      expect(saga.next().value).to.be.deep.equal(takeEvery(ActionType.LOAD, load<%= Name %>));
+    });
+  });
+
+  describe('load<%= Name %>ListSaga', function() {
+    it('takes latest LOAD_LIST action and runs load<%= Name %>List saga', function() {
+      const saga = load<%= Name %>ListSaga();
+
+      expect(saga.next().value).to.be.deep.equal(takeLatest(ActionType.LOAD_LIST, load<%= Name %>List));
+    });
+  });
+
+  describe('save<%= Name %>Saga', function() {
+    it('takes every SAVE action and runs save<%= Name %> saga', function() {
+      const saga = save<%= Name %>Saga();
+
+      expect(saga.next().value).to.be.deep.equal(takeEvery(ActionType.SAVE, save<%= Name %>));
+    });
+  });
+
+  describe('delete<%= Name %>Saga', function() {
+    it('takes every DELETE action and runs delete<%= Name %> saga', function() {
+      const saga = delete<%= Name %>Saga();
+
+      expect(saga.next().value).to.be.deep.equal(takeEvery(ActionType.DELETE, delete<%= Name %>));
+    });
+  });
+
+  describe('load<%= Name %>', function() {
+    describe('order check', function() {
+      const initAction = Action.load<%= Name %>ByKey('<%= name %>-key');
+      const loaded<%= Name %>Dto = {
+        id: '<%= name %>-key',
+      };
+
+      const saga = load<%= Name %>(initAction);
+
+      it('calls Api.fetch<%= Name %>', function() {
+        expect(saga.next().value).to.be.deep.equal(call(Api.fetch<%= Name %>, { <%= name %>Id: '<%= name %>-key' }));
+      });
+
+      it('dispatches Action.set<%= Name %>', function() {
+        expect(saga.next({ data: loaded<%= Name %>Dto }).value).to.deep.equal(put(Action.set<%= Name %>({ <%= name %>: dtoToRecord(loaded<%= Name %>Dto), time: Date.now() })));
+      });
+
+      it('dispatches Action.load<%= Name %>ByKeySuccess', function() {
+        expect(saga.next().value).to.deep.equal(put(Action.load<%= Name %>ByKeySuccess('<%= name %>-key')));
+      });
+
+      it('finises after all', function() {
+        expect(saga.next()).to.be.deep.equal({ done: true, value: undefined });
+      });
+    });
+  });
+
+  describe('save<%= Name %>', function() {
+    describe('order check for existed <%= name %>', function() {
+      const initAction = Action.save<%= Name %>(<%= Name %>({ key: '<%= name %>-key' }));
+      const saved<%= Name %>Dto = {
+        id: '<%= name %>-key',
+      };
+
+      const saga = save<%= Name %>(initAction);
+
+      it('calls Api.save<%= Name %>', function() {
+        expect(saga.next().value).to.be.deep.equal(call(Api.save<%= Name %>, { id: '<%= name %>-key' }));
+      });
+
+      it('dispatches Action.set<%= Name %>', function() {
+        expect(saga.next({ data: saved<%= Name %>Dto }).value).to.deep.equal(put(Action.set<%= Name %>({ <%= name %>: dtoToRecord(saved<%= Name %>Dto), time: Date.now() })));
+      });
+
+      it('dispatches Action.save<%= Name %>Success', function() {
+        expect(saga.next().value).to.deep.equal(put(Action.save<%= Name %>Success('<%= name %>-key')));
+      });
+
+      it('finises after all', function() {
+        expect(saga.next()).to.be.deep.equal({ done: true, value: undefined });
+      });
+    });
+
+    describe('order check for new <%= name %>', function() {
+      const initAction = Action.save<%= Name %>(<%= Name %>({ key: '' }));
+      const saved<%= Name %>Dto = {
+        id: 'saved-<%= name %>-key',
+      };
+
+      const saga = save<%= Name %>(initAction);
+
+      it('calls Api.create<%= Name %>', function() {
+        expect(saga.next().value).to.be.deep.equal(call(Api.create<%= Name %>, { id: '' }));
+      });
+
+      it('dispatches Action.set<%= Name %>', function() {
+        expect(saga.next({ data: saved<%= Name %>Dto }).value).to.deep.equal(put(Action.set<%= Name %>({ <%= name %>: dtoToRecord(saved<%= Name %>Dto), time: Date.now() })));
+      });
+
+      it('dispatches Action.save<%= Name %>Success', function() {
+        expect(saga.next().value).to.deep.equal(put(Action.save<%= Name %>Success('saved-<%= name %>-key')));
+      });
+
+      it('finises after all', function() {
+        expect(saga.next()).to.be.deep.equal({ done: true, value: undefined });
+      });
+    });
+  });
+
+  describe('delete<%= Name %>', function() {
+    describe('order check', function() {
+      const initAction = Action.delete<%= Name %>ByKey('<%= name %>-key');
+
+      const saga = delete<%= Name %>(initAction);
+
+      it('calls Api.delete<%= Name %>', function() {
+        expect(saga.next().value).to.be.deep.equal(call(Api.delete<%= Name %>, { <%= name %>Id: '<%= name %>-key' }));
+      });
+
+      it('dispatches Action.delete<%= Name %>ByKeySuccess', function() {
+        expect(saga.next().value).to.deep.equal(put(Action.delete<%= Name %>ByKeySuccess('<%= name %>-key')));
+      });
+
+      it('finises after all', function() {
+        expect(saga.next()).to.be.deep.equal({ done: true, value: undefined });
+      });
+    });
+  });
+
+  describe('load<%= Name %>List', function() {
+    describe('order check', function() {
+      const initAction = Action.load<%= Name %>List({});
+      const loaded<%= Name %>ListDto = {
+        results: [{ id: '<%= name %>-key' }],
+        pagination: {},
+      };
+
+      const saga = load<%= Name %>List(initAction);
+
+      it('calls Api.fetch<%= Name %>List', function() {
+        expect(saga.next().value).to.be.deep.equal(call(Api.fetch<%= Name %>List, initAction.payload));
+      });
+
+      it('dispatches Action.set<%= Name %>List', function() {
+        expect(saga.next({ data: loaded<%= Name %>ListDto }).value).to.deep.equal(put(Action.set<%= Name %>List({ <%= name %>List: loaded<%= Name %>ListDto.results.map(<%= name %>Dto => dtoToRecord(<%= name %>Dto)), time: Date.now() })));
+      });
+
+      // TODO write test for pagination query
+
+      it('dispatches Action.load<%= Name %>ListSuccess', function() {
+        expect(saga.next().value).to.deep.equal(put(Action.load<%= Name %>ListSuccess()));
+      });
+
+      it('finises after all', function() {
+        expect(saga.next()).to.be.deep.equal({ done: true, value: undefined });
+      });
+    });
+  });
+});

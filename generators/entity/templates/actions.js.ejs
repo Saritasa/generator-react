@@ -38,7 +38,7 @@ export function load<%= Name %>ByKey(key<% if (flow) { %>: string<% } %>) {
  * Code that start request is placed in <%= Name %>.sagas.js.
  * Request's code is placed in <%= Name %>.api.js file.
  *
- * @param {Ob} key - Some key that allow to differ 1 instance from another.
+ * @param {string} key - Some key that allow to differ 1 instance from another.
  *     It's an `id` usually.
  *
  * @returns {Action} Action with type LOAD_SUCCESS and `{ <%= name %>Id: key }` as payload.
@@ -169,7 +169,7 @@ export function save<%= Name %>(<%= name %><% if (flow) { %>: <%= Name %><% } %>
  * Code that start request is placed in <%= Name %>.sagas.js.
  * Request's code is placed in <%= Name %>.api.js file.
  *
- * @param {Ob} key - Some key that allow to differ 1 instance from another.
+ * @param {string} key - Some key that allow to differ 1 instance from another.
  *     It's an `id` usually.
  *
  * @returns {Action} Action with type SAVE_SUCCESS and `{ <%= name %>Id: key }` as payload.
@@ -235,7 +235,7 @@ export function delete<%= Name %>ByKey(key<% if (flow) { %>: string<% } %>) {
  * Code that start request is placed in <%= Name %>.sagas.js.
  * Request's code is placed in <%= Name %>.api.js file.
  *
- * @param {Ob} key - Some key that allow to differ 1 instance from another.
+ * @param {string} key - Some key that allow to differ 1 instance from another.
  *     It's an `id` usually.
  *
  * @returns {Action} Action with type DELETE_SUCCESS and `{ <%= name %>Id: key }` as payload.

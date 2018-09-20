@@ -1,5 +1,6 @@
 <% if (flow) { %>// @flow
-import { type Saga } from 'redux-saga';
+import type { Saga } from 'redux-saga';
+
 <% } %>import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 
 <% if (flow) { %>import * as Action from './<%= Name %>.actions';
@@ -22,13 +23,16 @@ import { dtoToRecord } from './<%= Name %>.utils';
  * @private
  * @memberof <%= moduleName %>/sagas
  */
-function* load<%= Name %>(action<% if (flow) { %>: $Call<typeof Action.load<%= Name %>ByKey, any><% } %>) {
+export function* load<%= Name %>(action<% if (flow) { %>: $Call<typeof Action.load<%= Name %>ByKey, any><% } %>): Saga<*> {
   try {
-    const <%= name %>Dto<% if (flow) { %>: <%= Name %>Dto<% } %> = yield call(Api.fetch<%= Name %>, action.payload);
+    const fetch<%= Name %>Result<% if (flow) { %>: Api.Fetch<%= Name %>Result <% } %> = yield call(Api.fetch<%= Name %>, action.payload);
+    const { data: <%= name %>Dto } = fetch<%= Name %>Result;
 
     yield put(Action.set<%= Name %>({ <%= name %>: dtoToRecord(<%= name %>Dto), time: Date.now() }));
     yield put(Action.load<%= Name %>ByKeySuccess(action.payload.<%= name %>Id));
-  } catch (error) {
+  } catch (anyError) {
+    const error: Api.Fetch<%= Name %>Error = anyError;
+
     yield put(Action.load<%= Name %>ByKeyFailed({ <%= name %>Id: action.payload.<%= name %>Id, error }));
   }
 }
@@ -42,14 +46,17 @@ function* load<%= Name %>(action<% if (flow) { %>: $Call<typeof Action.load<%= N
  * @private
  * @memberof <%= moduleName %>/sagas
  */
-function* save<%= Name %>(action<% if (flow) { %>: $Call<typeof Action.save<%= Name %>, any><% } %>) {
+export function* save<%= Name %>(action<% if (flow) { %>: $Call<typeof Action.save<%= Name %>, any><% } %>): Saga<*> {
   try {
     const apiAction = action.payload.<%= name %>Id ? Api.save<%= Name %> : Api.create<%= Name %>;
-    const <%= name %>Dto<% if (flow) { %>: <%= Name %>Dto<% } %> = yield call(apiAction, action.payload.<%= name %>);
+    const save<%= Name %>Result<% if (flow) { %>: Api.Save<%= Name %>Result <% } %> = yield call(apiAction, action.payload.<%= name %>);
+    const { data: <%= name %>Dto } = save<%= Name %>Result;
 
     yield put(Action.set<%= Name %>({ <%= name %>: dtoToRecord(<%= name %>Dto), time: Date.now() }));
-    yield put(Action.save<%= Name %>Success(action.payload.<%= name %>Id));
-  } catch (error) {
+    yield put(Action.save<%= Name %>Success(action.payload.<%= name %>Id || <%= name %>Dto.id));
+  } catch (anyError) {
+    const error: Api.Save<%= Name %>Error = anyError;
+
     yield put(Action.save<%= Name %>Failed({ <%= name %>Id: action.payload.<%= name %>Id, error }));
   }
 }
@@ -63,11 +70,13 @@ function* save<%= Name %>(action<% if (flow) { %>: $Call<typeof Action.save<%= N
  * @private
  * @memberof <%= moduleName %>/sagas
  */
-function* delete<%= Name %>(action<% if (flow) { %>: $Call<typeof Action.delete<%= Name %>ByKey, any><% } %>) {
+export function* delete<%= Name %>(action<% if (flow) { %>: $Call<typeof Action.delete<%= Name %>ByKey, any><% } %>): Saga<*> {
   try {
     yield call(Api.delete<%= Name %>, action.payload);
     yield put(Action.delete<%= Name %>ByKeySuccess(action.payload.<%= name %>Id));
-  } catch (error) {
+  } catch (anyError) {
+    const error: Api.Delete<%= Name %>Error = anyError;
+
     yield put(Action.delete<%= Name %>ByKeyFailed({ <%= name %>Id: action.payload.<%= name %>Id, error }));
   }
 }
@@ -81,14 +90,17 @@ function* delete<%= Name %>(action<% if (flow) { %>: $Call<typeof Action.delete<
  * @private
  * @memberof <%= moduleName %>/sagas
  */
-function* load<%= Name %>List(action<% if (flow) { %>: $Call<typeof Action.load<%= Name %>List, any><% } %>) {
+export function* load<%= Name %>List(action<% if (flow) { %>: $Call<typeof Action.load<%= Name %>List, any><% } %>): Saga<*> {
   try {
-    const <%= name %>ListDto<% if (flow) { %>: <%= Name %>ListDto<% } %> = yield call(Api.fetch<%= Name %>List, action.payload);
+    const fetch<%= Name %>ListResult<% if (flow) { %>: Api.Fetch<%= Name %>ListResult<% } %> = yield call(Api.fetch<%= Name %>List, action.payload);
+    const { data: <%= name %>ListDto } = fetch<%= Name %>ListResult
 
     yield put(Action.set<%= Name %>List({ <%= name %>List: <%= name %>ListDto.results.map(dtoToRecord), time: Date.now() }));
-    yield put({ type: ActionType.SET_PAGINATION, payload: <%= name %>ListDto.pagination });
+    // TODO set pagination query
     yield put(Action.load<%= Name %>ListSuccess());
-  } catch (error) {
+  } catch (anyError) {
+    const error: Api.Fetch<%= Name %>ListError = anyError;
+
     yield put(Action.load<%= Name %>ListFailed(error));
   }
 }
@@ -135,3 +147,10 @@ export function* save<%= Name %>Saga(): Saga<*> {
 export function* delete<%= Name %>Saga(): Saga<*> {
   yield takeEvery(ActionType.DELETE, delete<%= Name %>);
 }
+
+export const runnable<%= Name %>Sagas = [
+  load<%= Name %>Saga,
+  load<%= Name %>ListSaga,
+  save<%= Name %>Saga,
+  delete<%= Name %>Saga,
+];

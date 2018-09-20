@@ -3,7 +3,7 @@
 
 import { <%= name %>Reducer } from './<%= Name %>.reducer';
 import { setBaseSelectorPath } from './<%= Name %>.selectors';
-import * as Saga from './<%= Name %>.sagas';
+import { runnable<%= Name %>Sagas } from './<%= Name %>.sagas';
 
 /**
  * This module is used to inject all part of <%= moduleName %> module into application.
@@ -15,5 +15,5 @@ Runtime.getInstance().entityStore.inject({
   name: '<%= featureName ? `${featureName}::${name}` : name %>',
   reducer: <%= name %>Reducer,
   setBaseSelectorPath,
-  sagas: Object.values(Saga),
+  sagas: runnable<%= Name %>Sagas,
 });
