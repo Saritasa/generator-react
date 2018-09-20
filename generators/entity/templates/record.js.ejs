@@ -17,7 +17,7 @@ type <%= Name %>Shape = { key: string };<% } %>
  * @property {string} key - The key of <%= Name %>.
  * @memberof <%= moduleName %>/reducer
  */
-export const <%= Name %>: Immutable.RecordFactory<<%= Name %>Shape> = Immutable.Record({
+export const <%= Name %><% if (flow) { %>: Immutable.RecordFactory<<%= Name %>Shape><% } %> = Immutable.Record({
   key: '',
 });
 
@@ -40,10 +40,10 @@ type <%= Name %>MetaShape = { loading: boolean, updatedAt: number | null };<% } 
  * @property {?number} updatedAt - The time of last <%= name %>'s info updating.
  * @memberof <%= moduleName %>/reducer
  */
-export const <%= Name %>Meta: Immutable.RecordFactory<<%= Name %>MetaShape> = Immutable.Record(({
+export const <%= Name %>Meta<% if (flow) { %>: Immutable.RecordFactory<<%= Name %>MetaShape><% } %> = Immutable.Record({
   loading: false,
   updatedAt: null,
-}: <%= Name %>MetaShape));
+});
 
 /**
  * Type of <%= Name %>Model record.
@@ -64,7 +64,7 @@ type <%= Name %>ModelShape = { data: <%= Name %>, meta: <%= Name %>Meta };<% } %
  * @property {<%= Name %>Meta} meta - Meta info about <%= name %>.
  * @memberof <%= moduleName %>/reducer
  */
-export const <%= Name %>Model: Immutable.RecordFactory<<%= Name %>ModelShape> = Immutable.Record(({
+export const <%= Name %>Model<% if (flow) { %>: Immutable.RecordFactory<<%= Name %>ModelShape><% } %> = Immutable.Record({
   data: new <%= Name %>(),
   meta: new <%= Name %>Meta(),
-}: <%= Name %>ModelShape));
+});
