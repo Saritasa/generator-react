@@ -4,7 +4,7 @@ import { takeEvery, takeLatest, call, put } from 'redux-saga/effects';
 import * as ActionType from './<%= Name %>.actionTypes';
 import * as Action from './<%= Name %>.actions';
 import * as Api from './<%= Name %>.api';
-import { dtoToRecord, listQueryToListQueryDto } from './<%= Name %>.utils';
+import { dtoToRecord } from './<%= Name %>.utils';
 import { <%= Name %> } from './<%= Name %>.record';
 import {
   load<%= Name %>Saga,

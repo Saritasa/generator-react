@@ -1,23 +1,14 @@
 <% if (flow) { %>// @flow
-<% } %>/**
- * Module that implements work with <%= Name %> entities.
- *
- * @module <%= moduleName %>
- */
+<% } %>
+import './<%= Name %>.inject';
+
+/**
+* Module that implements work with <%= Name %> entities.
+*
+* @module <%= moduleName %>
+*/
 export * from './<%= Name %>.actions';
 export * from './<%= Name %>.schema';
 export * from './<%= Name %>.selectors';
 export * from './<%= Name %>.actionTypes';
 export { <%= Name %> } from './<%= Name %>.record';
-
-/**
- * Injects entity into parent part of runtime.
- *
- * @private
- * @memberof <%= moduleName %>
- */
-export function inject() {
-  console.warn("Inject should be called via `import 'entities/<%= Name %>/inject';`");
-  console.warn("Please don't use inject() from index.js");
-  import('./<%= Name %>.inject');
-}

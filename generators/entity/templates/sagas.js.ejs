@@ -3,9 +3,8 @@ import type { Saga } from 'redux-saga';
 
 <% } %>import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 
-<% if (flow) { %>import * as Action from './<%= Name %>.actions';
-import { type <%= Name %>Dto, type <%= Name %>ListDto } from './<%= Name %>.dto';
-<% } %>import * as Api from './<%= Name %>.api';
+import * as Action from './<%= Name %>.actions';
+import * as Api from './<%= Name %>.api';
 import * as ActionType from './<%= Name %>.actionTypes';
 import { dtoToRecord } from './<%= Name %>.utils';
 /**
