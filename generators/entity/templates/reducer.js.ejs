@@ -34,7 +34,7 @@ export type <%= Name %>StateShape = {
  * @returns {<%= Name %>StateRecord} - New state.
  * @memberof <%= moduleName %>/reducer
  */
-export const <%= Name %>StateRecord<% if (flow) { %>: Immutable.RecordFactory<<%= Name %>StateRecord><% } %> = Immutable.Record(
+export const <%= Name %>StateRecord<% if (flow) { %>: Immutable.RecordFactory<<%= Name %>StateShape><% } %> = Immutable.Record(
   {
     listLoading: false,
     entities: Immutable.Map(),
