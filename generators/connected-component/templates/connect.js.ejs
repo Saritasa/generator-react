@@ -7,7 +7,6 @@ import { <%= Component %><% if (flow) { %>, type <%= Component %>Props<% } %> } 
 /**
  * Method to get props for connected <%= Component %>.
  *
- *
  * Use global application's state and props passed from parent component for generate props
  * via selectors.
  *
@@ -36,7 +35,10 @@ const mapActionToProps = {
 /**
  * Props for <%= Name %> component.
  */
-export type <%= Name %>Props = $Diff<<%= Component %>Props, $Call<typeof mapStateToProps, any, any>>;
+export type <%= Name %>Props = $Diff<
+  $Diff<<%= Component %>Props, $Call<typeof mapStateToProps, any, any>>,
+  typeof mapActionToProps,
+>;
 <% } %>
 
 /**
