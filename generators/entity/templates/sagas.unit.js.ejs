@@ -13,7 +13,7 @@ rewiremock.inScope(() => {
   const ActionType = require('./<%= Name %>.actionTypes');
   const Action = require('./<%= Name %>.actions');
   const Api = require('./<%= Name %>.api');
-  const { dtoToRecord } = require('./<%= Name %>.utils');
+  const { dtoToRecord, recordToDto } = require('./<%= Name %>.utils');
   const { <%= Name %> } = require('./<%= Name %>.record');
   const {
     load<%= Name %>Saga,
@@ -105,8 +105,8 @@ rewiremock.inScope(() => {
 
         const saga = save<%= Name %>(initAction);
 
-        it('calls Api.save<%= Name %>', function() {
-          expect(saga.next().value).to.be.deep.equal(call(Api.save<%= Name %>, { id: '<%= name %>-key' }));
+        it('calls Api.save<%= Name %> with DTO', function() {
+          expect(saga.next().value).to.be.deep.equal(call(Api.save<%= Name %>, recordToDto()));
         });
 
         it('dispatches Action.set<%= Name %>', function() {
@@ -131,7 +131,7 @@ rewiremock.inScope(() => {
         const saga = save<%= Name %>(initAction);
 
         it('calls Api.create<%= Name %>', function() {
-          expect(saga.next().value).to.be.deep.equal(call(Api.create<%= Name %>, { id: '' }));
+          expect(saga.next().value).to.be.deep.equal(call(Api.create<%= Name %>, recordToDto()));
         });
 
         it('dispatches Action.set<%= Name %>', function() {

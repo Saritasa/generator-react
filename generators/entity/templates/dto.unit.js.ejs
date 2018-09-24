@@ -4,7 +4,7 @@ import * as Dto from './<%= Name %>.dto';
 
 describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join('::') %>::<%= Name %>::dto', function() {
   it('exports only default export', function() {
-    expect(Object.keys(Dto)).to.be.deep.equal(['default']);
+    expect(Object.keys(Dto)).to.be.deep.equal([]);
     expect(Dto.default).to.be.deep.equal({});
   });
 });
