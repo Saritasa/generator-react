@@ -32,6 +32,7 @@ const NAMED_TEMPLATES = {
     'dto.unit.js',
     'reducer.unit.js',
     'sagas.unit.js',
+    '__mocks__/utils.js',
     'schema.unit.js',
     'selectors.unit.js',
     'utils.unit.js',

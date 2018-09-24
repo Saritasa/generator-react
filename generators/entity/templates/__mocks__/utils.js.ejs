@@ -1,0 +1,10 @@
+const record = Symbol('Record.of(<%= Name %>)');
+const dto = Symbol('DTO.of(<%= Name %>)');
+
+export function dtoToRecord() {
+  return record;
+}
+
+export function recordToDto() {
+  return dto;
+}
