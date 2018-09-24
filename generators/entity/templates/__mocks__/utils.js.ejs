@@ -1,5 +1,6 @@
 const record = Symbol('Record.of(<%= Name %>)');
 const dto = Symbol('DTO.of(<%= Name %>)');
+const listQueryDto = Symbol('ListQueryDTO.of(<%= Name %>)');
 
 export function dtoToRecord() {
   return record;
@@ -7,4 +8,8 @@ export function dtoToRecord() {
 
 export function recordToDto() {
   return dto;
+}
+
+export function listQueryToListQueryDto() {
+  return listQueryDto;
 }
