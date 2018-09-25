@@ -31,7 +31,13 @@ export const <%= Name %><% if (flow) { %>: Immutable.RecordFactory<<%= Name %>Sh
  * @property {?number} updatedAt - Time of last entity update if present.
  * @memberof <%= moduleName %>/reducer
  */<% if (flow) { %>
-type <%= Name %>MetaShape = { loading: boolean, updatedAt: number | null };<% } %>
+type <%= Name %>MetaShape = {
+  loading: boolean,
+  saving: boolean,
+  updatedAt: number | null,
+  savedAt: number | null,
+  existed: boolean,
+};<% } %>
 
 /**
  * This is the shape and default properties for meta info for every instance of <%= Name %>.
@@ -42,7 +48,10 @@ type <%= Name %>MetaShape = { loading: boolean, updatedAt: number | null };<% } 
  */
 export const <%= Name %>Meta<% if (flow) { %>: Immutable.RecordFactory<<%= Name %>MetaShape><% } %> = Immutable.Record({
   loading: false,
-  updatedAt: null,
+  saving: false,
+  updatedAt: 0,
+  savedAt: 0,
+  existed: false,
 });
 
 /**
