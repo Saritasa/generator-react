@@ -12,7 +12,7 @@ describe('<%= [FeatureName.split('/').join('::'), 'Guard'].filter(Boolean).join(
 
   beforeEach(function() {
     props = {
-      children: <div>This should be rendered only after passing <%= Name %>'s check.</div>
+      children: <div>This should be rendered only after passing check of <%= Name %>.</div>
     };
   });
 
@@ -43,7 +43,7 @@ describe('<%= [FeatureName.split('/').join('::'), 'Guard'].filter(Boolean).join(
     doc.setState(
       { accessAllowed: true },
       () => {
-        expect(doc.text()).to.be.equal("This should be rendered only after passing <%= Name %>'s check,");
+        expect(doc.text()).to.be.equal("This should be rendered only after passing check of <%= Name %>.");
         done();
       });
   });
