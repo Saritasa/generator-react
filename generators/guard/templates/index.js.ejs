@@ -4,9 +4,9 @@
  *
  * @module <%= moduleName %>
  */
-import { <%= Name %>Connected as <%= Name %><% if (flow) { %>, type <%= Name %>ConnectedProps as <%= Name %>Props<% } %> } from './<%= Name %>.connect';
+import { <%= Name %>Connected <% if (flow) { %>, type <%= Name %>ConnectedProps<% } %> } from './<%= Name %>.connect';
 
-export { <%= Name %> };
+export const <%= Name %> = <%= Name %>Connected;
 <% if (flow) { %>
-export { <%= Name %>Props };
+export type <%= Name %>Props = <%= Name %>ConnectedProps;
 <% } %>
