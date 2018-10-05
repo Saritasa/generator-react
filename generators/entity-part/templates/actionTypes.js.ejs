@@ -1,0 +1,36 @@
+<% if (flow) { %>// @flow
+<% } %>/**
+ * Action types to work with <%= Name %>.
+ * @module <%= moduleName %>/actionTypes
+ */
+
+/**
+ * Action type that is dispatched in writing single <%= name %> into store.
+ *
+ * @memberof <%= moduleName %>/actionTypes
+ */
+export const SET<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SET'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SET';
+/**
+ * Action type that is dispatched in removing single <%= name %> from store.
+ *
+ * @memberof <%= moduleName %>/actionTypes
+ */
+export const REMOVE<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/REMOVE'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/REMOVE';
+/**
+ * Action type that is dispatched in writing list of <%= name %> into store.
+ *
+ * @memberof <%= moduleName %>/actionTypes
+ */
+export const SET_LIST<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SET_LIST'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SET_LIST';
+/**
+ * Action type that is dispatched in removing list of <%= name %> from store.
+ *
+ * @memberof <%= moduleName %>/actionTypes
+ */
+export const REMOVE_LIST<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/REMOVE_LIST'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/REMOVE_LIST';
+/**
+ * Action type that is dispatched in case writing current pagination state for <% name %>.
+ *
+ * @memberof <%= moduleName %>/actionTypes
+ */
+export const SET_PAGINATION<% if (flow) { %>: '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SET_PAGINATION'<% } %> = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>/SET_PAGINATION';

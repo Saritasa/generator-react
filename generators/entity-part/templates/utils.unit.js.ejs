@@ -1,0 +1,70 @@
+import { expect } from 'chai';
+import * as Immutable from 'immutable';
+
+import { <%= Name %> } from './<%= Name %>.record';
+import { dtoToRecord, get<%= Name %>Key, recordToDto } from './<%= Name %>.utils';
+
+const valid<%= Name %>Dto = { id: '<%= name %>-id' };
+
+const valid<%= Name %>ListQuery = {};
+
+describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join('::') %>::<%= Name %>::utils', function() {
+  const originalSetTimeout = window.setTimeout;
+
+  beforeEach(function() {
+    window.setTimeout = function(callback) { callback(); };
+  });
+
+  after(function() {
+    window.setTimeout = originalSetTimeout;
+  });
+
+  describe('get<%= Name %>Key(<%= name %>)', function() {
+    it('returns correct key', function() {
+      expect(get<%= Name %>Key(<%= Name %>({ key: '<%= name %>-key' }))).to.be.equal('<%= name %>-key');
+    });
+  });
+
+  describe('recordToDto(<%= name %>)', function() {
+    it('returns object with { id: keyValue }', function() {
+      expect(recordToDto(<%= Name %>({ key: '<%= name %>-key' }))).to.be.deep.equal({ id: '<%= name %>-key' });
+    });
+  });
+
+  describe('dtoToRecord(<%= name %>Dto)', function() {
+    it('calls setTimeout if pass empty object', function() {
+      let called = false;
+
+      window.setTimeout = function() {
+        called = true;
+      };
+
+      dtoToRecord({});
+      expect(called).to.be.equal(true);
+    });
+
+    it('uses setTimeout to throw error async', function() {
+      window.setTimeout = function(callback) {
+        expect(callback).to.throw(Error);
+      };
+
+      dtoToRecord({});
+    });
+
+    it('does not throw if arguments is valid <%= name %> dto', function() {
+      expect(() => dtoToRecord(valid<%= Name %>Dto)).not.to.throw(Error);
+    });
+
+    it('returns an record instance', function() {
+      const record = dtoToRecord(valid<%= Name %>Dto);
+
+      expect(Immutable.Record.isRecord(record)).to.be.equal(true);
+    });
+
+    it('moves fields into record correctly', function() {
+      const record = dtoToRecord(valid<%= Name %>Dto);
+
+      expect(record).to.have.property('key', valid<%= Name %>Dto.id);
+    });
+  });
+});

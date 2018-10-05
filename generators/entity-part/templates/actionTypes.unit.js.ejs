@@ -1,0 +1,36 @@
+import { expect } from 'chai';
+
+import * as ActionType from './<%= Name %>.actionTypes';
+
+const NAMESPACED_NAME = '<%= featureName ? `@@${featureName}/@${name}` : `@${name}` %>';
+
+describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join('::') %>::<%= Name %>::actionTypes', function() {
+  it('does not export any action types that is not string or symbol', function() {
+    Object.values(ActionType).forEach(value => {
+      expect(typeof value).to.be.oneOf(['string', 'symbol']);
+    });
+  });
+
+  it('exports only UPPER_CASED keys', function() {
+    Object.keys(ActionType).forEach(type => {
+      expect(type).to.be.equal(type.toUpperCase());
+    });
+  });
+
+  it('exports unique values for action types', function() {
+    const values = [...Object.values(ActionType)];
+    const uniqueValues = [...new Set(values)];
+
+    expect(values.length).to.be.equal(uniqueValues.length);
+  });
+
+  it(`exports values with "${NAMESPACED_NAME}" as prefix`, function() {
+    Object.values(ActionType).forEach(value => {
+      const prefixParts = value.split('/');
+
+      prefixParts.pop();
+
+      expect(prefixParts.join('/')).to.be.equal(`${NAMESPACED_NAME}`);
+    });
+  });
+});

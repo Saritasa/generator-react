@@ -1,0 +1,47 @@
+import { expect } from 'chai';
+
+import * as Action from './<%= Name %>.actions';
+import * as ActionType from './<%= Name %>.actionTypes';
+import { <%= Name %> } from './<%= Name %>.record';
+import { recordToDto } from './<%= Name %>.utils';
+
+describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join('::') %>::<%= Name %>::actions', function() {
+  it('exports only functions', function() {
+    Object.values(Action).forEach(action => {
+      expect(typeof action).to.be.equal('function');
+    });
+  });
+
+  it('exports action creators that have "<%= Name %>" as name\'s part', function() {
+    Object.keys(Action).forEach(actionName => {
+      const endsWithName = /[a-z]<%= Name %>$/.test(actionName);
+      const includesName = /[a-z]<%= Name %>[A-Z]/.test(actionName);
+
+      expect(endsWithName || includesName).to.be.equal(true);
+    });
+  });
+
+  describe('set<%= Name %>({ <%= name %>, time })', function() {
+    const <%= name %> = <%= Name %>({ key: '<%= name %>-key' });
+
+    it('returns object with type = ActionType.SET', function() {
+      expect(Action.set<%= Name %>({ <%= name %>, time: 164 })).to.have.property('type', ActionType.SET);
+    });
+
+    it('returns object with payload = { <%= name %>, time }', function() {
+      expect(Action.set<%= Name %>({ <%= name %>, time: 164 })).to.have.deep.property('payload', { <%= name %>, time: 164 });
+    });
+  });
+
+  describe('set<%= Name %>List({ <%= name %>List, time })', function() {
+    const <%= name %>List = Array.from({ length: 10 }, (_, i) => <%= Name %>({ key: `<%= name %>-key-${i}` }));
+
+    it('returns object with type = ActionType.SET_LIST', function() {
+      expect(Action.set<%= Name %>List({ <%= name %>List, time: 164 })).to.have.property('type', ActionType.SET_LIST);
+    });
+
+    it('returns object with payload = { <%= name %>List, time }', function() {
+      expect(Action.set<%= Name %>List({ <%= name %>List, time: 164 })).to.have.deep.property('payload', { <%= name %>List, time: 164 });
+    });
+  });
+});

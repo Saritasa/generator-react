@@ -1,0 +1,14 @@
+<% if (flow) { %>// @flow
+<% } %>
+import './<%= Name %>.inject';
+
+/**
+* Module that implements work with <%= Name %> entities.
+*
+* @module <%= moduleName %>
+*/
+export * from './<%= Name %>.actions';
+export * from './<%= Name %>.schema';
+export * from './<%= Name %>.selectors';
+export * from './<%= Name %>.actionTypes';
+export { <%= Name %> } from './<%= Name %>.record';
