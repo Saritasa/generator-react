@@ -4,6 +4,6 @@ node_js:
   - "lts/*"
 script:
   - mkdir ../temp
-  - cd ../temp && node ../react-generate/create-saritasa-react-app test-app && ls -la
+  - cd ../temp && node ../generator-react/create-saritasa-react-app test-app && ls -la
   - cd test-app && ls -la && npm run build
 
