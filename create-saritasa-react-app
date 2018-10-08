@@ -84,8 +84,11 @@ function install({ name }) {
   cp.execSync('npx flow init', { cwd: path.join(process.cwd(), name) });
   cp.execSync('npx flow-ignore-dev-deps', { cwd: path.join(process.cwd(), name) });
   cp.execSync(`npx rimraf ${filesToRemove.join(' ')}`, { cwd: path.join(process.cwd(), name) });
-  env.register('@saritasa/generator-react');
-  env.run(`@saritasa/react:app ${name}`, function() {
+
+  const gen = require.resolve(path.join('./'));
+
+  env.register(gen, 'my');
+  env.run(`my ${name}`, function() {
     console.log('Done.');
   });
 }
