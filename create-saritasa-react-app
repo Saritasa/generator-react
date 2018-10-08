@@ -2,7 +2,12 @@
 const path = require('path');
 const cp = require('child_process');
 
+const yeoman = require('yeoman-environment');
 const list = require('cli-list');
+
+const [name] = list(process.argv.slice(2)).join(',').split(',');
+
+const env = yeoman.createEnv(null, { cwd: path.join(process.cwd(), name) });
 
 const deps = [
   'prop-types',
@@ -79,14 +84,15 @@ function install({ name }) {
   cp.execSync('npx flow init', { cwd: path.join(process.cwd(), name) });
   cp.execSync('npx flow-ignore-dev-deps', { cwd: path.join(process.cwd(), name) });
   cp.execSync(`npx rimraf ${filesToRemove.join(' ')}`, { cwd: path.join(process.cwd(), name) });
-  cp.execSync(`npx yo @saritasa/react ${name}`, { cwd: path.join(process.cwd(), name) });
-  console.log('Done.');
+  env.register('@saritasa/generator-react');
+  env.run(`@saritasa/react:app ${name}`, function() {
+    console.log('Done.');
+  });
 }
 
 function run() {
   checkNodejsVerion();
   checkNpx();
-  const [name] = list(process.argv.slice(2)).join(',').split(',');
   checkArguments({ name });
   install({ name });
 }
