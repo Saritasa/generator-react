@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "8"
+  - "9"
+  - "10"
+  - "lts/*"
+  - "node"
+install: echo "nothing to install cause of npx usage"
+script:
+  - npx @saritasa/generator-react test-app
+  - cd test-app && npm run build
+
