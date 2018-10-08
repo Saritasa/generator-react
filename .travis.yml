@@ -3,7 +3,7 @@ node_js:
   - "8"
   - "lts/*"
 script:
-  - mkdir temp
-  - cd temp && node ../create-saritasa-react-app test-app && ls -la
+  - mkdir ../temp
+  - cd ../temp && node ../react-generate/create-saritasa-react-app test-app && ls -la
   - cd test-app && ls -la && npm run build
 
