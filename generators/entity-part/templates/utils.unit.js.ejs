@@ -25,6 +25,12 @@ describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join
     });
   });
 
+  describe('get<%= Name %>DtoKey(<%= name %>Dto)', function() {
+    it('returns correct key', function() {
+      expect(get<%= Name %>DtoKey(valid<%= Name %>Dto)).to.be.equal(String(valid<%= Name %>Dto.id));
+    });
+  });
+
   describe('recordToDto(<%= name %>)', function() {
     it('returns object with { id: keyValue }', function() {
       expect(recordToDto(<%= Name %>({ key: '<%= name %>-key' }))).to.be.deep.equal({ id: '<%= name %>-key' });

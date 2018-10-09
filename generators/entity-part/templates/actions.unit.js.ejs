@@ -3,7 +3,6 @@ import { expect } from 'chai';
 import * as Action from './<%= Name %>.actions';
 import * as ActionType from './<%= Name %>.actionTypes';
 import { <%= Name %> } from './<%= Name %>.record';
-import { recordToDto } from './<%= Name %>.utils';
 
 describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join('::') %>::<%= Name %>::actions', function() {
   it('exports only functions', function() {

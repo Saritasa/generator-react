@@ -5,5 +5,9 @@ node_js:
 script:
   - mkdir ../temp
   - cd ../temp && node ../generator-react/create-saritasa-react-app test-app && ls -la
-  - cd test-app && ls -la && npm run build
+  - cd test-app && ls -la
+  - npm run lint
+  - npx flow
+  - npm run test
+  - npm run build
 

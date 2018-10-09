@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const fs = require('fs');
 const path = require('path');
 const cp = require('child_process');
 
@@ -13,7 +14,7 @@ const deps = [
   'prop-types',
   'reselect',
   'redux',
-  'immutable',
+  'immutable@4.0.0-rc.10',
   'redux-immutable',
   'redux-saga',
   'react-redux',
@@ -54,6 +55,7 @@ const devDeps = [
 const filesToRemove = [
   'src/App*',
   'src/index.js',
+  '.flowconfig'
 ];
 
 function checkNodejsVerion() {
@@ -89,6 +91,15 @@ function install({ name }) {
 
   env.register(gen, 'my');
   env.run(`my ${name}`, function() {
+    cp.execSync(`npx eslint -c ./.eslintrc.yml --fix "src/**/*.js"`, { cwd: path.join(process.cwd(), name) });
+    const packageJsonFile = path.join(process.cwd(), name, 'package.json');
+    const packageJsonContent = JSON.parse(fs.readFileSync(packageJsonFile, 'utf8'));
+
+    packageJsonContent.scripts.lint = 'eslint -c ./.eslintrc.yml \\"src/**/*.js\\"';
+    packageJsonContent.scripts.test = "KARMA_SINGLE_RUN=1 react-scripts test";
+    packageJsonContent.scripts.precommit = "lint-staged";
+
+    fs.writeFileSync(path.join(process.cwd(), name, 'package.json'), JSON.stringify(packageJsonContent));
     console.log('Done.');
   });
 }

@@ -1,0 +1,29 @@
+[include]
+src/
+dto_spec/
+
+[libs]
+
+[lints]
+# all=off by default
+all=warn
+sketchy-null-bool=off
+untyped-type-import=error
+#unsafe-getters-setters=error
+
+
+[options]
+module.system.node.resolve_dirname=node_modules
+module.name_mapper='^api$' -> '<PROJECT_ROOT>/src/api'
+module.name_mapper='^api/\(.*\)$' -> '<PROJECT_ROOT>/src/api/\1'
+module.name_mapper='^components/\(.*\)$' -> '<PROJECT_ROOT>/src/components/\1'
+module.name_mapper='^dto-spec/\(.*\)$' -> '<PROJECT_ROOT>/src/dto-spec/\1'
+module.name_mapper='^entities/\(.*\)$' -> '<PROJECT_ROOT>/src/entities/\1'
+module.name_mapper='^features/\(.*\)$' -> '<PROJECT_ROOT>/src/features/\1'
+module.name_mapper='^guards/\(.*\)$' -> '<PROJECT_ROOT>/src/guards/\1'
+module.name_mapper='^links/\(.*\)$' -> '<PROJECT_ROOT>/src/links/\1'
+module.name_mapper='^pages/\(.*\)$' -> '<PROJECT_ROOT>/src/pages/\1'
+module.name_mapper='^routes/\(.*\)$' -> '<PROJECT_ROOT>/src/routes/\1'
+module.name_mapper='^utils/\(.*\)$' -> '<PROJECT_ROOT>/src/utils/\1'
+
+[ignore]
