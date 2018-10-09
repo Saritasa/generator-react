@@ -8,6 +8,5 @@ script:
   - cd test-app && ls -la
   - npm run lint
   - npx flow
-  - npm run test
   - npm run build
 
