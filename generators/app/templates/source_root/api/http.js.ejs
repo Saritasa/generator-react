@@ -1,0 +1,32 @@
+// @flow
+import axios from 'axios';
+
+if (typeof process.env.REACT_APP_API_URL !== 'string') {
+  throw new Error('Declare REACT_APP_API_URL on build.');
+}
+
+export const http = axios.create({
+  baseURL: process.env.REACT_APP_API_URL,
+});
+
+type AddRequestInterceptor = typeof http.interceptors.request.use;
+
+/**
+ * Adds interceptors for request. For more info check Axios doc.
+ *
+ * @param {Array<Function>} rest Array of interceptors.
+ * @returns {number} See Axios doc.
+ */
+export const addRequestInterceptor: AddRequestInterceptor = (...rest) =>
+  http.interceptors.request.use(...rest);
+
+type AddResponseInterceptor = typeof http.interceptors.request.use;
+
+/**
+ * Adds interceptors for response. For more info check Axios doc.
+ *
+ * @param {Array<Function>} rest Array of interceptors.
+ * @returns {number} See Axios doc.
+ */
+export const addResponseInterceptor: AddResponseInterceptor = (...rest) =>
+  http.interceptors.response.use(...rest);

@@ -41,6 +41,17 @@ export function get<%= Name %>Key(<%= name %><% if (flow) { %>: <%= Name %><% } 
 }
 
 /**
+ * Gets key from <%= Name %>'s dto.
+ *
+ * @param {<%= Name %>Dto} <%= name %>Dto - Instance of <%= Name %>'s dto which key we need.
+ * @returns {string} - Key.
+ * @memberof <%= moduleName %>/utils
+ */
+export function get<%= Name %>DtoKey(<%= name %>Dto<% if (flow) { %>: <%= Name %>Dto<% } %>)<% if (flow) { %>: string<% } %> {
+  return String(<%= name %>Dto.id);
+}
+
+/**
  * Transforms record into DTO.
  *
  * @param {<%= Name %>} <%= name %> - Instance of <%= Name %> to transform.
@@ -77,5 +88,5 @@ Errors: ${errors.map(({ message, dataPath }) => `${dataPath}: ${message}`).join(
     }
   }
 
-  return new <%= Name %>({ key: <%= name %>Dto.id });
+  return new <%= Name %>({ key: get<%= Name %>DtoKey(<%= name %>Dto) });
 }

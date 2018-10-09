@@ -2,7 +2,7 @@
 <% } %>import ReactDOM from 'react-dom';
 
 import { createApplication, Runtime } from 'react-app-core';
-import registerServiceWorker from './registerServiceWorker';
+import * as ServiceWorker from './serviceWorker';
 
 /**
  * Mount point for application.
@@ -13,4 +13,4 @@ if (!root) throw new Error(`Can't render App without element with id="root" on t
 
 ReactDOM.render(createApplication(Runtime), root);
 
-registerServiceWorker();
+ServiceWorker.register();

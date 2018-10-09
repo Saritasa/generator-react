@@ -8,8 +8,16 @@ const BaseGenerator = require('../_base/BaseGenerator');
 const TEMPLATES = {
   files: [
     '.env',
+    '.env.test',
+    '.eslintrc.yml',
+    '.eslintignore',
+    '.flowconfig',
     `source_root/index.js`,
     `source_root/index.client.js`,
+    `source_root/setupTest.js`,
+    `source_root/setupTest.updated.js`,
+    `source_root/api/index.js`,
+    `source_root/api/http.js`,
     `source_root/components/ExampleHeader.js`,
     `source_root/links/index.js`,
     `source_root/links/Nested.link.js`,

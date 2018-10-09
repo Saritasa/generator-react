@@ -1,14 +1,20 @@
 #!/usr/bin/env node
+const fs = require('fs');
 const path = require('path');
 const cp = require('child_process');
 
+const yeoman = require('yeoman-environment');
 const list = require('cli-list');
+
+const [name] = list(process.argv.slice(2)).join(',').split(',');
+
+const env = yeoman.createEnv(null, { cwd: path.join(process.cwd(), name) });
 
 const deps = [
   'prop-types',
   'reselect',
   'redux',
-  'immutable',
+  'immutable@4.0.0-rc.10',
   'redux-immutable',
   'redux-saga',
   'react-redux',
@@ -49,6 +55,7 @@ const devDeps = [
 const filesToRemove = [
   'src/App*',
   'src/index.js',
+  '.flowconfig'
 ];
 
 function checkNodejsVerion() {
@@ -73,20 +80,33 @@ function checkArguments({ name }) {
 }
 
 function install({ name }) {
-  cp.execSync(`npx @saritasa/create-react-app ${name} --use-npm`);
+  cp.execSync(`npx create-react-app ${name} --use-npm --scripts-version @saritasa/react-scripts`);
   cp.execSync(`npm install --save ${deps}`, { cwd: path.join(process.cwd(), name) });
   cp.execSync(`npm install --save-dev ${devDeps}`, { cwd: path.join(process.cwd(), name) });
   cp.execSync('npx flow init', { cwd: path.join(process.cwd(), name) });
   cp.execSync('npx flow-ignore-dev-deps', { cwd: path.join(process.cwd(), name) });
   cp.execSync(`npx rimraf ${filesToRemove.join(' ')}`, { cwd: path.join(process.cwd(), name) });
-  cp.execSync(`npx yo @saritasa/react ${name}`, { cwd: path.join(process.cwd(), name) });
-  console.log('Done.');
+
+  const gen = require.resolve(path.join('./'));
+
+  env.register(gen, 'my');
+  env.run(`my ${name}`, function() {
+    cp.execSync(`npx eslint -c ./.eslintrc.yml --fix "src/**/*.js"`, { cwd: path.join(process.cwd(), name) });
+    const packageJsonFile = path.join(process.cwd(), name, 'package.json');
+    const packageJsonContent = JSON.parse(fs.readFileSync(packageJsonFile, 'utf8'));
+
+    packageJsonContent.scripts.lint = 'eslint -c ./.eslintrc.yml "src/**/*.js"';
+    packageJsonContent.scripts.test = "KARMA_SINGLE_RUN=1 react-scripts test";
+    packageJsonContent.scripts.precommit = "lint-staged";
+
+    fs.writeFileSync(path.join(process.cwd(), name, 'package.json'), JSON.stringify(packageJsonContent));
+    console.log('Done.');
+  });
 }
 
 function run() {
   checkNodejsVerion();
   checkNpx();
-  const [name] = list(process.argv.slice(2)).join(',').split(',');
   checkArguments({ name });
   install({ name });
 }

@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "8"
+  - "lts/*"
+script:
+  - mkdir ../temp
+  - cd ../temp && node ../generator-react/create-saritasa-react-app test-app && ls -la
+  - cd test-app && ls -la
+  - npm run lint
+  - npx flow
+  - npm run build
+
