@@ -95,7 +95,7 @@ function install({ name }) {
     const packageJsonFile = path.join(process.cwd(), name, 'package.json');
     const packageJsonContent = JSON.parse(fs.readFileSync(packageJsonFile, 'utf8'));
 
-    packageJsonContent.scripts.lint = 'eslint -c ./.eslintrc.yml \\"src/**/*.js\\"';
+    packageJsonContent.scripts.lint = 'eslint -c ./.eslintrc.yml "src/**/*.js"';
     packageJsonContent.scripts.test = "KARMA_SINGLE_RUN=1 react-scripts test";
     packageJsonContent.scripts.precommit = "lint-staged";
 
