@@ -1,5 +1,7 @@
 # @saritasa/generator-react
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Saritasa/generator-react.svg)](https://greenkeeper.io/)
+
 Package that allow to generate boilerplate code for react projects.
 
 Installation:
