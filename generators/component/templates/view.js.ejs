@@ -28,7 +28,7 @@ export type <%= Name %>ViewProps = { children: ?React.Node };
  * @returns {?React.Node} Rendered <%= Name %>.
  * @memberof <%= moduleName %>/view
  */
-export const <%= Name %>ViewPlain = ({ children }<% if (flow) { %>: <%= Name %>ViewProps<% } %>) => (
+const <%= Name %>ViewPlain = ({ children }<% if (flow) { %>: <%= Name %>ViewProps<% } %>) => (
   <div className={cls('host')}>
     <%= Name %>View works!
     {children}
@@ -43,4 +43,6 @@ export const <%= Name %>ViewPlain = ({ children }<% if (flow) { %>: <%= Name %>V
  *
  * @memberof <%= moduleName %>/view
  */
-export const <%= Name %>View = pure(<%= Name %>ViewPlain);
+const <%= Name %>View = pure(<%= Name %>ViewPlain);
+
+export { <%= Name %>View, <%= Name %>ViewPlain };

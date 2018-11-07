@@ -1,7 +1,7 @@
 <% if (flow) { %>// @flow
-<% } %>import * as <%= Name %>Paths from './routes/<%= Name %>.paths';
-import { <%= name %>RouteStore } from './routes';
-import { routeStore } from '../../routes';
+<% } %>import * as <%= Name %>Paths from './routes';
+import { <%= name %>RouteStore } from './routes/routeStore';
+import { routeStore } from '../../routes/routeStore';
 
 /**
  * This module injects routes into parent feature or app (if there is not any parent feature).

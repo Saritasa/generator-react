@@ -11,7 +11,6 @@ const [name] = list(process.argv.slice(2)).join(',').split(',');
 const env = yeoman.createEnv(null, { cwd: path.join(process.cwd(), name) });
 
 const deps = [
-  'prop-types',
   'reselect',
   'redux',
   'immutable@4.0.0-rc.10',
@@ -24,7 +23,7 @@ const deps = [
   'ajv',
   'axios',
   '@saritasa/react-form',
-  'recompose@0.27',
+  'recompose',
   'classnames',
   'react-app-core',
   'react-router',

@@ -4,11 +4,18 @@
 // or
 // you may re-export type from generated type for api
 /**
- * Type declaration for entity's data transfer object.
+ * Type declaration for entity's data transfer object from API.
  *
  * @memberof <%= moduleName %>/api
  */
-export type <%= Name %>Dto = any;
+export type <%= Name %>ReadDto = any;
+
+/**
+* Type declaration for entity's data transfer object for API.
+*
+* @memberof <%= moduleName %>/api
+*/
+export type <%= Name %>WriteDto = any;
 
 /**
  * Type declaration for entity's loading error data transfer object.
@@ -43,8 +50,8 @@ export type <%= Name %>DeleteErrorDto = any;
  *
  * @memberof <%= moduleName %>/api
  */
-export type <%= Name %>ListDto = {
-  results: Array<<%= Name %>Dto>,
+export type <%= Name %>ListReadDto = {
+  results: Array<<%= Name %>ReadDto>,
   // you may use pagination type if you have some.
   pagination: any,
 };

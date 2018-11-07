@@ -2,8 +2,9 @@
 <% } %>import http, * as Axios from 'axios'; // use internal module if need
 <% if (flow) { %>
 import type {
-  <%= Name%>Dto,
-  <%= Name%>ListDto,
+  <%= Name%>ReadDto,
+  <%= Name%>WriteDto,
+  <%= Name%>ListReadDto,
   <%= Name %>LoadErrorDto,
   <%= Name %>SaveErrorDto,
   <%= Name %>DeleteDto,
@@ -31,7 +32,7 @@ export function fetch<%= Name %>({ <%= name %>Id }<% if (flow) { %>: { <%= name 
   });
 }
 
-export type Fetch<%= Name %>Result = Axios.AxiosXHR<<%= Name%>Dto>;
+export type Fetch<%= Name %>Result = Axios.AxiosXHR<<%= Name%>ReadDto>;
 export type Fetch<%= Name %>Error = Error | Axios.AxiosError<<%= Name %>LoadErrorDto>;
 
 /**
@@ -50,7 +51,7 @@ export function fetch<%= Name %>List({ query }<% if (flow) { %>: *<% } %>) {
   });
 }
 
-export type Fetch<%= Name %>ListResult = Axios.AxiosXHR<<%= Name%>ListDto>;
+export type Fetch<%= Name %>ListResult = Axios.AxiosXHR<<%= Name%>ListReadDto>;
 export type Fetch<%= Name %>ListError = Error | Axios.AxiosError<<%= Name %>LoadErrorDto>;
 
 /**
@@ -60,7 +61,7 @@ export type Fetch<%= Name %>ListError = Error | Axios.AxiosError<<%= Name %>Load
  * @returns {Object} Promise-like object.
  * @memberof <%= moduleName %>/api
  */
-export function save<%= Name %>(<%= name %><% if (flow) { %>: <%= Name%>Dto<% } %>) {
+export function save<%= Name %>(<%= name %><% if (flow) { %>: <%= Name%>WriteDto<% } %>) {
   return http.request({
     method: 'put',
     url: `/api/v1/<%= name %>/${<%= name %>.id}`,
@@ -78,7 +79,7 @@ export type Save<%= Name %>Error = Error | Axios.AxiosError<<%= Name %>SaveError
  * @returns {Object} Promise-like object.
  * @memberof <%= moduleName %>/api
  */
-export function create<%= Name %>(<%= name %><% if (flow) { %>: <%= Name%>Dto<% } %>) {
+export function create<%= Name %>(<%= name %><% if (flow) { %>: <%= Name%>WriteDto<% } %>) {
   return http.request({
     method: 'post',
     url: `/api/v1/<%= name %>`,

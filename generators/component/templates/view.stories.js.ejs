@@ -1,7 +1,6 @@
 <% if (flow) { %>// @flow
 <% } %>import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { action, configureActions } from '@storybook/addon-actions';
 import { withKnobs /*, text, boolean, select*/ } from '@storybook/addon-knobs';
 
 import { <%= Name %>View } from './<%= Name %>.view';
@@ -10,4 +9,4 @@ const stories = storiesOf('<%= [FeatureName.split('/').join('::'), 'Component'].
 
 stories.addDecorator(withKnobs);
 
-stories.add('with #children only', () => <<%= Name %>View >children</<%= Name %>View >);
+stories.add('default', () => <<%= Name %>View >children</<%= Name %>View >);

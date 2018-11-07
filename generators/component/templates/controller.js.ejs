@@ -29,7 +29,7 @@ type <%= Name %>ControllerState = null;
  * @extends React.PureComponent
  * @memberof <%= moduleName %>/controller
  */
-export class <%= Name %>Controller extends React.PureComponent<% if (flow) { %><<%= Name %>ControllerProps, <%= Name %>ControllerState><% } %> {
+class <%= Name %>Controller extends React.PureComponent<% if (flow) { %><<%= Name %>ControllerProps, <%= Name %>ControllerState><% } %> {
   // Uncomment default props if need
   // static defaultProps = {};
 
@@ -57,3 +57,5 @@ export class <%= Name %>Controller extends React.PureComponent<% if (flow) { %><
     return React.createElement(<%= Name %>View, this.getViewProps());
   }
 }
+
+export { <%= Name %>Controller };
