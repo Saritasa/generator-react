@@ -59,9 +59,16 @@ module.exports = class BaseGenerator extends Generator {
   _checkNodejsVerion() {
     const { node } = process.versions;
 
-    if (Number(node.split('.')[0]) !== 8) {
-      throw new Error(`Use nodejs v8 instead of ${node}`);
+    const [major, minor, patch] = node.split('.').map(part => parseInt(part, 10));
+    if (major === 8 && minor >= 9) {
+      return;
+    } else if (
+      major === 10 && minor >= 13
+    ) {
+      return;
     }
+
+    throw new Error(`Use nodejs lts (8.9+ or 10.13+) instead of ${node}`);
   }
 
   /**
