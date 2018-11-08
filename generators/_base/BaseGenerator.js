@@ -59,7 +59,7 @@ module.exports = class BaseGenerator extends Generator {
   _checkNodejsVerion() {
     const { node } = process.versions;
 
-    const [major, minor, patch] = node.split('.').map(part => parseInt(part, 10));
+    const [major, minor] = node.split('.').map(part => parseInt(part, 10));
     if (major === 8 && minor >= 9) {
       return;
     } else if (
