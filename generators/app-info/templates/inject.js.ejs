@@ -1,0 +1,19 @@
+<% if (flow) { %>// @flow
+<% } %>import { Runtime } from 'react-app-core';
+
+import { <%= name %>Reducer } from './<%= Name %>.reducer';
+import { setBaseSelectorPath } from './<%= Name %>.selectors';
+import { runnable<%= Name %>Sagas } from './<%= Name %>.sagas';
+
+/**
+ * This module is used to inject all part of <%= moduleName %> module into application.
+ *
+ * @module <%= moduleName %>/inject
+ */
+
+Runtime.getInstance().appStore.inject({
+  name: '<%= featureName ? `${featureName}::${name}` : name %>',
+  reducer: <%= name %>Reducer,
+  setBaseSelectorPath,
+  sagas: []],
+});

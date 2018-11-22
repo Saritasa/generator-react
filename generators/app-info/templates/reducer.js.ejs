@@ -1,0 +1,122 @@
+<% if (flow) { %>// @flow
+<% } %>import * as Immutable from 'immutable';
+
+import * as ActionType from './<%= Name %>.actionTypes';
+<% if (flow) { %>import typeof * as Action from './<%= Name %>.actions';
+<% } %>import { <%= Name %>Model } from './<%= Name %>.record';
+import { get<%= Name %>Key } from './<%= Name %>.utils';
+/**
+ * Module that knows how to transform state of <%= Name %>.
+ *
+ * @module <%= moduleName %>/reducer
+ */
+
+/**
+ * Type of <%= Name %>StateRecord that describes default values and shape for state of <%= Name %>.
+ *
+ * @name <%= Name %>StateShape
+ * @type {Object}
+ * @property {boolean} listLoading - Flag that shows if list of <%= Name %> is loading currently.
+ * @property {Immutable.Map<string, <%= Name %>Model>} entities - Hasmap for all instances of <%= Name %>
+ *     saved in store.
+ * @property {Immutable.List<string>} keys - List of all keys of <%= Name %> that are stored in store.
+ * @memberof <%= moduleName %>/reducer
+ */<% if (flow) { %>
+export type <%= Name %>StateShape = {
+  listLoading: boolean,
+  entities: Immutable.Map<string, <%= Name %>Model>,
+  keys: Immutable.List<string>,
+};
+<% } %>
+/**
+ * Record that describes default values and shape for state of <%= Name %>.
+ *
+ * @returns {<%= Name %>StateRecord} - New state.
+ * @memberof <%= moduleName %>/reducer
+ */
+export const <%= Name %>StateRecord<% if (flow) { %>: Immutable.RecordFactory<<%= Name %>StateShape><% } %> = Immutable.Record(
+  {
+    listLoading: false,
+    entities: Immutable.Map(),
+    keys: Immutable.List(),
+  },
+);
+
+const defaultState = new <%= Name %>StateRecord();
+
+/**
+ * Saves single <%= name %> into store. Sets time of last update.
+ *
+ * @param {<%= Name %>StateRecord} state - Current state for <%= Name %>.
+ * @param {Object} payload - Action payload.
+ * @param {<%= Name %>} payload.<%= name %> - Instance of <%= Name %>.
+ * @param {number} payload.time - Time that action called.
+ * @returns {<%= Name %>StateRecord} - New state.
+ * @private
+ * @memberof <%= moduleName %>/reducer
+ */
+function set<%= Name %>(state, { <%= name %>, time }) {
+  const key = get<%= Name %>Key(<%= name %>);
+
+  return state
+    .update('keys', keys => {
+      if (keys.includes(key)) return keys;
+
+      return keys.push(key);
+    })
+    .update('entities', entities =>
+      entities.set(
+        key,
+        (entities.get(key) || new <%= Name %>Model())
+          .update('meta', meta => meta.set('updatedAt', time))
+          .set('data', <%= name %>),
+    ),
+  );
+}
+
+/**
+ * Saves every <%= name %> into store. Sets time of last update.
+ *
+ * @param {<%= Name %>StateRecord} state - Current state for <%= Name %>.
+ * @param {Object} payload - Action payload.
+ * @param {List<<%= Name%>>} payload.<%= name %>List - List of <%= Name %>.
+ * @param {number} payload.time - Time that action called.
+ * @returns {<%= Name %>StateRecord} - New state.
+ * @private
+ * @memberof <%= moduleName %>/reducer
+ */
+function set<%= Name %>List(state, { <%= name %>List, time }) {
+  return <%= name %>List.reduce((currentState: <%= Name %>StateRecord, <%= name %>) => set<%= Name %>(currentState, { <%= name %>, time }), state.delete('keys'));
+}
+<% if (flow) { %>
+type GetReturnType = <V>((...rest: any) => V) => V;
+<% } %>
+/**
+ * Reducer that transforms state for <%= Name %>.
+ *
+ * @param {<%= Name %>StateRecord} state - Current state for <%= Name %>.
+ * @param {Object} action - Action that may change the state.
+ * @returns {<%= Name %>StateRecord} New (if has any update) or old state record.
+ * @memberof <%= moduleName %>/reducer
+ */
+export function <%= name %>Reducer(state<% if (flow) { %>: <%= Name %>StateRecord<% } %> = defaultState, action<% if (flow) { %>: $Values<$ObjMap<Action, GetReturnType>><% } %>)<% if (flow) { %>: <%= Name %>StateRecord<% } %> {
+  switch (action.type) {
+    case ActionType.LOAD_LIST:
+      return state.set('listLoading', true);
+
+    case ActionType.LOAD_LIST_SUCCESS:
+      return state.set('listLoading', false);
+
+    case ActionType.LOAD_LIST_FAILED:
+      return state.set('listLoading', false);
+
+    case ActionType.SET:
+      return set<%= Name %>(state, action.payload);
+
+    case ActionType.SET_LIST:
+      return set<%= Name %>List(state, action.payload);
+
+    default:
+      return state;
+  }
+}

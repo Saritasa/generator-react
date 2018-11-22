@@ -1,0 +1,122 @@
+<% if (flow) { %>// @flow
+<% } %>import { createSelector } from 'reselect';
+<% if (flow) { %>import * as Immutable from 'immutable';
+<% } %>
+import { <% if (flow) { %><%= Name %>Model, <% } %><%= Name %> } from './<%= Name %>.record';
+<% if (flow) { %>import { <%= Name %>StateRecord } from './<%= Name %>.reducer';
+<% } %>
+/**
+ * Selectors for working with <% Name %> data inside store.
+ *
+ * @module <%= moduleName %>/selectors
+ */
+
+/**
+ * Path to get state of <%= Name %> in store.
+ *
+ * @private
+ * @memberof <%= moduleName %>/selectors
+ */
+let baseSelectorPath: Array<string> = [];
+
+/**
+ * Empty <%= Name %> to use it as default value for some cases.
+ *
+ * @private
+ * @memberof <%= moduleName %>/selectors
+ */
+const empty<%= Name %>Entity: <%= Name %> = new <%= Name %>();
+
+/**
+ * Sets path to get state of <%= Name %> in store.
+ *
+ * @function
+ * @param {Array<string>} path - Path in store like `['entities', '<%= name %>']`.
+ * @memberof <%= moduleName %>/selectors
+ */
+export const setBaseSelectorPath = (path<% if (flow) { %>: Array<string><% } %>) => {
+  baseSelectorPath = path;
+};
+
+/**
+ * Selects all state of <%= Name %> from store.
+ *
+ * @function
+ * @param {*} state - Global application state.
+ * @returns {<%= Name %>StateRecord} - State of <%= Name %> from store.
+ * @memberof <%= moduleName %>/selectors
+ */
+export const selectBase<% if (flow) { %>: (*) => <%= Name %>StateRecord<% } %> = createSelector(state => state, state => state.getIn(baseSelectorPath, new <%= Name %>StateRecord()));
+
+/**
+ * Selects flag if list of <%= Name %> is loading.
+ *
+ * @function
+ * @param {*} state - Global application state.
+ * @returns {boolean} - listLoading flag from state of <%= Name %>.
+ * @memberof <%= moduleName %>/selectors
+ */
+export const select<%= Name %>ListLoading<% if (flow) { %>: (*) => boolean<% } %> = createSelector(selectBase, base => base.get('listLoading'));
+
+/**
+ * Selects Map of all <%= Name %> from store.
+ *
+ * @function
+ * @param {*} state - Global application state.
+ * @returns {Immutable.Map<string, <%= Name %>Model>} - Map of all <%= Name %>.
+ * @memberof <%= moduleName %>/selectors
+ */
+export const select<%= Name %>Map<% if (flow) { %>: (*) => Immutable.Map<string, <%= Name %>Model><% } %> = createSelector(selectBase, base => base.get('entities'));
+
+/**
+ * Selects keys (ids as usuall) of all <%= Name %> from store.
+ *
+ * @function
+ * @param {*} state - Global application state.
+ * @returns {Immutable.List<string>} - List of keys of all <%= Name %>.
+ * @memberof <%= moduleName %>/selectors
+ */
+export const select<%= Name %>Keys<% if (flow) { %>: (*) => Immutable.List<string><% } %> = createSelector(selectBase, base => base.get('keys'));
+
+/**
+ * Selects list of all <%= Name %> from store.
+ *
+ * @function
+ * @param {*} state - Global application state.
+ * @returns {Immutable.List<<%= Name %>>} - List of all <%= Name %>.
+ * @memberof <%= moduleName %>/selectors
+ */
+export const select<%= Name %>List<% if (flow) { %>: (*) => Immutable.List<<%= Name %>><% } %> = createSelector([select<%= Name %>Keys, select<%= Name %>Map], (keys, entitiesMap) => keys.map(key => entitiesMap.getIn([key, 'data'])));
+
+/**
+ * Selects single <%= Name %> by its key from store.
+ *
+ * @function
+ * @param {*} state - Global application state.
+ * @param {string} key - Key of <%= Name %> (usually its id).
+ * @returns {<%= Name %>} - Single <%= Name %>.
+ * @memberof <%= moduleName %>/selectors
+ */
+export const select<%= Name %>ByKey<% if (flow) { %>: (*, string) => <%= Name %><% } %> = createSelector([select<%= Name %>Map, (state, key) => key], (entitiesMap, key) => entitiesMap.getIn([key, 'data'], empty<%= Name %>Entity));
+
+/**
+ * Selects flag if single <%= Name %> by its key exists from store.
+ *
+ * @function
+ * @param {*} state - Global application state.
+ * @param {string} key - Key of <%= Name %> (usually its id).
+ * @returns {boolean} - `true` if exists. `false` if does not.
+ * @memberof <%= moduleName %>/selectors
+ */
+export const select<%= Name %>ByKeyExist<% if (flow) { %>: (*, string) => boolean<% } %> = createSelector([select<%= Name %>Map, (state, key) => key], (entitiesMap, key) => entitiesMap.has(key));
+
+/**
+ * Selects flag if single <%= Name %> by its key is loading.
+ *
+ * @function
+ * @param {*} state - Global application state.
+ * @param {string} key - Key of <%= Name %> (usually its id).
+ * @returns {boolean} - `true` if is loading. `false` if is not.
+ * @memberof <%= moduleName %>/selectors
+ */
+export const select<%= Name %>ByKeyLoading<% if (flow) { %>: (*, string) => boolean<% } %> = createSelector([select<%= Name %>Map, (state, key) => key], (entitiesMap, key) => entitiesMap.getIn([key, 'meta', 'loading'], true));
