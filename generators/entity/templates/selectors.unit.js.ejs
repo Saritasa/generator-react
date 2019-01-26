@@ -4,6 +4,10 @@ import { <%= Name %>StateRecord } from './<%= Name %>.reducer';
 import * as Selector from './<%= Name %>.selectors';
 
 describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join('::') %>::<%= Name %>::selectors', function() {
+  beforeEach(function() {
+    Selector.setBaseSelectorPath([]);
+  });
+
   Object.entries(Selector).filter(([key]) => key.startsWith('select')).forEach(([key, select]) => {
     describe(key, function() {
       it('does not throw on any selector on default state', function() {

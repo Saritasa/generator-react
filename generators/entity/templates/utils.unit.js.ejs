@@ -9,13 +9,14 @@ const valid<%= Name %>Dto = { id: '<%= name %>-id' };
 const valid<%= Name %>ListQuery = {};
 
 describe('<%= [FeatureName.split('/').join('::'), 'Entity'].filter(Boolean).join('::') %>::<%= Name %>::utils', function() {
-  const originalSetTimeout = window.setTimeout;
+  let originalSetTimeout;
 
   beforeEach(function() {
+    originalSetTimeout = window.setTimeout;
     window.setTimeout = function(callback) { callback(); };
   });
 
-  after(function() {
+  afterEach(function() {
     window.setTimeout = originalSetTimeout;
   });
 
