@@ -2,7 +2,7 @@
 <% } %>import * as React from 'react';
 import { Form<% if (flow) { %>, type FormProps<% } %> } from '@saritasa/react-form';
 
-import { <%= Name %>View<% if (flow) { %>, type <%= Name %>ViewProps<% } %> } from './<%= Name %>.view';
+import { <%= Name %>View } from './<%= Name %>.view';
 import { <%= name %>FieldRules, validate<%= Name %><% if (flow) { %>, type <%= Name %>Values<% } %> } from './<%= Name %>.values';
 
 /**
@@ -16,7 +16,7 @@ import { <%= name %>FieldRules, validate<%= Name %><% if (flow) { %>, type <%= N
  *
  * @memberof <%= moduleName %>/controller
  */
-export type <%= Name %>ControllerProps = {
+type <%= Name %>ControllerProps = {
   onSubmit: $PropertyType<FormProps<<%= Name %>Values>, 'onSubmit'>
 };
 
@@ -33,7 +33,7 @@ type <%= Name %>ControllerState = null;
  * @memberof <%= moduleName %>/controller
  */
 type <%= Name %>Props = {
-  ...$Exact<<%= Name %>ViewProps>,
+  ...$Exact<React.ElementProps<typeof <%= Name %>View>,
   ...$Exact<FormProps<<%= Name %>Values>>,
 };
 <% } %>
@@ -53,7 +53,7 @@ export class <%= Name %>Controller extends React.PureComponent<% if (flow) { %><
    * @returns {<%= Name %>ViewProps} Props for view part of component.
    * @memberof <%= moduleName %>/controller.<%= Name %>Controller#
    */
-  getViewProps()<% if (flow) { %>: $Exact<<%= Name %>ViewProps><% } %> {
+  getViewProps()<% if (flow) { %>: React.ElementProps<typeof <%= Name %>View><% } %> {
     return { formName: '<%= Name %>' };
   }
 

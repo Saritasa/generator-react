@@ -1,10 +1,10 @@
 <% if (flow) { %>// @flow
-<% } %>import { <%= Name %>Controller<% if (flow) { %>, type <%= Name %>ControllerProps<% } %> } from './<%= Name %>.controller';
+<% } %>import { <%= Name %>Controller } from './<%= Name %>.controller';
 
 /**
  * TODO: Fill this section with main info about <%= Name %> form component and values.
  *
  * @module <%= moduleName %>
  */
-<% if (flow) { %>export type <%= Name %>Props = <%= Name %>ControllerProps;
+<% if (flow) { %>export type <%= Name %>Props = React.ElementProps<typeof <%= Name %>Controller>;
 <% } %>export const <%= Name %> = <%= Name %>Controller;
