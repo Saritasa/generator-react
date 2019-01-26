@@ -1,7 +1,7 @@
 <% if (flow) { %>// @flow
 <% } %>import * as React from 'react';
 
-import { <%= Name %>View<% if (flow) { %>, type <%= Name %>ViewProps<% } %> } from './<%= Name %>.view';
+import { <%= Name %>View } from './<%= Name %>.view';
 
 /**
  * Module with controller for <%= Name %> component.
@@ -14,7 +14,7 @@ import { <%= Name %>View<% if (flow) { %>, type <%= Name %>ViewProps<% } %> } fr
  *
  * @memberof <%= moduleName %>/controller
  */
-export type <%= Name %>ControllerProps = { children: ?React.Node };
+type <%= Name %>ControllerProps = { children: ?React.Node };
 
 /**
  * Shape of <%= Name %>Controller's State.
@@ -39,7 +39,7 @@ class <%= Name %>Controller extends React.PureComponent<% if (flow) { %><<%= Nam
    * @returns {<%= Name %>ViewProps} Props for view part of component.
    * @memberof <%= moduleName %>/controller.<%= Name %>Controller#
    */
-  getViewProps()<% if (flow) { %>: $Exact<<%= Name %>ViewProps><% } %> {
+  getViewProps()<% if (flow) { %>: React.ElementProps<typeof <%= Name %>View><% } %> {
     return {
       children: this.props.children,
     };
