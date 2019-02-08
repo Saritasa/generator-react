@@ -33,7 +33,7 @@
   "devDependencies": {
     "@saritasa/eslint-config-base": "^1.0.0",
     "eslint": "^5.1.0",
-    "eslint-plugin-compat": "^2.5.0",
+    "eslint-plugin-compat": "^2.7.0",
     "eslint-plugin-eslint-comments": "^3.0.1",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsdoc": "^3.7.1",
