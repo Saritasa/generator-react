@@ -5,7 +5,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 
 import { <%= Name %>Controller } from './<%= Name %>.controller';
 
-const stories = storiesOf('<%= [FeatureName.split('/').join('::'), 'Form'].filter(Boolean).join('::') %>::<%= Name %>::Controller', module);
+const stories = storiesOf('<%= [FeatureName, 'Form'].filter(Boolean).join('/') %>/<%= Name %>/Controller', module);
 
 stories.addDecorator(withKnobs);
 
