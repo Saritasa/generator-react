@@ -39,7 +39,7 @@ class <%= Name %>Controller extends React.PureComponent<% if (flow) { %><<%= Nam
    * @returns {<%= Name %>ViewProps} Props for view part of component.
    * @memberof <%= moduleName %>/controller.<%= Name %>Controller#
    */
-  getViewProps()<% if (flow) { %>: React.ElementProps<typeof <%= Name %>View><% } %> {
+  getViewProps() {
     return {
       children: this.props.children,
     };
