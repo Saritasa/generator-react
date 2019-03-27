@@ -11,9 +11,9 @@
  */<% if (flow) { %>
 type <%= Name %>Shape = { key: string };<% } %>
 
-const <%= Name %>RecordPrototype = Immutable.Record<% if (flow) { %><Immutable.RecordFactory<<%= Name %>Shape><% } %>(({
+const <%= Name %>RecordPrototype = Immutable.Record<% if (flow) { %><<%= Name %>Shape><% } %>(({
   key: '',
-}<% if (flow) { %>: Immutable.RecordFactory<<%= Name %>Shape><% } %>));
+}<% if (flow) { %>: <%= Name %>Shape<% } %>));
 
 /**
  * This is the shape and default properties for every instance of <%= Name %>.
@@ -21,7 +21,7 @@ const <%= Name %>RecordPrototype = Immutable.Record<% if (flow) { %><Immutable.R
  * @property {string} key - The key of <%= Name %>.
  * @memberof <%= moduleName %>/reducer
  */
-class <%= Name %> extends <%= Name %>RecordPrototype { }
+class <%= Name %> extends <%= Name %>RecordPrototype<% if (flow) { %><<%= Name %>Shape><% } %> { }
 
 /**
  * Type of <%= Name %>Meta record.
