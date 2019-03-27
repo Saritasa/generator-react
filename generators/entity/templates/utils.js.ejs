@@ -3,7 +3,7 @@
 
 import { <%= Name %> } from './<%= Name %>.record';
 import { <%= Name %>DtoSchema } from './<%= Name %>.schema';
-<% if (flow) { %>import { type <%= Name %>Dto } from './<%= Name %>.dto';
+<% if (flow) { %>import { type <%= Name %>ReadDto, type <%= Name %>WriteDto } from './<%= Name %>.dto';
 <% } %>
 /**
  * Utils for working with <% Name %> data.
@@ -47,7 +47,7 @@ export function get<%= Name %>Key(<%= name %><% if (flow) { %>: <%= Name %><% } 
  * @returns {<%= Name %>Dto} - DTO.
  * @memberof <%= moduleName %>/utils
  */
-export function recordToDto(<%= name %><% if (flow) { %>: <%= Name %><% } %>)<% if (flow) { %>: <%= Name %>Dto<% } %> {
+export function recordToDto(<%= name %><% if (flow) { %>: <%= Name %><% } %>)<% if (flow) { %>: <%= Name %>WriteDto<% } %> {
   return { id: <%= name %>.get('key') };
 }
 
@@ -61,7 +61,7 @@ export function recordToDto(<%= name %><% if (flow) { %>: <%= Name %><% } %>)<% 
  * @returns {<%= Name %>} - Instance of <%= Name %>.
  * @memberof <%= moduleName %>/utils
  */
-export function dtoToRecord(<%= name %>Dto<% if (flow) { %>: <%= Name %>Dto<% } %>)<% if (flow) { %>: <%= Name %><% } %> {
+export function dtoToRecord(<%= name %>Dto<% if (flow) { %>: <%= Name %>ReadDto<% } %>)<% if (flow) { %>: <%= Name %><% } %> {
   // ignore else statement, cause testing always run with NODE_ENV=test
   /* istanbul ignore else */
   if (process.env.NODE_ENV !== 'production') {
