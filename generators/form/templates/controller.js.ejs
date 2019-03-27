@@ -33,7 +33,7 @@ type <%= Name %>ControllerState = null;
  * @memberof <%= moduleName %>/controller
  */
 type <%= Name %>Props = {
-  ...$Exact<React.ElementProps<typeof <%= Name %>View>,
+  ...$Exact<React.ElementProps<typeof <%= Name %>View>>,
   ...$Exact<FormProps<<%= Name %>Values>>,
 };
 <% } %>
