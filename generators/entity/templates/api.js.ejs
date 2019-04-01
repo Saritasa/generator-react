@@ -69,7 +69,7 @@ export function save<%= Name %>(<%= name %><% if (flow) { %>: <%= Name%>WriteDto
   });
 }
 
-export type Save<%= Name %>Result = Axios.AxiosXHR<<%= Name%>Dto>;
+export type Save<%= Name %>Result = Axios.AxiosXHR<<%= Name%>ReadDto>;
 export type Save<%= Name %>Error = Error | Axios.AxiosError<<%= Name %>SaveErrorDto>;
 
 /**

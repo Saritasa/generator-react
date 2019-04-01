@@ -36,7 +36,7 @@ export type <%= Name %>Errors = $Shape<$Exact<{ [$Keys<<%= Name %>Values>]: stri
  * @returns {<%= Name %>Values} Same values' object or new object with updated fields.
  * @memberof <%= moduleName %>/values
  */
-export const <%= name %>FieldRules = createFieldRules(<% if (flow) { %>(<% } %>values<% if (flow) { %>: <%= Name %>Values)<% } %> => values);
+export const <%= name %>FieldRules = createFieldRules(<% if (flow) { %><<%= Name %>Values><% } %>values => values);
 
 /**
  * Method to validate values.
