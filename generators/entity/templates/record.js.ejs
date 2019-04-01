@@ -21,7 +21,7 @@ const <%= Name %>RecordPrototype = Immutable.Record<% if (flow) { %><<%= Name %>
  * @property {string} key - The key of <%= Name %>.
  * @memberof <%= moduleName %>/reducer
  */
-class <%= Name %> extends <%= Name %>RecordPrototype<% if (flow) { %><<%= Name %>Shape><% } %> { }
+export class <%= Name %> extends <%= Name %>RecordPrototype<% if (flow) { %><<%= Name %>Shape><% } %> { }
 
 /**
  * Type of <%= Name %>Meta record.
