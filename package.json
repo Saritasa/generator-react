@@ -28,7 +28,7 @@
     "cli-list": "^0.2.0",
     "ejs": "^2.6.1",
     "yeoman-environment": "^2.3.3",
-    "yeoman-generator": "^3.1.1"
+    "yeoman-generator": "^4.0.1"
   },
   "devDependencies": {
     "@saritasa/eslint-config-base": "^1.0.0",
